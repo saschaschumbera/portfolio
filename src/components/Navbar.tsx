@@ -94,25 +94,6 @@ export default function Navbar() {
             </span>
           </button>
 
-          <a
-            href="/cv-sascha-schumbera.pdf"
-            download
-            className="text-xs font-medium px-4 py-2 rounded-full transition-all duration-200"
-            style={{
-              border: "1px solid var(--accent)",
-              color: "var(--accent)",
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.background = "var(--accent)";
-              (e.target as HTMLElement).style.color = "#fff";
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.background = "transparent";
-              (e.target as HTMLElement).style.color = "var(--accent)";
-            }}
-          >
-            CV Download
-          </a>
         </div>
 
         {/* Mobile */}
@@ -169,16 +150,6 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href="/cv-sascha-schumbera.pdf"
-                  download
-                  className="text-xs font-medium"
-                  style={{ color: "var(--accent)" }}
-                >
-                  CV Download
-                </a>
-              </li>
             </ul>
           </motion.div>
         )}

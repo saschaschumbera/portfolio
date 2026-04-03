@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Download, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 
 const GithubIcon = () => (
@@ -57,26 +57,6 @@ export default function Contact() {
             sascha.schumbera@mail.de
           </motion.a>
 
-          <motion.a
-            href="/cv-sascha-schumbera.pdf"
-            download
-            initial={mounted ? { opacity: 0, scale: 0.95 } : false}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="inline-flex items-center gap-3 px-8 py-3 rounded-full font-medium text-sm transition-all duration-200 mb-10 ml-0 sm:ml-3"
-            style={{ border: "1px solid var(--border)", color: "var(--text-2)" }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.50)";
-              (e.currentTarget as HTMLElement).style.color = "var(--text-1)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-              (e.currentTarget as HTMLElement).style.color = "var(--text-2)";
-            }}
-          >
-            <Download size={16} />
-            CV downloaden
-          </motion.a>
 
           {/* Divider */}
           <div className="flex items-center gap-4 mb-8">

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useIsMounted } from "@/hooks/useIsMounted";
-import { ArrowDown, Download, Mail } from "lucide-react";
+import { ArrowDown, Mail } from "lucide-react";
 import Image from "next/image";
 
 const GithubIcon = () => (
@@ -213,23 +213,6 @@ export default function Hero() {
             }}
           >
             Projekte ansehen
-          </a>
-          <a
-            href="/cv-sascha-schumbera.pdf"
-            download
-            className="px-8 py-3 rounded-full font-medium text-sm transition-all duration-200 inline-flex items-center justify-center gap-2"
-            style={{ border: "1px solid var(--border)", color: "var(--text-2)" }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.5)";
-              (e.currentTarget as HTMLElement).style.color = "var(--text-1)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-              (e.currentTarget as HTMLElement).style.color = "var(--text-2)";
-            }}
-          >
-            <Download size={16} />
-            CV downloaden
           </a>
         </motion.div>
 
