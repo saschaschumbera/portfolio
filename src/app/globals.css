@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* ── Dark theme (default) ───────────────────────────────────────── */
+:root {
+  color-scheme: dark;
+  --bg-base:    #0a0a0f;
+  --bg-section: #0d0d14;
+  --bg-card:    #1e1e2e;
+  --bg-input:   #1e1e2e;
+  --bg-chat:    #0f0f1a;
+  --border:     #2d2d3f;
+  --text-1:     #e2e8f0;
+  --text-2:     #94a3b8;
+  --text-3:     #64748b;
+  --accent:     #6366f1;
+  --accent-h:   #5558e8;
+  --accent-gold:#f59e0b;
+  --glow-1:     rgba(99,102,241,0.10);
+  --glow-2:     rgba(245,158,11,0.06);
+  --nav-bg:     rgba(10,10,15,0.90);
+}
+
+/* ── Light theme ────────────────────────────────────────────────── */
+html.light {
+  color-scheme: light;
+  --bg-base:    #f8fafc;
+  --bg-section: #f1f5f9;
+  --bg-card:    #ffffff;
+  --bg-input:   #f8fafc;
+  --bg-chat:    #f1f5f9;
+  --border:     #e2e8f0;
+  --text-1:     #0f172a;
+  --text-2:     #475569;
+  --text-3:     #94a3b8;
+  --accent:     #6366f1;
+  --accent-h:   #5558e8;
+  --accent-gold:#d97706;
+  --glow-1:     rgba(99,102,241,0.06);
+  --glow-2:     rgba(217,119,6,0.04);
+  --nav-bg:     rgba(248,250,252,0.92);
+}
+
+/* ── Base styles ────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--bg-base);
+  color: var(--text-1);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Theme toggle icons: render both, switch via root class to avoid hydration mismatch. */
+.theme-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-icon-sun {
+  display: inline-flex;
+}
+
+.theme-icon-moon {
+  display: none;
+}
+
+html.light .theme-icon-sun {
+  display: none;
+}
+
+html.light .theme-icon-moon {
+  display: inline-flex;
+}
+
+
+@keyframes chatbot-wave {
+  0%, 70%, 100% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-14deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  85% {
+    transform: rotate(-8deg);
+  }
+  90% {
+    transform: rotate(6deg);
+  }
+  95% {
+    transform: rotate(0deg);
+  }
+}
+
+.chatbot-wave {
+  transform-origin: 70% 75%;
+  animation: chatbot-wave 6s ease-in-out infinite;
+}
+
+::selection { background: #6366f133; color: var(--text-1); }
+
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
