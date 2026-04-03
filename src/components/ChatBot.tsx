@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect } from "react";
 import { X, Send, Bot } from "lucide-react";
-import { findAnswer, SUGGESTIONS } from "./chatbotKnowledge";
+import { findAnswer, SUGGESTIONS, SUGGESTIONS_EN, findAnswerEn } from "./chatbotKnowledge";
 import { useIsMounted } from "@/hooks/useIsMounted";
+import { useLang } from "./LanguageProvider";
 
 type Message = {
   role: "user" | "assistant";
@@ -71,14 +72,16 @@ function AssistantBubble({ content, animate }: { content: string; animate: boole
 
 export default function ChatBot() {
   const mounted = useIsMounted();
+  const { lang } = useLang();
+  const isEN = lang === "en";
+
+  const initialMessage = isEN
+    ? "Hi! I'm happy to answer questions about Sascha — his background, projects, skills or how to get in touch."
+    : "Hi! Ich beantworte gerne Fragen über Sascha — seinen Werdegang, Projekte, Skills oder wie du ihn kontaktieren kannst.";
+
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<(Message & { animate?: boolean })[]>([
-    {
-      role: "assistant",
-      content:
-        "Hi! Ich beantworte gerne Fragen über Sascha — seinen Werdegang, Projekte, Skills oder wie du ihn kontaktieren kannst.",
-      animate: false,
-    },
+    { role: "assistant", content: initialMessage, animate: false },
   ]);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
@@ -88,6 +91,12 @@ export default function ChatBot() {
   const openedAtRef = useRef(0);
   const sendCooldownRef = useRef(false);
   const sendCooldownTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setMessages([{ role: "assistant", content: initialMessage, animate: false }]);
+    setInput("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -200,7 +209,7 @@ export default function ChatBot() {
 
     // Short delay to feel natural
     setTimeout(() => {
-      const answer = findAnswer(userText);
+      const answer = isEN ? findAnswerEn(userText) : findAnswer(userText);
       setThinking(false);
       setMessages((prev) =>
         trimMessageHistory([
@@ -294,10 +303,10 @@ export default function ChatBot() {
                 <Bot size={15} className="text-[#6366f1]" />
               </div>
               <div>
-                <p className="text-sm sm:text-[15px] font-semibold" style={{ color: "var(--text-1)" }}>Sascha&apos;s Assistent</p>
+                <p className="text-sm sm:text-[15px] font-semibold" style={{ color: "var(--text-1)" }}>{isEN ? "Sascha's Assistant" : "Sascha's Assistent"}</p>
                 <div className="flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
-                  <p className="text-xs sm:text-sm" style={{ color: "var(--text-3)" }}>Online</p>
+                  <p className="text-xs sm:text-sm" style={{ color: "var(--text-3)" }}>{isEN ? "Online" : "Online"}</p>
                 </div>
               </div>
               <button
@@ -343,7 +352,7 @@ export default function ChatBot() {
               {/* Suggestion chips */}
               {messages.length === 1 && !thinking && (
                 <div className="flex flex-col gap-1.5 pt-1">
-                  {SUGGESTIONS.map((s) => (
+                  {(isEN ? SUGGESTIONS_EN : SUGGESTIONS).map((s) => (
                     <button
                       key={s}
                       onClick={() => send(s)}
@@ -377,7 +386,7 @@ export default function ChatBot() {
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value.slice(0, MAX_INPUT_CHARS))}
-                  placeholder="Frage stellen..."
+                  placeholder={isEN ? "Ask a question..." : "Frage stellen..."}
                   disabled={thinking}
                   maxLength={MAX_INPUT_CHARS}
                   className="flex-1 rounded-full px-4 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none transition-colors disabled:opacity-50"

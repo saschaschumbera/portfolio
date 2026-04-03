@@ -5,6 +5,8 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, MapPin } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
+import { useLang } from "./LanguageProvider";
+import { t } from "@/lib/translations";
 
 const GithubIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -22,6 +24,8 @@ export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const mounted = useIsMounted();
+  const { lang } = useLang();
+  const tx = t[lang].contact;
 
   return (
     <section id="contact" className="py-24 px-6" ref={ref}>
@@ -32,14 +36,13 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "var(--accent)" }}>
-            Kontakt
+            {tx.tag}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: "var(--text-1)" }}>
-            Lass uns reden
+            {tx.heading}
           </h2>
           <p className="text-sm mb-10 max-w-lg mx-auto leading-relaxed" style={{ color: "var(--text-3)" }}>
-            Ob Collaboration, Projekt-Feedback oder einfach ein fachlicher Austausch —
-            ich freue mich über jede Nachricht.
+            {tx.subheading}
           </p>
 
           {/* Main CTA */}
@@ -57,11 +60,10 @@ export default function Contact() {
             sascha.schumbera@mail.de
           </motion.a>
 
-
           {/* Divider */}
           <div className="flex items-center gap-4 mb-8">
             <div className="flex-1 h-px" style={{ background: "var(--border)" }} />
-            <span className="text-xs" style={{ color: "var(--text-3)" }}>oder</span>
+            <span className="text-xs" style={{ color: "var(--text-3)" }}>{tx.or}</span>
             <div className="flex-1 h-px" style={{ background: "var(--border)" }} />
           </div>
 
@@ -105,7 +107,7 @@ export default function Contact() {
             style={{ color: "var(--text-3)" }}
           >
             <MapPin size={12} />
-            Korschenbroich, NRW — Deutschland
+            {tx.location}
           </motion.p>
         </motion.div>
       </div>

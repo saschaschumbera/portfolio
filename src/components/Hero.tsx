@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { ArrowDown, Mail } from "lucide-react";
 import Image from "next/image";
+import { useLang } from "./LanguageProvider";
+import { t } from "@/lib/translations";
 
 const GithubIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -18,21 +20,32 @@ const LinkedinIcon = () => (
   </svg>
 );
 
-const roles = ["AI-orientierter Softwareentwickler", "Referent Kreditrisikosteuerung", "B.Sc. Angewandte KI (laufend)"];
-const quickFacts = [
-  "10+ Jahre Finanz- und Banking-Erfahrung",
-  "KI-gestützte Dokumentenanalyse & OCR-Workflows",
-  "AI-orientierte End-to-End Produktentwicklung",
-  "Schwerpunkte: Python, SQL, Power BI, OCR",
-];
+const taglines = {
+  de: "KI-Anwendungen für dokumenten- und datengetriebene Prozesse. Über 10 Jahre Banking-Erfahrung trifft auf moderne AI-Entwicklung — von Dokumentenanalyse bis zu Multi-Agent-Systemen.",
+  en: "AI applications for document- and data-driven processes. Over 10 years of banking experience meets modern AI development — from document analysis to multi-agent systems.",
+};
+
+const badges = {
+  de: "AI & Automatisierung im Finanzkontext",
+  en: "AI & Automation in Finance",
+};
 
 export default function Hero() {
   const mounted = useIsMounted();
+  const { lang } = useLang();
+  const tx = t[lang].hero;
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
+    setDisplayed("");
+    setDeleting(false);
+    setRoleIndex(0);
+  }, [lang]);
+
+  useEffect(() => {
+    const roles = tx.roles;
     const current = roles[roleIndex];
     let timeout: ReturnType<typeof setTimeout>;
 
@@ -50,7 +63,7 @@ export default function Hero() {
     }
 
     return () => clearTimeout(timeout);
-  }, [displayed, deleting, roleIndex]);
+  }, [displayed, deleting, roleIndex, tx.roles]);
 
   return (
     <section className="relative min-h-screen min-h-[100dvh] flex flex-col items-center justify-center px-6 pt-20 sm:pt-0 overflow-hidden">
@@ -119,7 +132,7 @@ export default function Hero() {
           }}
         >
           <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--accent)" }} />
-          AI & Automatisierung im Finanzkontext
+          {badges[lang]}
         </motion.div>
 
         {/* Name */}
@@ -157,9 +170,7 @@ export default function Hero() {
           className="text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
           style={{ color: "var(--text-3)" }}
         >
-          KI-Anwendungen für dokumenten- und datengetriebene Prozesse. Über 10 Jahre Banking-Erfahrung
-          trifft auf moderne AI-Entwicklung — von Dokumentenanalyse bis zu
-          Multi-Agent-Systemen.
+          {taglines[lang]}
         </motion.p>
 
         <motion.div
@@ -168,7 +179,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.45 }}
           className="flex flex-wrap justify-center gap-2 mb-10"
         >
-          {quickFacts.map((fact) => (
+          {tx.quickFacts.map((fact) => (
             <span
               key={fact}
               className="px-3 py-1 rounded-full text-xs"
@@ -197,7 +208,7 @@ export default function Hero() {
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent-h)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent)"; }}
           >
-            Projekt anfragen
+            {tx.cta}
           </a>
           <a
             href="#projects"
@@ -212,7 +223,7 @@ export default function Hero() {
               (e.currentTarget as HTMLElement).style.color = "var(--text-2)";
             }}
           >
-            Projekte ansehen
+            {tx.projects}
           </a>
         </motion.div>
 

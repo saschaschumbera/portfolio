@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import UserActionLogger from "@/components/UserActionLogger";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import { Analytics } from "@vercel/analytics/next";
 
 const enableActionLogger = process.env.NEXT_PUBLIC_ENABLE_ACTION_LOGGER === "1";
@@ -41,9 +42,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          {enableActionLogger ? <UserActionLogger /> : null}
-          {children}
-          <Analytics />
+          <LanguageProvider>
+            {enableActionLogger ? <UserActionLogger /> : null}
+            {children}
+            <Analytics />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

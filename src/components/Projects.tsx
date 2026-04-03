@@ -6,6 +6,8 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Shield, FileSearch, X, Video, PenLine } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
+import { useLang } from "./LanguageProvider";
+import { t } from "@/lib/translations";
 
 const GithubIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
@@ -13,71 +15,10 @@ const GithubIcon = () => (
   </svg>
 );
 
-type ProjectItem = {
-  icon: typeof FileSearch;
-  title: string;
-  subtitle: string;
-  description: string;
-  tags: string[];
-  accent: string;
-  status: string;
-  github: string | null;
-  highlights: string[];
-  videoSrc?: string;
-};
-
-const projects: ProjectItem[] = [
-  {
-    icon: FileSearch,
-    title: "DocInspect",
-    subtitle: "KI-gestützte Dokumentenanalyse",
-    description:
-      "End-to-End Webanwendung zur Analyse von Verträgen und Dokumenten mit Fokus auf Datenschutz und automatisierte Risikobewertung. Privacy-by-Design: sensible Daten werden lokal pseudonymisiert, bevor externe Verarbeitung erfolgt.",
-    tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"],
-    accent: "#6366f1",
-    status: "In Entwicklung",
-    github: null,
-    videoSrc: "/projects/docinspect-demo.mp4",
-    highlights: [
-      "Textextraktion aus PDF, DOCX und TXT plus OCR für Bilddateien",
-      "Risiko-Scoring in Ampellogik mit Handlungsempfehlungen",
-      "Multi-Agent-Workflow mit Provider-Routing & Fallback",
-    ],
-  },
-  {
-    icon: Shield,
-    title: "Vertragsverwaltung",
-    subtitle: "Self-Hosted Dokumentenmanagement",
-    description:
-      "Datenschutzorientiertes Fullstack-System zur Verwaltung, Analyse und Auswertung von Dokumenten. Lokal betrieben ohne Cloud-Abhängigkeit (Self-Hosted Ansatz).",
-    tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"],
-    accent: "#f59e0b",
-    status: "In Umsetzung",
-    github: null,
-    videoSrc: "/projects/vertragsverwaltung-demo.mp4",
-    highlights: [
-      "Automatische Erkennung von Beträgen, Fristen & Vertragsparteien",
-      "Leistungsfähige Such- und Filterfunktionen über Dokumente und Metadaten",
-      "Self-Hosted Architektur ohne Cloud-Abhängigkeit",
-    ],
-  },
-  {
-    icon: PenLine,
-    title: "Smart Notes",
-    subtitle: "KI-gestützte Handschrifterkennung",
-    description:
-      "Intelligentes Notizen- und Aufgabenmanagementsystem mit KI-Handschrifterkennung über die Google Gemini API. Handschriftliche Canvas-Eingaben werden automatisch in strukturierte Markdown-Notizen umgewandelt und lokal im Vault gespeichert.",
-    tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"],
-    accent: "#22c55e",
-    status: "Abgeschlossen",
-    github: null,
-    videoSrc: "/projects/smartnotes-demo.mp4",
-    highlights: [
-      "Handschrift-zu-Text via Google Gemini Vision API mit automatischer Strukturierung",
-      "Erkennt automatisch Aufgaben, Kategorien und Tags aus dem Handschriftbild",
-      "Notizen werden als Markdown mit Frontmatter lokal im Vault-Ordner gespeichert",
-    ],
-  },
+const projectMeta = [
+  { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: "/projects/docinspect-demo.mp4", tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
+  { icon: Shield, accent: "#f59e0b", github: null, videoSrc: "/projects/vertragsverwaltung-demo.mp4", tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
+  { icon: PenLine, accent: "#22c55e", github: null, videoSrc: "/projects/smartnotes-demo.mp4", tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
 ];
 
 export default function Projects() {
@@ -85,6 +26,8 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const mounted = useIsMounted();
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const { lang } = useLang();
+  const tx = t[lang].projects;
 
   return (
     <section id="projects" className="py-24 px-6" ref={ref}>
@@ -96,35 +39,22 @@ export default function Projects() {
           className="mb-14 text-center"
         >
           <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "var(--accent)" }}>
-            Projekte
+            {tx.tag}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "var(--text-1)" }}>
-            Was ich gebaut habe
+            {tx.heading}
           </h2>
           <p className="text-sm mt-3 max-w-xl mx-auto" style={{ color: "var(--text-3)" }}>
-            Eigene Anwendungen mit Fokus auf Dokumentenanalyse, Automatisierung und Datenschutz.
+            {tx.subheading}
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map(
-            (
-              {
-                icon: Icon,
-                title,
-                subtitle,
-                description,
-                tags,
-                accent,
-                status,
-                github,
-                highlights,
-                videoSrc,
-              },
-              i
-            ) => (
+          {tx.items.map((item, i) => {
+            const { icon: Icon, accent, github, highlights: _h, videoSrc, tags } = { ...projectMeta[i], highlights: item.highlights };
+            return (
               <motion.article
-                key={title}
+                key={item.title}
                 initial={mounted ? { opacity: 0, y: 40 } : false}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
@@ -153,9 +83,9 @@ export default function Projects() {
                     </div>
                     <div>
                       <h3 className="text-base font-bold" style={{ color: "var(--text-1)" }}>
-                        {title}
+                        {item.title}
                       </h3>
-                      <p className="text-xs" style={{ color: "var(--text-3)" }}>{subtitle}</p>
+                      <p className="text-xs" style={{ color: "var(--text-3)" }}>{item.subtitle}</p>
                     </div>
                   </div>
                   <span
@@ -166,18 +96,18 @@ export default function Projects() {
                       background: `${accent}10`,
                     }}
                   >
-                    {status}
+                    {item.status}
                   </span>
                 </div>
 
                 {/* Description */}
                 <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-3)" }}>
-                  {description}
+                  {item.description}
                 </p>
 
                 {/* Highlights */}
                 <ul className="space-y-1 mb-5">
-                  {highlights.map((h) => (
+                  {item.highlights.map((h) => (
                     <li key={h} className="flex items-center gap-2 text-xs" style={{ color: "var(--text-2)" }}>
                       <span style={{ color: accent }} className="text-[10px]">▸</span>
                       {h}
@@ -218,7 +148,7 @@ export default function Projects() {
                   ) : (
                     <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-3)" }}>
                       <GithubIcon />
-                      Repository auf Anfrage
+                      {tx.repoOnRequest}
                     </span>
                   )}
                   {videoSrc && (
@@ -229,13 +159,13 @@ export default function Projects() {
                       style={{ color: accent }}
                     >
                       <Video size={13} />
-                      Demo-Video
+                      {tx.demoVideo}
                     </button>
                   )}
                 </div>
               </motion.article>
-            )
-          )}
+            );
+          })}
         </div>
 
         {/* Coming soon card */}
@@ -247,7 +177,7 @@ export default function Projects() {
           style={{ border: "1px dashed var(--border)" }}
         >
           <p className="text-xs" style={{ color: "var(--text-3)" }}>
-            Weitere Projekte und Ausbaustufen sind in Entwicklung.
+            {tx.comingSoon}
           </p>
         </motion.div>
 

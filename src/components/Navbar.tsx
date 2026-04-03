@@ -4,19 +4,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Brain, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
-
-const links = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projekte", href: "#projects" },
-  { label: "Erfahrung", href: "#experience" },
-  { label: "Kontakt", href: "#contact" },
-];
+import { useLang } from "./LanguageProvider";
+import { t } from "@/lib/translations";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { toggle } = useTheme();
+  const { lang, toggle: toggleLang } = useLang();
+  const tx = t[lang].nav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -61,7 +57,7 @@ export default function Navbar() {
 
         {/* Desktop */}
         <ul className="hidden md:flex gap-8">
-          {links.map((l) => (
+          {tx.links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -75,6 +71,22 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
+          {/* Language toggle */}
+          <button
+            onClick={toggleLang}
+            className="text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-200"
+            style={{
+              border: "1px solid var(--border)",
+              color: "var(--text-2)",
+              background: "var(--bg-card)",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-1)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-2)"; }}
+            aria-label="Switch language"
+          >
+            {lang === "de" ? "EN" : "DE"}
+          </button>
+
           {/* Theme toggle */}
           <button
             onClick={toggle}
@@ -93,11 +105,24 @@ export default function Navbar() {
               <Moon size={14} />
             </span>
           </button>
-
         </div>
 
         {/* Mobile */}
         <div className="md:hidden flex items-center gap-2">
+          {/* Language toggle mobile */}
+          <button
+            onClick={toggleLang}
+            className="text-xs font-semibold px-2.5 py-1 rounded-full"
+            style={{
+              border: "1px solid var(--border)",
+              color: "var(--text-2)",
+              background: "var(--bg-card)",
+            }}
+            aria-label="Switch language"
+          >
+            {lang === "de" ? "EN" : "DE"}
+          </button>
+
           <button
             onClick={toggle}
             aria-label="Theme umschalten"
@@ -138,7 +163,7 @@ export default function Navbar() {
             }}
           >
             <ul className="px-6 py-4 flex flex-col gap-4">
-              {links.map((l) => (
+              {tx.links.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}

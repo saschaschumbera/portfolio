@@ -234,6 +234,9 @@ export const RULES: Rule[] = [
 export const FALLBACK =
   "Das weiß ich leider nicht genau. Am besten fragst du Sascha direkt — er ist per E-Mail erreichbar: sascha.schumbera@mail.de";
 
+export const FALLBACK_EN =
+  "I'm not sure about that. Best to ask Sascha directly — he's reachable by email: sascha.schumbera@mail.de";
+
 export const SUGGESTIONS = [
   "Was macht Sascha besonders?",
   "Welche KI-Projekte hat er gebaut?",
@@ -241,16 +244,62 @@ export const SUGGESTIONS = [
   "Was ist sein Tech-Stack?",
 ];
 
-export function findAnswer(input: string): string {
+export const SUGGESTIONS_EN = [
+  "What makes Sascha stand out?",
+  "Which AI projects has he built?",
+  "How can I contact him?",
+  "What is his tech stack?",
+];
+
+export const RULES_EN: Rule[] = [
+  { keywords: ["hello", "hi", "hey", "good morning", "good evening"], answer: "Hi! Great to have you here. I'm happy to answer questions about Sascha — his background, projects, skills or how to contact him." },
+  { keywords: ["contact", "email", "mail", "reach", "write"], answer: "Sascha is reachable by email: sascha.schumbera@mail.de — or via the contact section on this page." },
+  { keywords: ["phone", "mobile", "number", "call"], answer: "Sascha's phone number is not public, but he's very responsive by email: sascha.schumbera@mail.de" },
+  { keywords: ["freelance", "hire", "project", "cooperation", "collaboration", "work together"], answer: "For collaboration and project enquiries, reach Sascha directly by email: sascha.schumbera@mail.de" },
+  { keywords: ["who is", "about sascha", "about him", "introduction", "profile"], answer: "Sascha Schumbera is an AI-oriented software developer from NRW, Germany. He combines over 10 years of finance and banking experience with modern AI development, building end-to-end AI products — from document analysis to multi-agent systems." },
+  { keywords: ["location", "where", "lives", "based", "germany", "nrw"], answer: "Sascha lives and works in NRW, Germany." },
+  { keywords: ["stand out", "unique", "different", "special", "why sascha", "strength", "makes him"], answer: "Sascha combines over 10 years of finance and banking experience with AI-oriented software development — including credit decisions up to €250,000, risk model application, and banking automation. That domain expertise is his biggest differentiator as an AI developer." },
+  { keywords: ["soft skill", "personality", "work style", "character"], answer: "Sascha is known for analytical thinking, structured work approach, fast onboarding into complex systems, and strong communication at the interface of business and IT." },
+  { keywords: ["language", "english", "german"], answer: "Sascha speaks German as his native language and English at a business-fluent level." },
+  { keywords: ["current", "currently", "now", "today", "right now"], answer: "Sascha currently works as a specialist (IT specialist) in credit risk management at Bank11 (since September 2023) and studies B.Sc. Applied Artificial Intelligence at IU International University in parallel." },
+  { keywords: ["bank11"], answer: "At Bank11, Sascha has been building automation solutions with SQL and SCHUFA-DSS since 09/2023, designing low-code decision systems, creating Power BI dashboards for credit risk reporting and fraud detection, and training colleagues on AI tools." },
+  { keywords: ["experience", "career", "background", "history"], answer: "Sascha's career: specialist at RCI Banque (2016–2021, acting team lead) → Full-Stack developer at Adelta Finanz → Retail Underwriter at De Lage Landen → Credit Risk Specialist at Bank11 (present). Studying B.Sc. Applied AI at IU since 2025." },
+  { keywords: ["years", "how long", "experience"], answer: "Sascha has over 10 years of professional experience, with a strong focus on finance and banking." },
+  { keywords: ["degree", "bachelor", "university", "studies", "iu"], answer: "Sascha has been studying B.Sc. Applied Artificial Intelligence at IU International University since November 2025 (planned: 11/2025 – 10/2029)." },
+  { keywords: ["project", "built", "developed", "created", "work", "portfolio"], answer: "Sascha has independently built two AI products: DocInspect (AI document analysis with Privacy-by-Design) and a Contract Manager (self-hosted document management, 100% local). More projects are in development." },
+  { keywords: ["docinspect", "document analysis", "risk assessment"], answer: "DocInspect is an end-to-end web application for AI-powered analysis of contracts and documents. Highlights: Privacy-by-Design (local pseudonymisation before LLM processing), OCR pipeline for PDF/DOCX/TXT/image files, multi-agent workflow with provider routing & fallback, risk scoring with traffic-light logic." },
+  { keywords: ["contract manager", "contract management", "self-hosted", "self hosted", "privacy", "gdpr"], answer: "The Contract Manager is a privacy-oriented, locally operated full-stack web application in a self-hosted approach. Features: upload/camera capture with OCR, detection of amounts, deadlines and metadata, search & filter functions, no cloud dependency." },
+  { keywords: ["skill", "knowledge", "tech stack", "technology", "tools", "can he"], answer: "Core skills: Python, SQL, TypeScript. AI tools: Claude Code, Cursor, GitHub Copilot, LangGraph, Prompt Engineering, local LLMs. Data: Power BI, SAS, DAX. Engineering: FastAPI, OCR pipelines, data modelling. Automation: Power Automate, UIPath (RPA), SCHUFA-DSS." },
+  { keywords: ["python"], answer: "Python is Sascha's main programming language for AI development — used for FastAPI backends, OCR pipelines, LLM integration, automation scripts and data processing." },
+  { keywords: ["sql"], answer: "SQL is a daily tool for Sascha — for automation solutions at Bank11, data analysis, reporting and the development of SAS programs for data preparation." },
+  { keywords: ["typescript", "next.js", "nextjs", "react", "frontend"], answer: "Sascha uses TypeScript and React/Next.js on the frontend — this portfolio is built with it. He combines modern web technologies with his AI focus for complete end-to-end products." },
+  { keywords: ["power bi", "dashboard", "reporting", "visualisation"], answer: "Power BI is a core tool in Sascha's credit risk management work — for management dashboards, credit risk reporting and fraud detection visualisations. He's proficient in DAX for complex calculations." },
+  { keywords: ["ai", "artificial intelligence", "machine learning", "llm", "agentic"], answer: "Sascha's AI focus: Agentic AI, production-ready LLM applications, multi-agent systems and AI-first development. He uses Claude Code, LangGraph, local LLMs and prompt engineering — and has independently built AI products that solve real business problems." },
+  { keywords: ["github", "repository", "repo", "code", "open source"], answer: "You can find Sascha's GitHub profile directly on this page — in the hero section or the contact section." },
+  { keywords: ["linkedin", "network", "social media", "connect"], answer: "Sascha's LinkedIn profile is linked on this page — in the hero section and contact section. You can connect with him there directly." },
+  { keywords: ["thank", "thanks", "great", "awesome", "perfect", "cool"], answer: "You're welcome! If you have more questions, I'm here. Sascha also looks forward to a direct message: sascha.schumbera@mail.de" },
+  { keywords: ["bye", "goodbye", "see you", "ciao"], answer: "Goodbye! If you have more questions — I'm always here. And Sascha appreciates your interest!" },
+  { keywords: ["available", "open to", "job", "position", "opportunity"], answer: "For specific project or position enquiries, reach Sascha directly by email: sascha.schumbera@mail.de — he welcomes interesting opportunities." },
+];
+
+function matchRules(rules: Rule[], input: string, fallback: string): string {
   const lower = input.toLowerCase();
-  for (const rule of RULES) {
+  for (const rule of rules) {
     if (
       rule.keywords.some((kw) =>
-        new RegExp(`\\b${kw.replace(/[.*+?^${}()|[\\]\\]/g, "\\\\$&")}\\b`).test(lower)
+        new RegExp(`\\b${kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(lower)
       )
     ) {
       return rule.answer;
     }
   }
-  return FALLBACK;
+  return fallback;
+}
+
+export function findAnswer(input: string): string {
+  return matchRules(RULES, input, FALLBACK);
+}
+
+export function findAnswerEn(input: string): string {
+  return matchRules(RULES_EN, input, FALLBACK_EN);
 }
