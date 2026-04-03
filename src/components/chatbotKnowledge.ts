@@ -42,7 +42,7 @@ export const RULES: Rule[] = [
     answer: "Sascha lebt und arbeitet in NRW.",
   },
   {
-    keywords: ["besonders", "unterschied", "alleinstellung", "unique", "warum sascha", "stärke"],
+    keywords: ["besonders", "unterschied", "alleinstellung", "unique", "warum sascha", "stärke", "macht sascha aus", "macht ihn aus", "zeichnet ihn", "hebt ihn", "was macht er"],
     answer: "Sascha verbindet über 10 Jahre Finanz- und Banking-Erfahrung mit KI-orientierter Softwareentwicklung. Dazu gehören u. a. Kreditentscheidungen bis 250.000 €, Arbeit mit Risikomodellen sowie Automatisierung und Reporting im Bankenumfeld.",
   },
   {
@@ -130,7 +130,7 @@ export const RULES: Rule[] = [
     answer: "DocInspect nutzt einen Multi-Agent-Ansatz mit robustem Provider-Routing: Fällt ein LLM-Provider aus, greift automatisch ein Fallback-System ein. Das ermöglicht hohe Verfügbarkeit auch in produktionsnahen Umgebungen.",
   },
   {
-    keywords: ["skill", "kenntnisse", "fähigkeit", "kann er", "tech stack", "technologie"],
+    keywords: ["skill", "kenntnisse", "fähigkeit", "kann er", "tech stack", "tech-stack", "technologie", "womit arbeitet", "womit entwickelt"],
     answer: "Kern-Skills: Python, SQL, TypeScript. AI-Tools: Claude Code, Cursor, GitHub Copilot, LangGraph, Prompt Engineering, lokale LLMs. Data: Power BI, SAS, DAX. Engineering: FastAPI, OCR-Pipelines, Datenmodellierung. Automation: Power Automate, UIPath (RPA), SCHUFA-DSS.",
   },
   {
@@ -219,7 +219,7 @@ export const RULES: Rule[] = [
   },
   {
     keywords: ["lebenslauf", "cv", "resume", "herunterladen", "download"],
-    answer: "Saschas Lebenslauf kann direkt auf dieser Seite heruntergeladen werden — der Download-Button befindet sich im Hero-Bereich oben.",
+    answer: "Für Saschas Lebenslauf wende dich am besten direkt per E-Mail an ihn: sascha.schumbera@mail.de — er schickt ihn dir gerne zu.",
   },
   {
     keywords: ["verfügbar", "offen", "jobsuche", "stelle", "position", "anstellung", "wechsel", "opportunity"],

@@ -217,7 +217,7 @@ export default function ChatBot() {
     <>
       {/* Floating button */}
       <div
-        className="fixed"
+        className={`fixed${open ? " hidden sm:block" : ""}`}
         style={{
           width: "3.5rem",
           height: "3.5rem",

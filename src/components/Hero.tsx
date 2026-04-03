@@ -53,7 +53,7 @@ export default function Hero() {
   }, [displayed, deleting, roleIndex]);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+    <section className="relative min-h-screen min-h-[100dvh] flex flex-col items-center justify-center px-6 pt-20 sm:pt-0 overflow-hidden">
       {/* Background grid */}
       <div
         className="absolute inset-0 opacity-[0.03]"
