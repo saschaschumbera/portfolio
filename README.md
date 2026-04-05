@@ -2,7 +2,7 @@
 
 Personal portfolio website built with Next.js, showcasing projects, skills, and experience.
 
-**Live:** [sascha-schumbera.dev](https://sascha-schumbera.dev) *(coming soon)*
+**Live:** [sascha-schumbera.dev](https://sascha-schumbera.dev) 
 
 ## Tech Stack
 
