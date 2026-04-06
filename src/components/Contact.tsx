@@ -57,7 +57,7 @@ export default function Contact() {
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--accent)"; }}
           >
             <Mail size={16} />
-            sascha.schumbera@mail.de
+            sascha.schumbera [at] mail.de
           </motion.a>
 
           {/* Divider */}

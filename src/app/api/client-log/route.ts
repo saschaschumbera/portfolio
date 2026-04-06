@@ -1,4 +1,4 @@
-import { appendFile, mkdir, readFile, stat } from "node:fs/promises";
+import { appendFile, mkdir, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
 
@@ -152,14 +152,6 @@ function isSameOriginRequest(request: Request): boolean {
   return true;
 }
 
-function canReadLogs(request: Request): boolean {
-  const token = process.env.LOG_VIEW_TOKEN;
-  if (!token) return false;
-
-  const provided = request.headers.get("x-log-view-token");
-  return provided === token;
-}
-
 async function writeLog(entry: LogBody) {
   await mkdir(LOG_DIR, { recursive: true });
 
@@ -214,23 +206,3 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
-  if (!canReadLogs(request)) {
-    return jsonNoStore({ ok: false, error: "forbidden" }, 403);
-  }
-
-  try {
-    const content = await readFile(LOG_FILE, "utf8");
-    const lines = content.trim().split("\n").filter(Boolean);
-    const recent = lines.slice(-200).map((line) => {
-      try {
-        return JSON.parse(line);
-      } catch {
-        return { raw: line };
-      }
-    });
-    return jsonNoStore({ ok: true, count: recent.length, recent });
-  } catch {
-    return jsonNoStore({ ok: true, count: 0, recent: [] });
-  }
-}

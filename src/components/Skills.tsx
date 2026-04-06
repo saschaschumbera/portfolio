@@ -8,36 +8,12 @@ import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
 
 const skillGroups = [
-  {
-    key: "ai",
-    color: "#6366f1",
-    skills: ["Claude Code", "Cursor", "GitHub Copilot", "LangGraph", "Prompt Engineering", "Agentic AI", "Lokale LLMs", "AI-first Development"],
-  },
-  {
-    key: "programming",
-    color: "#a78bfa",
-    skills: ["Python", "SQL", "TypeScript"],
-  },
-  {
-    key: "engineering",
-    color: "#f59e0b",
-    skills: ["API-Design", "OCR-Pipelines", "Datenmodellierung", "Prozessautomatisierung", "Multi-Agent-Systeme", "Privacy-by-Design"],
-  },
-  {
-    key: "data",
-    color: "#34d399",
-    skills: ["Power BI", "SAS", "DAX", "Excel/VBA"],
-  },
-  {
-    key: "finance",
-    color: "#fb923c",
-    skills: ["Kreditrisikosteuerung", "Scoring-Modelle", "Betrugserkennung", "SCHUFA-DSS", "Kreditentscheidung", "Risikomodelle"],
-  },
-  {
-    key: "tools",
-    color: "#38bdf8",
-    skills: ["Power Automate", "UIPath (RPA)", "SCHUFA-DSS"],
-  },
+  { key: "ai", color: "#6366f1" },
+  { key: "programming", color: "#a78bfa" },
+  { key: "engineering", color: "#e879f9" },
+  { key: "data", color: "#34d399" },
+  { key: "finance", color: "#fb923c" },
+  { key: "tools", color: "#38bdf8" },
 ];
 
 export default function Skills() {
@@ -65,8 +41,9 @@ export default function Skills() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skillGroups.map(({ key, color, skills }, gi) => {
+          {skillGroups.map(({ key, color }, gi) => {
             const category = tx.categories.find((c) => c.key === key)?.label ?? key;
+            const skills = tx.groups[key as keyof typeof tx.groups] ?? [];
             return (
               <motion.div
                 key={key}

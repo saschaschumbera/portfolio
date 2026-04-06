@@ -48,6 +48,14 @@ export const t = {
         { key: "finance", label: "Finance-Domain" },
         { key: "tools", label: "Tools & Automation" },
       ],
+      groups: {
+        ai: ["Claude Code", "Cursor", "GitHub Copilot", "LangGraph", "Prompt Engineering", "Agentic AI", "Lokale LLMs", "AI-first Development"],
+        programming: ["Python", "SQL", "TypeScript"],
+        engineering: ["API-Design", "OCR-Pipelines", "Datenmodellierung", "Prozessautomatisierung", "Multi-Agent-Systeme", "Privacy-by-Design"],
+        data: ["Power BI", "SAS", "DAX", "Excel/VBA"],
+        finance: ["Kreditrisikosteuerung", "Scoring-Modelle", "Betrugserkennung", "SCHUFA-DSS", "Kreditentscheidung", "Risikomodelle"],
+        tools: ["Power Automate", "UIPath (RPA)", "SCHUFA-DSS"],
+      },
     },
     experience: {
       tag: "Werdegang",
@@ -161,6 +169,11 @@ export const t = {
       or: "oder",
       location: "Korschenbroich, NRW — Deutschland",
     },
+    footer: {
+      impressum: "Impressum",
+      datenschutz: "Datenschutz",
+      builtWith: "Built with Next.js · Motion · Tailwind CSS",
+    },
     chatbot: {
       title: "Sascha's Assistent",
       online: "Online",
@@ -226,6 +239,14 @@ export const t = {
         { key: "finance", label: "Finance Domain" },
         { key: "tools", label: "Tools & Automation" },
       ],
+      groups: {
+        ai: ["Claude Code", "Cursor", "GitHub Copilot", "LangGraph", "Prompt Engineering", "Agentic AI", "Local LLMs", "AI-first Development"],
+        programming: ["Python", "SQL", "TypeScript"],
+        engineering: ["API Design", "OCR Pipelines", "Data Modelling", "Process Automation", "Multi-Agent Systems", "Privacy-by-Design"],
+        data: ["Power BI", "SAS", "DAX", "Excel/VBA"],
+        finance: ["Credit Risk Management", "Scoring Models", "Fraud Detection", "SCHUFA-DSS", "Credit Decision", "Risk Models"],
+        tools: ["Power Automate", "UIPath (RPA)", "SCHUFA-DSS"],
+      },
     },
     experience: {
       tag: "Experience",
@@ -338,6 +359,11 @@ export const t = {
       subheading: "Whether it's collaboration, project feedback or just a professional exchange — I look forward to every message.",
       or: "or",
       location: "Korschenbroich, NRW — Germany",
+    },
+    footer: {
+      impressum: "Imprint",
+      datenschutz: "Privacy Policy",
+      builtWith: "Built with Next.js · Motion · Tailwind CSS",
     },
     chatbot: {
       title: "Sascha's Assistant",
