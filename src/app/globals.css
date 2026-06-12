@@ -43,7 +43,10 @@ html.light {
 /* ── Base styles ────────────────────────────────────────────────── */
 * { box-sizing: border-box; }
 
-html { scroll-behavior: auto; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* fixed navbar height + breathing room for anchor targets */
+}
 
 body {
   background: var(--bg-base);
@@ -101,6 +104,24 @@ html.light .theme-icon-moon {
 .chatbot-wave {
   transform-origin: 70% 75%;
   animation: chatbot-wave 6s ease-in-out infinite;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 ::selection { background: #6366f133; color: var(--text-1); }

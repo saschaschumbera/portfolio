@@ -33,7 +33,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
 
   return (
     <ThemeContext.Provider value={{ theme, toggle }}>
-      <MotionConfig reducedMotion="never">
+      <MotionConfig reducedMotion="user">
         {children}
       </MotionConfig>
     </ThemeContext.Provider>

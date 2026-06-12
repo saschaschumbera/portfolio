@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, FileSearch, X, Video, PenLine } from "lucide-react";
+import { Shield, FileSearch, X, Video, PenLine, Play } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
@@ -71,6 +71,34 @@ export default function Projects() {
                   className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl pointer-events-none"
                   style={{ background: accent }}
                 />
+
+                {/* Video preview */}
+                {videoSrc && (
+                  <button
+                    type="button"
+                    onClick={() => setActiveVideo(videoSrc)}
+                    className="group/video relative block w-full aspect-video rounded-xl overflow-hidden mb-5"
+                    style={{ border: "1px solid var(--border)", background: "#000" }}
+                    aria-label={`${item.title} — ${tx.demoVideo}`}
+                  >
+                    <video
+                      src={`${videoSrc}#t=0.1`}
+                      preload="metadata"
+                      muted
+                      playsInline
+                      tabIndex={-1}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-[1.03]"
+                    />
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover/video:bg-black/10 transition-colors duration-300">
+                      <span
+                        className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover/video:scale-110"
+                        style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.25)" }}
+                      >
+                        <Play size={18} fill="#fff" style={{ color: "#fff", marginLeft: 2 }} />
+                      </span>
+                    </span>
+                  </button>
+                )}
 
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">

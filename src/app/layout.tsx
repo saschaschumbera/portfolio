@@ -23,10 +23,48 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const siteDescription =
+  "AI-orientierter Softwareentwickler mit Schwerpunkt auf KI-gestützten Anwendungen und Automatisierungslösungen. Erfahrung in Finance, Banking und End-to-End AI-Produktentwicklung.";
+
 export const metadata: Metadata = {
-  title: "Sascha Schumbera — AI Developer",
-  description:
-    "AI-orientierter Softwareentwickler mit Schwerpunkt auf KI-gestützten Anwendungen und Automatisierungslösungen. Erfahrung in Finance, Banking und End-to-End AI-Produktentwicklung.",
+  metadataBase: new URL("https://sascha-schumbera.dev"),
+  title: {
+    default: "Sascha Schumbera — AI Developer",
+    template: "%s | Sascha Schumbera",
+  },
+  description: siteDescription,
+  keywords: [
+    "AI Developer",
+    "KI-Entwickler",
+    "Softwareentwickler",
+    "Kreditrisikosteuerung",
+    "Dokumentenanalyse",
+    "OCR",
+    "LLM",
+    "Multi-Agent-Systeme",
+    "Python",
+    "Finance",
+  ],
+  authors: [{ name: "Sascha Schumbera", url: "https://sascha-schumbera.dev" }],
+  creator: "Sascha Schumbera",
+  openGraph: {
+    type: "website",
+    url: "https://sascha-schumbera.dev",
+    siteName: "Sascha Schumbera — AI Developer",
+    title: "Sascha Schumbera — AI Developer",
+    description: siteDescription,
+    locale: "de_DE",
+    alternateLocale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sascha Schumbera — AI Developer",
+    description: siteDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
