@@ -38,11 +38,15 @@ export default function Hero() {
   const [displayed, setDisplayed] = useState("");
   const [deleting, setDeleting] = useState(false);
 
-  useEffect(() => {
+  // Typewriter bei Sprachwechsel zurücksetzen — während des Renderns,
+  // damit kein Frame mit dem alten Text der anderen Sprache erscheint.
+  const [prevLang, setPrevLang] = useState(lang);
+  if (prevLang !== lang) {
+    setPrevLang(lang);
     setDisplayed("");
     setDeleting(false);
     setRoleIndex(0);
-  }, [lang]);
+  }
 
   useEffect(() => {
     const roles = tx.roles;

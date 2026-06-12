@@ -51,7 +51,7 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {tx.items.map((item, i) => {
-            const { icon: Icon, accent, github, highlights: _h, videoSrc, tags } = { ...projectMeta[i], highlights: item.highlights };
+            const { icon: Icon, accent, github, videoSrc, tags } = projectMeta[i];
             return (
               <motion.article
                 key={item.title}
