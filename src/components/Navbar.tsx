@@ -1,23 +1,46 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X, Brain, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
 
+const sectionIds = ["about", "skills", "experience", "contact"];
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { toggle } = useTheme();
   const { lang, toggle: toggleLang } = useLang();
   const tx = t[lang].nav;
+
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(`#${entry.target.id}`);
+        });
+      },
+      // Narrow horizontal band around the viewport center → exactly one active section
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -57,17 +80,24 @@ export default function Navbar() {
 
         {/* Desktop */}
         <ul className="hidden md:flex gap-8">
-          {tx.links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="text-sm transition-colors duration-200 hover:opacity-100"
-                style={{ color: "var(--text-2)" }}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {tx.links.map((l) => {
+            const isActive = activeSection === l.href;
+            return (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className="text-sm transition-colors duration-200 hover:opacity-100"
+                  style={{
+                    color: isActive ? "var(--accent)" : "var(--text-2)",
+                    fontWeight: isActive ? 600 : 400,
+                  }}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  {l.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
@@ -149,6 +179,18 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Scroll progress */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute top-16 -mt-[2px] left-0 right-0 h-[2px] origin-left"
+        style={{
+          scaleX: progress,
+          background: "linear-gradient(90deg, #6366f1, #a78bfa)",
+          opacity: scrolled ? 1 : 0,
+          transition: "opacity 0.3s ease",
+        }}
+      />
 
       <AnimatePresence>
         {menuOpen && (

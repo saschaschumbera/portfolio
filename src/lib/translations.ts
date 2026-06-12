@@ -4,7 +4,6 @@ export const t = {
       links: [
         { label: "About", href: "#about" },
         { label: "Skills", href: "#skills" },
-        { label: "Projekte", href: "#projects" },
         { label: "Erfahrung", href: "#experience" },
         { label: "Kontakt", href: "#contact" },
       ],
@@ -195,7 +194,6 @@ export const t = {
       links: [
         { label: "About", href: "#about" },
         { label: "Skills", href: "#skills" },
-        { label: "Projects", href: "#projects" },
         { label: "Experience", href: "#experience" },
         { label: "Contact", href: "#contact" },
       ],

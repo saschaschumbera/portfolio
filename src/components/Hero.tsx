@@ -210,21 +210,6 @@ export default function Hero() {
           >
             {tx.cta}
           </a>
-          <a
-            href="#projects"
-            className="px-8 py-3 rounded-full font-medium text-sm transition-all duration-200"
-            style={{ border: "1px solid var(--border)", color: "var(--text-2)" }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.5)";
-              (e.currentTarget as HTMLElement).style.color = "var(--text-1)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-              (e.currentTarget as HTMLElement).style.color = "var(--text-2)";
-            }}
-          >
-            {tx.projects}
-          </a>
         </motion.div>
 
         {/* Social links */}

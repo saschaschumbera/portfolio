@@ -106,28 +106,20 @@ export const RULES: Rule[] = [
     answer: "Saschas Bildungsweg: kaufmännische Ausbildung → Berufserfahrung im Finanzsektor → B.Sc. Angewandte Künstliche Intelligenz an der IU (seit 2025, laufend).",
   },
   {
-    keywords: ["projekt", "gebaut", "entwickelt", "eigene", "work", "portfolio"],
-    answer: "Sascha hat zwei eigenständige KI-Produkte entwickelt: DocInspect (KI-Dokumentenanalyse mit Privacy-by-Design) und Vertragsverwaltung (Self-Hosted Dokumentenmanagement, 100% lokal). Weitere Projekte sind in Entwicklung.",
-  },
-  {
-    keywords: ["docinspect", "dokumentenanalyse", "risikobewertung", "risikoanalyse"],
-    answer: "DocInspect ist eine End-to-End Webanwendung zur KI-Analyse von Verträgen und Dokumenten. Highlights: Privacy-by-Design (lokale Pseudonymisierung vor LLM-Verarbeitung), OCR-Pipeline für PDF/DOCX/TXT/Bilddateien via Tesseract, Multi-Agent-Workflow mit Provider-Routing & Fallback, Risiko-Scoring in Ampellogik mit Handlungsempfehlungen.",
-  },
-  {
-    keywords: ["vertragsverwaltung", "self-hosted", "dokumentenmanagement", "dsgvo", "datenschutz"],
-    answer: "Die Vertragsverwaltung ist eine datenschutzorientierte, lokal betriebene Fullstack-Webanwendung im Self-Hosted Ansatz. Features laut CV: Upload/Kamera-Erfassung mit OCR, Erkennung von Beträgen, Fristen und Metadaten, Such- und Filterfunktionen, Versionierung sowie Import/Export.",
+    keywords: ["projekt", "gebaut", "entwickelt", "eigene", "work", "portfolio", "docinspect", "vertragsverwaltung"],
+    answer: "Saschas Projektbereich wird gerade neu aufgebaut — aktuell entstehen neue KI-Projekte mit Fokus auf Agenten und Prozessautomatisierung. Wenn du mehr wissen willst, frag Sascha am besten direkt: sascha.schumbera@mail.de",
   },
   {
     keywords: ["privacy", "pseudonymisierung", "datenschutz", "privacy by design"],
-    answer: "Ein zentrales Thema in Saschas Projekten ist Privacy-by-Design: Bei DocInspect werden sensible Daten lokal pseudonymisiert, bevor sie externe LLM-APIs erreichen. Bei der Vertragsverwaltung werden alle Daten ausschließlich lokal verarbeitet — kein Byte verlässt die eigene Infrastruktur.",
+    answer: "Privacy-by-Design ist ein zentrales Thema für Sascha: Sensible Daten werden lokal pseudonymisiert oder verarbeitet, bevor externe KI-Dienste ins Spiel kommen — besonders relevant für datenschutzsensible Anwendungsfälle im Finanzumfeld.",
   },
   {
     keywords: ["ocr", "texterkennung", "tesseract", "scan", "bilddatei"],
-    answer: "Sascha hat OCR-Pipelines mit Tesseract implementiert — für die Textextraktion aus gescannten Dokumenten, Bilddateien und komplexen PDFs. Beide Projekte (DocInspect und Vertragsverwaltung) nutzen diese OCR-Technologie.",
+    answer: "Sascha hat OCR-Pipelines mit Tesseract implementiert — für die Textextraktion aus gescannten Dokumenten, Bilddateien und komplexen PDFs.",
   },
   {
     keywords: ["multi.agent", "agent system", "provider routing", "fallback"],
-    answer: "DocInspect nutzt einen Multi-Agent-Ansatz mit robustem Provider-Routing: Fällt ein LLM-Provider aus, greift automatisch ein Fallback-System ein. Das ermöglicht hohe Verfügbarkeit auch in produktionsnahen Umgebungen.",
+    answer: "Sascha arbeitet mit Multi-Agent-Ansätzen und robustem Provider-Routing: Fällt ein LLM-Provider aus, greift automatisch ein Fallback-System ein. Das ermöglicht hohe Verfügbarkeit auch in produktionsnahen Umgebungen.",
   },
   {
     keywords: ["skill", "kenntnisse", "fähigkeit", "kann er", "tech stack", "tech-stack", "technologie", "womit arbeitet", "womit entwickelt"],
@@ -151,7 +143,7 @@ export const RULES: Rule[] = [
   },
   {
     keywords: ["langgraph", "langchain", "workflow", "graph"],
-    answer: "LangGraph nutzt Sascha für die Orchestrierung von Multi-Agent-Workflows — z.B. in DocInspect für das Provider-Routing und den strukturierten Analyse-Ablauf. Graph-basierte Pipelines ermöglichen robuste Fallback-Logik und parallele Agenten-Ausführung.",
+    answer: "LangGraph nutzt Sascha für die Orchestrierung von Multi-Agent-Workflows. Graph-basierte Pipelines ermöglichen robuste Fallback-Logik und parallele Agenten-Ausführung.",
   },
   {
     keywords: ["power bi", "dashboard", "reporting", "visualisierung", "bericht"],
@@ -239,14 +231,14 @@ export const FALLBACK_EN =
 
 export const SUGGESTIONS = [
   "Was macht Sascha besonders?",
-  "Welche KI-Projekte hat er gebaut?",
+  "Was ist sein Finanz-Hintergrund?",
   "Wie kann ich ihn kontaktieren?",
   "Was ist sein Tech-Stack?",
 ];
 
 export const SUGGESTIONS_EN = [
   "What makes Sascha stand out?",
-  "Which AI projects has he built?",
+  "What is his finance background?",
   "How can I contact him?",
   "What is his tech stack?",
 ];
@@ -266,9 +258,8 @@ export const RULES_EN: Rule[] = [
   { keywords: ["experience", "career", "background", "history"], answer: "Sascha's career: specialist at RCI Banque (2016–2021, acting team lead) → Full-Stack developer at Adelta Finanz → Retail Underwriter at De Lage Landen → Credit Risk Specialist at Bank11 (present). Studying B.Sc. Applied AI at IU since 2025." },
   { keywords: ["years", "how long", "experience"], answer: "Sascha has over 10 years of professional experience, with a strong focus on finance and banking." },
   { keywords: ["degree", "bachelor", "university", "studies", "iu"], answer: "Sascha has been studying B.Sc. Applied Artificial Intelligence at IU International University since November 2025 (planned: 11/2025 – 10/2029)." },
-  { keywords: ["project", "built", "developed", "created", "work", "portfolio"], answer: "Sascha has independently built two AI products: DocInspect (AI document analysis with Privacy-by-Design) and a Contract Manager (self-hosted document management, 100% local). More projects are in development." },
-  { keywords: ["docinspect", "document analysis", "risk assessment"], answer: "DocInspect is an end-to-end web application for AI-powered analysis of contracts and documents. Highlights: Privacy-by-Design (local pseudonymisation before LLM processing), OCR pipeline for PDF/DOCX/TXT/image files, multi-agent workflow with provider routing & fallback, risk scoring with traffic-light logic." },
-  { keywords: ["contract manager", "contract management", "self-hosted", "self hosted", "privacy", "gdpr"], answer: "The Contract Manager is a privacy-oriented, locally operated full-stack web application in a self-hosted approach. Features: upload/camera capture with OCR, detection of amounts, deadlines and metadata, search & filter functions, no cloud dependency." },
+  { keywords: ["project", "built", "developed", "created", "work", "portfolio", "docinspect", "contract manager"], answer: "Sascha's project section is currently being rebuilt — new AI projects focused on agents and process automation are in the works. For details, best to ask Sascha directly: sascha.schumbera@mail.de" },
+  { keywords: ["privacy", "gdpr", "pseudonymisation", "privacy by design"], answer: "Privacy-by-Design is a core theme for Sascha: sensitive data is pseudonymised or processed locally before any external AI service is involved — especially relevant for privacy-sensitive use cases in finance." },
   { keywords: ["skill", "knowledge", "tech stack", "technology", "tools", "can he"], answer: "Core skills: Python, SQL, TypeScript. AI tools: Claude Code, Cursor, GitHub Copilot, LangGraph, Prompt Engineering, local LLMs. Data: Power BI, SAS, DAX. Engineering: FastAPI, OCR pipelines, data modelling. Automation: Power Automate, UIPath (RPA), SCHUFA-DSS." },
   { keywords: ["python"], answer: "Python is Sascha's main programming language for AI development — used for FastAPI backends, OCR pipelines, LLM integration, automation scripts and data processing." },
   { keywords: ["sql"], answer: "SQL is a daily tool for Sascha — for automation solutions at Bank11, data analysis, reporting and the development of SAS programs for data preparation." },
