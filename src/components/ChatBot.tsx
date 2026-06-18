@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { X, Send, Bot } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { X, Send, Bot, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { findAnswer, SUGGESTIONS, SUGGESTIONS_EN, findAnswerEn } from "./chatbotKnowledge";
+import { initSemantic, isSemanticReady, semanticAnswer } from "./chatbotSemantic";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 
@@ -85,6 +87,11 @@ export default function ChatBot() {
   ]);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
+  // "idle" until the chat is first opened, then "loading" the embedding model,
+  // then "ready" once semantic matching is live.
+  const [semanticStatus, setSemanticStatus] = useState<"idle" | "loading" | "ready">("idle");
+  // Animated teaser bubble above the closed bot button (shown once per session).
+  const [showHint, setShowHint] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const suppressClickUntilRef = useRef(0);
@@ -107,6 +114,34 @@ export default function ChatBot() {
     if (!open) return;
     const timer = setTimeout(() => inputRef.current?.focus(), 120);
     return () => clearTimeout(timer);
+  }, [open]);
+
+  // Lazy-load the semantic model the first time the chat is opened. Until it's
+  // ready, the keyword matcher answers; afterwards answers become meaning-based.
+  useEffect(() => {
+    if (!open) return;
+    if (isSemanticReady()) {
+      setSemanticStatus("ready");
+      return;
+    }
+    setSemanticStatus("loading");
+    initSemantic()
+      .then(() => setSemanticStatus("ready"))
+      .catch(() => setSemanticStatus("idle"));
+  }, [open]);
+
+  const dismissHint = useCallback(() => setShowHint(false), []);
+
+  // Reveal the teaser shortly after every page load, never while the chat is open.
+  useEffect(() => {
+    if (!mounted || open) return;
+    const showTimer = window.setTimeout(() => setShowHint(true), 1200);
+    return () => window.clearTimeout(showTimer);
+  }, [mounted, open]);
+
+  // Opening the chat hides the teaser.
+  useEffect(() => {
+    if (open) setShowHint(false);
   }, [open]);
 
   useEffect(() => {
@@ -208,8 +243,17 @@ export default function ChatBot() {
     setThinking(true);
 
     // Short delay to feel natural
-    setTimeout(() => {
-      const answer = isEN ? findAnswerEn(userText) : findAnswer(userText);
+    setTimeout(async () => {
+      const keywordAnswer = () => (isEN ? findAnswerEn(userText) : findAnswer(userText));
+      let answer: string | null = null;
+      try {
+        // Once the model is loaded, try semantic matching first.
+        if (isSemanticReady()) answer = await semanticAnswer(userText, isEN);
+      } catch {
+        answer = null;
+      }
+      // Keyword matching as backstop (and while the model is still loading).
+      if (answer === null) answer = keywordAnswer();
       setThinking(false);
       setMessages((prev) =>
         trimMessageHistory([
@@ -235,6 +279,63 @@ export default function ChatBot() {
           bottom: "calc(1rem + env(safe-area-inset-bottom))",
         }}
       >
+        <AnimatePresence>
+          {showHint && !open && (
+            <motion.div
+              key="chat-hint"
+              initial={{ opacity: 0, y: 12, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 380, damping: 26 }}
+              style={{ position: "absolute", bottom: "calc(100% + 0.85rem)", right: 0, zIndex: 3 }}
+            >
+              <div className="relative chatbot-float">
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); dismissHint(); setChatOpen(true); }}
+                  className="block text-left rounded-2xl px-3.5 py-2.5 shadow-xl shadow-black/25"
+                  style={{ background: "var(--bg-card)", border: "1px solid var(--border)", width: "min(15rem, 70vw)" }}
+                  aria-label={isEN ? "Open chat" : "Chat öffnen"}
+                >
+                  <span className="flex items-center gap-1.5 mb-0.5">
+                    <Sparkles size={13} className="text-[#6366f1]" />
+                    <span className="text-[11px] font-semibold tracking-wide uppercase text-[#6366f1]">
+                      {isEN ? "AI Assistant" : "KI-Assistent"}
+                    </span>
+                  </span>
+                  <p className="text-xs sm:text-sm font-medium leading-snug" style={{ color: "var(--text-1)" }}>
+                    {isEN
+                      ? "Ask me anything about Sascha — skills, projects, career …"
+                      : "Frag mich alles über Sascha — Skills, Projekte, Werdegang …"}
+                  </p>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); dismissHint(); }}
+                  aria-label={isEN ? "Dismiss" : "Ausblenden"}
+                  className="absolute -top-2 -left-2 w-5 h-5 rounded-full flex items-center justify-center shadow-md"
+                  style={{ background: "var(--bg-card)", border: "1px solid var(--border)", color: "var(--text-2)" }}
+                >
+                  <X size={11} />
+                </button>
+                {/* Tail pointing down toward the bot icon */}
+                <span
+                  className="absolute"
+                  style={{
+                    right: "1.05rem",
+                    bottom: "-0.38rem",
+                    width: "0.75rem",
+                    height: "0.75rem",
+                    background: "var(--bg-card)",
+                    borderRight: "1px solid var(--border)",
+                    borderBottom: "1px solid var(--border)",
+                    transform: "rotate(45deg)",
+                  }}
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
         {!open && (
           <>
             <span className="absolute inset-0 rounded-full bg-[#6366f1] animate-ping opacity-75" style={{ pointerEvents: "none" }} />
@@ -304,9 +405,23 @@ export default function ChatBot() {
               </div>
               <div>
                 <p className="text-sm sm:text-[15px] font-semibold" style={{ color: "var(--text-1)" }}>{isEN ? "Sascha's Assistant" : "Sascha's Assistent"}</p>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
-                  <p className="text-xs sm:text-sm" style={{ color: "var(--text-3)" }}>{isEN ? "Online" : "Online"}</p>
+                  <p className="text-xs sm:text-sm" style={{ color: "var(--text-3)" }}>Online</p>
+                  {semanticStatus === "ready" && (
+                    <span className="flex items-center gap-1 text-xs sm:text-sm font-medium text-[#6366f1]" title={isEN ? "AI semantic search active" : "KI-Semantiksuche aktiv"}>
+                      <span style={{ color: "var(--text-3)" }}>·</span>
+                      <Sparkles size={12} />
+                      {isEN ? "Semantic search" : "Semantische Suche"}
+                    </span>
+                  )}
+                  {semanticStatus === "loading" && (
+                    <span className="flex items-center gap-1 text-xs sm:text-sm" style={{ color: "var(--text-3)" }}>
+                      <span>·</span>
+                      <Sparkles size={12} className="animate-pulse" />
+                      {isEN ? "loading AI…" : "KI lädt…"}
+                    </span>
+                  )}
                 </div>
               </div>
               <button

@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "fetch:chatbot-assets": "node scripts/fetch-chatbot-assets.mjs",
+    "predev": "node scripts/fetch-chatbot-assets.mjs",
     "dev": "next dev --webpack",
+    "prebuild": "node scripts/fetch-chatbot-assets.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
     "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.7.0",
@@ -24,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "^16.2.9",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   },
   "overrides": {

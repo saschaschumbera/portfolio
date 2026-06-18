@@ -106,8 +106,40 @@ export const RULES: Rule[] = [
     answer: "Saschas Bildungsweg: kaufmännische Ausbildung → Berufserfahrung im Finanzsektor → B.Sc. Angewandte Künstliche Intelligenz an der IU (seit 2025, laufend).",
   },
   {
-    keywords: ["projekt", "gebaut", "entwickelt", "eigene", "work", "portfolio", "docinspect", "vertragsverwaltung"],
-    answer: "Saschas Projektbereich wird gerade neu aufgebaut — aktuell entstehen neue KI-Projekte mit Fokus auf Agenten und Prozessautomatisierung. Wenn du mehr wissen willst, frag Sascha am besten direkt: sascha.schumbera@mail.de",
+    keywords: ["projekt", "gebaut", "entwickelt", "eigene", "work", "portfolio", "projekte"],
+    answer: "Sascha hat mehrere eigene KI- und Software-Projekte gebaut — u.a. eine Vertragsverwaltung mit OCR (Next.js), einen lokalen RAG-Assistenten für Obsidian (LangChain + ChromaDB + Ollama), einen agentischen Telegram-Assistenten mit Computer-Use, ein KI-Notiztool mit Gemini, einen FastAPI-Battlesnake-Bot und einen Computer-Vision-Automatisierungsbot. Frag gerne nach einem konkreten Projekt!",
+  },
+  {
+    keywords: ["vertragsverwaltung", "vertrags-app", "verträge", "vertrag", "kündigungsfrist"],
+    answer: "Vertragsverwaltung: eine Next.js-Full-Stack-App zur Verwaltung von Verträgen mit OCR (Tesseract.js), automatischer Fristenüberwachung (Ampel-System), E-Mail-Erinnerungen vor Kündigungsfristen und durchsuchbaren PDFs. Komplett self-hosted mit SQLite und Privacy-First-Ansatz.",
+  },
+  {
+    keywords: ["dokumentenablage", "dokumentenmanagement", "dokumentenverwaltung"],
+    answer: "Dokumentenablage: eine Next.js-App zur Ablage und Volltextsuche von Dokumenten — mit OCR-Texterkennung (Tesseract.js), PDF-Verarbeitung und SQLite. Fokus auf lokaler, datenschutzfreundlicher Dokumentenverwaltung.",
+  },
+  {
+    keywords: ["obsidian", "rag", "vektordatenbank", "chromadb", "langchain", "wissensassistent"],
+    answer: "Obsidian-AI-Agent: ein lokaler KI-Assistent, der Saschas Notizen per RAG durchsucht — gebaut mit LangChain, ChromaDB als Vektordatenbank und Gemma über Ollama (lokales LLM, keine Cloud). Inklusive Embeddings und Websuche. Genau die RAG-Technik steckt auch hinter dem semantischen Chatbot auf dieser Seite.",
+  },
+  {
+    keywords: ["telegram", "personal agent", "ki-assistent", "computer-use", "computer use", "pyautogui", "whisper"],
+    answer: "Personal Agent: ein agentischer Telegram-Assistent mit modularer Architektur und explizitem Context Engineering — kann den Rechner per Computer-Use (PyAutoGUI) steuern und Sprachnachrichten via Whisper transkribieren. Zeigt Saschas Fokus auf produktionsnahe Agentic AI.",
+  },
+  {
+    keywords: ["smart-notes", "smart notes", "notiztool", "notizen", "gemini"],
+    answer: "Smart-Notes: ein KI-gestütztes Notiztool auf Basis von Express und der Gemini API — verarbeitet und strukturiert Notizen automatisch (Markdown). Beispiel für schnelle Integration von LLM-APIs in eine eigene Anwendung.",
+  },
+  {
+    keywords: ["battlesnake", "spiel-ki", "spiele-ki", "game ai", "competition"],
+    answer: "Battlesnake: ein FastAPI-Server für die Battlesnake-Blackout-2026-Competition — implementiert die Spiel-API und eine Zug-Logik mit Echtzeit-Anforderung (≤ 500 ms pro Zug). Zeigt Algorithmik und sauberes Backend-Design.",
+  },
+  {
+    keywords: ["sadidauto", "computer vision", "opencv", "bilderkennung", "bot dofus"],
+    answer: "Sadidauto: ein Computer-Vision-Automatisierungsbot (ursprünglich Open Source, von Sascha überarbeitet und erweitert) — erkennt Spielzustände per visueller Bilderkennung (OpenCV) und steuert Maus/Tastatur via PyAutoGUI, mit PySide6-Oberfläche. Belegt Computer Vision und Desktop-Automatisierung.",
+  },
+  {
+    keywords: ["tiktok", "video", "content automatisierung", "videogenerierung", "yt-dlp", "faceless"],
+    answer: "Content-Automatisierung: mehrere Pipelines, die KI-Videos und Social-Media-Content end-to-end produzieren — Scraping (yt-dlp), KI-Analyse, automatische Skript- und Voice-Generierung (TTS) bis zum Upload. Zeigt Saschas Stärke im Bauen kompletter automatisierter Medien-Pipelines.",
   },
   {
     keywords: ["privacy", "pseudonymisierung", "datenschutz", "privacy by design"],
@@ -258,7 +290,14 @@ export const RULES_EN: Rule[] = [
   { keywords: ["experience", "career", "background", "history"], answer: "Sascha's career: specialist at RCI Banque (2016–2021, acting team lead) → Full-Stack developer at Adelta Finanz → Retail Underwriter at De Lage Landen → Credit Risk Specialist at Bank11 (present). Studying B.Sc. Applied AI at IU since 2025." },
   { keywords: ["years", "how long", "experience"], answer: "Sascha has over 10 years of professional experience, with a strong focus on finance and banking." },
   { keywords: ["degree", "bachelor", "university", "studies", "iu"], answer: "Sascha has been studying B.Sc. Applied Artificial Intelligence at IU International University since November 2025 (planned: 11/2025 – 10/2029)." },
-  { keywords: ["project", "built", "developed", "created", "work", "portfolio", "docinspect", "contract manager"], answer: "Sascha's project section is currently being rebuilt — new AI projects focused on agents and process automation are in the works. For details, best to ask Sascha directly: sascha.schumbera@mail.de" },
+  { keywords: ["project", "built", "developed", "created", "work", "portfolio", "projects"], answer: "Sascha has built several AI and software projects — including a contract manager with OCR (Next.js), a local RAG assistant for Obsidian (LangChain + ChromaDB + Ollama), an agentic Telegram assistant with computer-use, an AI note tool with Gemini, a FastAPI Battlesnake bot and a computer-vision automation bot. Feel free to ask about a specific one!" },
+  { keywords: ["contract", "contract manager", "vertragsverwaltung", "ocr app"], answer: "Contract Manager: a Next.js full-stack app to manage contracts with OCR (Tesseract.js), automatic deadline tracking, email reminders before cancellation periods, and searchable PDFs — fully self-hosted with SQLite and a privacy-first approach." },
+  { keywords: ["obsidian", "rag", "vector database", "chromadb", "langchain", "knowledge assistant"], answer: "Obsidian AI Agent: a local AI assistant that searches Sascha's notes via RAG — built with LangChain, ChromaDB as the vector database and Gemma via Ollama (local LLM, no cloud). The same RAG technique powers the semantic chatbot on this page." },
+  { keywords: ["telegram", "personal agent", "computer-use", "computer use", "pyautogui", "whisper"], answer: "Personal Agent: an agentic Telegram assistant with modular architecture and explicit context engineering — it can control the computer via computer-use (PyAutoGUI) and transcribe voice messages with Whisper. Shows Sascha's focus on production-grade agentic AI." },
+  { keywords: ["smart-notes", "smart notes", "note tool", "gemini"], answer: "Smart-Notes: an AI-powered note tool built with Express and the Gemini API that automatically processes and structures notes (Markdown) — an example of quickly integrating LLM APIs into a custom app." },
+  { keywords: ["battlesnake", "game ai", "competition"], answer: "Battlesnake: a FastAPI server for the Battlesnake Blackout 2026 competition — implements the game API and a move logic under a real-time constraint (≤ 500 ms per move). Demonstrates algorithmics and clean backend design." },
+  { keywords: ["sadidauto", "computer vision", "opencv", "image recognition"], answer: "Sadidauto: a computer-vision automation bot (originally open source, reworked and extended by Sascha) — detects states via visual image recognition (OpenCV) and controls mouse/keyboard via PyAutoGUI, with a PySide6 UI. Demonstrates computer vision and desktop automation." },
+  { keywords: ["tiktok", "video", "content automation", "video generation", "yt-dlp"], answer: "Content automation: several pipelines that produce AI videos and social-media content end-to-end — scraping (yt-dlp), AI analysis, automatic script and voice generation (TTS) through to upload. Shows Sascha's strength in building complete automated media pipelines." },
   { keywords: ["privacy", "gdpr", "pseudonymisation", "privacy by design"], answer: "Privacy-by-Design is a core theme for Sascha: sensitive data is pseudonymised or processed locally before any external AI service is involved — especially relevant for privacy-sensitive use cases in finance." },
   { keywords: ["skill", "knowledge", "tech stack", "technology", "tools", "can he"], answer: "Core skills: Python, SQL, TypeScript. AI tools: Claude Code, Cursor, GitHub Copilot, LangGraph, Prompt Engineering, local LLMs. Data: Power BI, SAS, DAX. Engineering: FastAPI, OCR pipelines, data modelling. Automation: Power Automate, UIPath (RPA), SCHUFA-DSS." },
   { keywords: ["python"], answer: "Python is Sascha's main programming language for AI development — used for FastAPI backends, OCR pipelines, LLM integration, automation scripts and data processing." },
