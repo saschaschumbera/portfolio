@@ -8,7 +8,9 @@ const configuredDevOrigins = (process.env.ALLOWED_DEV_ORIGINS ?? "")
 
 const cspDirectives = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  // 'wasm-unsafe-eval' lets the in-browser embedding model (Transformers.js)
+  // compile its WebAssembly runtime; 'unsafe-eval' (dev only) already covers it.
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' blob: data:",
   "font-src 'self' data:",

@@ -51,3 +51,9 @@ AGENTS.md
 # local files
 Lebenslauf*.pdf
 public/cv-sascha-schumbera.pdf
+
+# chatbot model + ONNX runtime (>100MB, fetched at build via scripts/fetch-chatbot-assets.mjs)
+/public/models/
+/public/ort/
+
+STATUS-NOTIZEN.md

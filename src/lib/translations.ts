@@ -48,9 +48,9 @@ export const t = {
         { key: "tools", label: "Tools & Automation" },
       ],
       groups: {
-        ai: ["Claude Code", "Cursor", "GitHub Copilot", "LangGraph", "Prompt Engineering", "Agentic AI", "Lokale LLMs", "AI-first Development"],
+        ai: ["Claude Code", "Cursor", "GitHub Copilot", "LangGraph", "LangChain", "RAG", "Vektordatenbanken (ChromaDB)", "Prompt Engineering", "Agentic AI", "Lokale LLMs (Ollama)", "Gemini API", "Whisper / STT", "Computer Vision", "AI-first Development"],
         programming: ["Python", "SQL", "TypeScript"],
-        engineering: ["API-Design", "OCR-Pipelines", "Datenmodellierung", "Prozessautomatisierung", "Multi-Agent-Systeme", "Privacy-by-Design"],
+        engineering: ["Next.js Full-Stack", "FastAPI", "API-Design", "SQLite", "OCR-Pipelines", "PDF-Verarbeitung", "Web Scraping", "Computer-Use-Automation", "Playwright", "Datenmodellierung", "Prozessautomatisierung", "Multi-Agent-Systeme", "Medien-/Video-Pipelines", "Privacy-by-Design"],
         data: ["Power BI", "SAS", "DAX", "Excel/VBA"],
         finance: ["Kreditrisikosteuerung", "Scoring-Modelle", "Betrugserkennung", "SCHUFA-DSS", "Kreditentscheidung", "Risikomodelle"],
         tools: ["Power Automate", "UIPath (RPA)", "SCHUFA-DSS"],
@@ -238,9 +238,9 @@ export const t = {
         { key: "tools", label: "Tools & Automation" },
       ],
       groups: {
-        ai: ["Claude Code", "Cursor", "GitHub Copilot", "LangGraph", "Prompt Engineering", "Agentic AI", "Local LLMs", "AI-first Development"],
+        ai: ["Claude Code", "Cursor", "GitHub Copilot", "LangGraph", "LangChain", "RAG", "Vector Databases (ChromaDB)", "Prompt Engineering", "Agentic AI", "Local LLMs (Ollama)", "Gemini API", "Whisper / STT", "Computer Vision", "AI-first Development"],
         programming: ["Python", "SQL", "TypeScript"],
-        engineering: ["API Design", "OCR Pipelines", "Data Modelling", "Process Automation", "Multi-Agent Systems", "Privacy-by-Design"],
+        engineering: ["Next.js Full-Stack", "FastAPI", "API Design", "SQLite", "OCR Pipelines", "PDF Processing", "Web Scraping", "Computer-Use Automation", "Playwright", "Data Modelling", "Process Automation", "Multi-Agent Systems", "Media/Video Pipelines", "Privacy-by-Design"],
         data: ["Power BI", "SAS", "DAX", "Excel/VBA"],
         finance: ["Credit Risk Management", "Scoring Models", "Fraud Detection", "SCHUFA-DSS", "Credit Decision", "Risk Models"],
         tools: ["Power Automate", "UIPath (RPA)", "SCHUFA-DSS"],
