@@ -66,9 +66,14 @@ const tests: [string, string][] = [
 const dot = (a: number[], b: number[]) => a.reduce((s, v, i) => s + v * b[i], 0);
 
 async function main() {
-  const extractor = await pipeline("feature-extraction", "Xenova/multilingual-e5-small", { dtype: "q8" });
+  const extractor = (await pipeline("feature-extraction", "Xenova/multilingual-e5-small", {
+    dtype: "q8",
+  })) as unknown as (
+    t: string[],
+    o: { pooling: "mean"; normalize: boolean },
+  ) => Promise<{ tolist: () => number[][] }>;
   const embed = async (t: string[]) =>
-    (await (extractor as any)(t, { pooling: "mean", normalize: true })).tolist() as number[][];
+    (await extractor(t, { pooling: "mean", normalize: true })).tolist();
 
   const vecs = await embed(entries.map((e) => `passage: ${e.text}`));
 
