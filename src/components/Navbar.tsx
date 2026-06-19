@@ -7,7 +7,7 @@ import { useTheme } from "./ThemeProvider";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
 
-const sectionIds = ["about", "skills", "experience", "contact"];
+const sectionIds = ["about", "skills", "experience", "projects", "contact"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, FileSearch, X, Video, PenLine, Play } from "lucide-react";
+import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
@@ -16,9 +16,13 @@ const GithubIcon = () => (
 );
 
 const projectMeta = [
-  { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: "/projects/docinspect-demo.mp4", tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
-  { icon: Shield, accent: "#f59e0b", github: null, videoSrc: "/projects/vertragsverwaltung-demo.mp4", tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
-  { icon: PenLine, accent: "#22c55e", github: null, videoSrc: "/projects/smartnotes-demo.mp4", tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
+  { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
+  { icon: Shield, accent: "#f59e0b", github: null, videoSrc: null, tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
+  { icon: PenLine, accent: "#22c55e", github: null, videoSrc: null, tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
+  { icon: Database, accent: "#a78bfa", github: null, videoSrc: null, tags: ["Python", "LangChain", "ChromaDB", "Ollama", "RAG", "Tool-Use"] },
+  { icon: Bot, accent: "#38bdf8", github: null, videoSrc: null, tags: ["Python", "Agentic AI", "Context Engineering", "Intent-Orchestrierung", "Multi-Capability", "Telegram"] },
+  { icon: Gamepad2, accent: "#f472b6", github: null, videoSrc: null, tags: ["Python", "FastAPI", "Algorithmik", "Echtzeit"] },
+  { icon: Eye, accent: "#14b8a6", github: null, videoSrc: null, tags: ["Python", "OpenCV", "Computer Vision", "Computer-Use", "State Machine", "OCR", "Pathfinding", "PyAutoGUI"] },
 ];
 
 export default function Projects() {
