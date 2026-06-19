@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored chatbot runtime (minified onnxruntime .mjs) — not our source.
+    "public/**",
   ]),
 ]);
 
