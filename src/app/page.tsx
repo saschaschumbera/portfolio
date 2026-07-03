@@ -55,10 +55,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Projects />
         <About />
         <Skills />
         <Experience />
-        <Projects />
         <Contact />
       </main>
       <Footer />

@@ -2,10 +2,10 @@ export const t = {
   de: {
     nav: {
       links: [
+        { label: "Projekte", href: "#projects" },
         { label: "About", href: "#about" },
         { label: "Skills", href: "#skills" },
         { label: "Erfahrung", href: "#experience" },
-        { label: "Projekte", href: "#projects" },
         { label: "Kontakt", href: "#contact" },
       ],
     },
@@ -252,10 +252,10 @@ export const t = {
   en: {
     nav: {
       links: [
+        { label: "Projects", href: "#projects" },
         { label: "About", href: "#about" },
         { label: "Skills", href: "#skills" },
         { label: "Experience", href: "#experience" },
-        { label: "Projects", href: "#projects" },
         { label: "Contact", href: "#contact" },
       ],
     },
