@@ -16,7 +16,7 @@ const GithubIcon = () => (
 );
 
 const projectMeta = [
-  { icon: Clapperboard, accent: "#ec4899", github: null, videoSrc: null, caseStudyUrl: "/case-studies/tiktok-autopilot", tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }, { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" }, { label: "@truecrime_DE.exe", url: "https://www.tiktok.com/@truecrime_DE.exe" }] },
+  { icon: Clapperboard, accent: "#ec4899", featured: true, github: null, videoSrc: null, caseStudyUrl: "/case-studies/tiktok-autopilot", tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }, { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" }, { label: "@truecrime_DE.exe", url: "https://www.tiktok.com/@truecrime_DE.exe" }] },
   { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, caseStudyUrl: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
   { icon: Shield, accent: "#f59e0b", github: null, videoSrc: null, tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
   { icon: PenLine, accent: "#22c55e", github: null, videoSrc: null, tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
@@ -56,9 +56,10 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {tx.items.map((item, i) => {
-            const { icon: Icon, accent, github, videoSrc, tags, externalLinks, caseStudyUrl } = projectMeta[i] as {
+            const { icon: Icon, accent, featured, github, videoSrc, tags, externalLinks, caseStudyUrl } = projectMeta[i] as {
               icon: any;
               accent: string;
+              featured?: boolean;
               github: string | null;
               videoSrc: string | null;
               caseStudyUrl?: string | null;
@@ -71,7 +72,7 @@ export default function Projects() {
                 initial={mounted ? { opacity: 0, y: 40 } : false}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="group relative p-6 rounded-2xl transition-all duration-300 overflow-hidden"
+                className={`group relative p-6 rounded-2xl transition-all duration-300 overflow-hidden${featured ? " md:col-span-2" : ""}`}
                 style={{
                   border: "1px solid var(--border)",
                   background: "color-mix(in srgb, var(--bg-card) 40%, transparent)",
@@ -174,7 +175,7 @@ export default function Projects() {
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-4">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   {caseStudyUrl && (
                     <a
                       href={caseStudyUrl}
