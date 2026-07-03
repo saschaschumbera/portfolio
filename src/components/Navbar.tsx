@@ -56,7 +56,7 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group">
+        <a href="/" className="flex items-center gap-2 group">
           <div
             className="relative w-8 h-8 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-all duration-300"
             style={{
@@ -85,7 +85,7 @@ export default function Navbar() {
             return (
               <li key={l.href}>
                 <a
-                  href={l.href}
+                  href={`/${l.href}`}
                   className="text-sm transition-colors duration-200 hover:opacity-100"
                   style={{
                     color: isActive ? "var(--accent)" : "var(--text-2)",
@@ -208,7 +208,7 @@ export default function Navbar() {
               {tx.links.map((l) => (
                 <li key={l.href}>
                   <a
-                    href={l.href}
+                    href={`/${l.href}`}
                     onClick={() => setMenuOpen(false)}
                     className="text-sm transition-colors"
                     style={{ color: "var(--text-2)" }}
