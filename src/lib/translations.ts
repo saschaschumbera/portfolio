@@ -125,6 +125,7 @@ export const t = {
       subheading: "Eigene KI- und Software-Projekte — von Dokumentenanalyse über RAG-Agenten bis Automatisierung.",
       repoOnRequest: "Repository auf Anfrage",
       demoVideo: "Demo-Video",
+      readCaseStudy: "Case Study lesen",
       comingSoon: "Weitere Projekte und Ausbaustufen sind in Entwicklung.",
       items: [
         {
@@ -375,6 +376,7 @@ export const t = {
       subheading: "Personal AI and software projects — from document analysis to RAG agents and automation.",
       repoOnRequest: "Repository on request",
       demoVideo: "Demo video",
+      readCaseStudy: "Read Case Study",
       comingSoon: "More projects and extensions are in development.",
       items: [
         {

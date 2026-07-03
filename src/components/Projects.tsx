@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye, Clapperboard, ExternalLink } from "lucide-react";
+import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye, Clapperboard, ExternalLink, FileText } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
@@ -16,8 +16,8 @@ const GithubIcon = () => (
 );
 
 const projectMeta = [
-  { icon: Clapperboard, accent: "#ec4899", github: null, videoSrc: null, tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }] },
-  { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
+  { icon: Clapperboard, accent: "#ec4899", github: null, videoSrc: null, caseStudyUrl: "/case-studies/tiktok-autopilot", tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }] },
+  { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, caseStudyUrl: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
   { icon: Shield, accent: "#f59e0b", github: null, videoSrc: null, tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
   { icon: PenLine, accent: "#22c55e", github: null, videoSrc: null, tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
   { icon: Database, accent: "#a78bfa", github: null, videoSrc: null, tags: ["Python", "LangChain", "ChromaDB", "Ollama", "RAG", "Tool-Use"] },
@@ -56,7 +56,15 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {tx.items.map((item, i) => {
-            const { icon: Icon, accent, github, videoSrc, tags, externalLinks } = projectMeta[i] as any;
+            const { icon: Icon, accent, github, videoSrc, tags, externalLinks, caseStudyUrl } = projectMeta[i] as {
+              icon: any;
+              accent: string;
+              github: string | null;
+              videoSrc: string | null;
+              caseStudyUrl?: string | null;
+              tags: string[];
+              externalLinks?: { label: string; url: string }[];
+            };
             return (
               <motion.article
                 key={item.title}
@@ -167,6 +175,22 @@ export default function Projects() {
 
                 {/* Links */}
                 <div className="flex gap-4">
+                  {caseStudyUrl && (
+                    <a
+                      href={caseStudyUrl}
+                      className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full transition-all"
+                      style={{ 
+                        color: "var(--bg-base)",
+                        backgroundColor: accent,
+                        boxShadow: `0 0 10px ${accent}40`
+                      }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.9"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
+                    >
+                      <FileText size={13} />
+                      {tx.readCaseStudy}
+                    </a>
+                  )}
                   {github ? (
                     <a
                       href={github}
