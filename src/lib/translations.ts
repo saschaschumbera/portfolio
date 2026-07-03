@@ -131,7 +131,7 @@ export const t = {
         {
           title: "TikTok Autopilot",
           subtitle: "Autonome AI-Content-Pipeline",
-          description: "Eine vollständig autonome, headless Data- & AI-Pipeline für soziale Medien (TikTok, Instagram, YouTube). Scrapt Inhalte, extrahiert Transkripte, nutzt LLMs für Redaktion & Gating, generiert Voiceovers (Gemini TTS) und automatisiert den finalen Videoschnitt sowie den automatischen Upload.",
+          description: "Eine vollständig autonome, headless Data- & AI-Pipeline für soziale Medien (TikTok, Instagram, YouTube). Beschafft Inhalte per Scraping oder autonomem KI-Research-Agent, extrahiert Transkripte, nutzt LLMs für Redaktion & Gating, generiert Voiceovers (Gemini TTS) und automatisiert den finalen Videoschnitt sowie den automatischen Upload.",
           status: "Produktiv (Live)",
           highlights: [
             "Multi-Kanal-Betrieb (4 Live-Kanäle: Gedankenguide, Inner Child, Geldnerd, TrueCrime) mit vollautomatischem täglichen Posting",
@@ -382,7 +382,7 @@ export const t = {
         {
           title: "TikTok Autopilot",
           subtitle: "Autonomous AI Content Pipeline",
-          description: "A fully autonomous, headless data & AI pipeline for social media (TikTok, Instagram, YouTube). Scrapes content, extracts transcripts, uses LLMs for editing & gating, generates voiceovers (Gemini TTS), and automates the final video editing as well as the upload.",
+          description: "A fully autonomous, headless data & AI pipeline for social media (TikTok, Instagram, YouTube). Sources content via scraping or an autonomous AI research agent, extracts transcripts, uses LLMs for editing & gating, generates voiceovers (Gemini TTS), and automates the final video editing as well as the upload.",
           status: "Live (Production)",
           highlights: [
             "Multi-channel operation (4 live channels: Gedankenguide, Inner Child, Geldnerd, TrueCrime) with fully automated daily posting",

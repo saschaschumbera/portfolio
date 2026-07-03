@@ -10,7 +10,7 @@ export const caseStudyTiktok = {
     sections: {
       architecture: {
         title: "Die Architektur",
-        content: "Die Pipeline besteht aus sechs vollautomatisierten Stufen, orchestriert durch einen zentralen Scheduler.",
+        content: "Die Pipeline besteht aus sechs vollautomatisierten Stufen, orchestriert durch einen zentralen Scheduler. Als Quelle dienen je nach Kanal gescrapte TikTok-Videos (Playwright) oder kuratierte, faktengeprüfte Recherche-Datenbanken, die ein autonomer KI-Agent nachts selbstständig nachfüllt.",
         mermaid: `
 graph TD
     A[1. Scrape<br>Playwright] -->|TikTok Hashtags| B[2. Extract<br>Whisper + OCR]
@@ -35,6 +35,14 @@ graph TD
           {
             title: "3. Hybrid Visuals (Code-to-Video)",
             content: "Für den 'Finance'-Kanal reichen statische Videos nicht aus. Ich nutze HeyGen HyperFrames (HTML/CSS/GSAP), um datengetriebene Charts und Overlays per Code zu generieren. FFmpeg montiert diese dynamischen Overlays framengenau über Hintergrund-Videos (Grok Imagine).",
+          },
+          {
+            title: "4. Autonomer Research-Agent (Self-Refueling)",
+            content: "Zwei Kanäle beziehen ihre Inhalte nicht aus Scraping, sondern aus faktengeprüften Recherche-Datenbanken. Damit diese nie leerlaufen, füllt ein nächtlicher Task sie autonom nach: Ein Gate prüft den Füllstand, ein headless laufender KI-Agent recherchiert neue Fälle und Themen im Internet, ein Validator prüft Struktur und Fakten. Das System beschafft sich seinen Rohstoff selbst.",
+          },
+          {
+            title: "5. Datengetriebenes Brand-Management",
+            content: "Als einer der Kanäle bei ~2k Reichweite stagnierte, zeigte die Analyse: Brand-Drift, nicht Qualität. Die Nische wurde datenbasiert verbreitert und ein wöchentlicher, automatischer Brand-Check etabliert, der Ausreißer, Follower-Wachstum und Skip-Quote gegen die Baseline prüft — das Verdikt kommt per Telegram.",
           },
         ]
       },
@@ -66,6 +74,18 @@ graph TD
             title: "Cost Engineering",
             content: "Aggressives Caching von Zwischenartefakten und zentrales Rate-Limit-Management drücken die operativen Kosten auf unter 0,05 € für 3 Videos pro Tag.",
           },
+          {
+            title: "CC-first-Extraktion",
+            content: "Statt jeden Kandidaten 1–3 Minuten auf CPU zu transkribieren, holt die Pipeline zuerst TikToks eigenen Untertitel-Track (~1 s, ohne Video-Download). Whisper und OCR sind nur noch Fallback; ein Caption-Vor-Gate verwirft Off-Topic-Kandidaten, bevor überhaupt transkribiert wird.",
+          },
+          {
+            title: "Instagram-Caption-Injection",
+            content: "Instagram übernimmt Composer-Text stillschweigend nicht in den Publish-Request. Der Uploader injiziert die Caption deshalb per Request-Interception direkt in den Submit-Payload — verifiziert gegen die Live-og:description, nie gegen das DOM, abgesichert durch einen täglichen automatischen Gegencheck.",
+          },
+          {
+            title: "Cross-Platform-Publishing",
+            content: "YouTube Shorts werden einen Tag im Voraus über die YouTube Data API geplant, Instagram Reels laufen über geteilte bzw. kanaleigene Konten in alternierenden Tages-Slots — orchestriert vom selben Scheduler wie TikTok.",
+          },
         ],
       },
       results: {
@@ -86,7 +106,7 @@ graph TD
     sections: {
       architecture: {
         title: "The Architecture",
-        content: "The pipeline consists of six fully automated stages, orchestrated by a central scheduler.",
+        content: "The pipeline consists of six fully automated stages, orchestrated by a central scheduler. Depending on the channel, the source is either scraped TikTok videos (Playwright) or curated, fact-checked research databases that an autonomous AI agent refills overnight.",
         mermaid: `
 graph TD
     A[1. Scrape<br>Playwright] -->|TikTok Hashtags| B[2. Extract<br>Whisper + OCR]
@@ -111,6 +131,14 @@ graph TD
           {
             title: "3. Hybrid Visuals (Code-to-Video)",
             content: "For the 'Finance' channel, static videos aren't enough. I use HeyGen HyperFrames (HTML/CSS/GSAP) to generate data-driven charts and overlays via code. FFmpeg accurately composites these dynamic overlays onto background videos (Grok Imagine).",
+          },
+          {
+            title: "4. Autonomous Research Agent (Self-Refueling)",
+            content: "Two channels don't source their content from scraping but from fact-checked research databases. To keep them from ever running dry, a nightly task refills them autonomously: a gate checks the fill level, a headless AI agent researches new cases and topics on the web, a validator checks structure and facts. The system procures its own raw material.",
+          },
+          {
+            title: "5. Data-Driven Brand Management",
+            content: "When one channel plateaued at ~2k reach, analysis showed brand drift — not quality — was the cause. The niche was widened based on data, and a weekly automated brand check now compares outliers, follower growth and skip rate against the baseline — the verdict is delivered via Telegram.",
           },
         ]
       },
@@ -141,6 +169,18 @@ graph TD
           {
             title: "Cost Engineering",
             content: "Aggressive caching of intermediate artifacts and central rate-limit management push operational costs below €0.05 for 3 videos per day.",
+          },
+          {
+            title: "CC-First Extraction",
+            content: "Instead of transcribing every candidate for 1–3 minutes on CPU, the pipeline first fetches TikTok's own subtitle track (~1s, no video download needed). Whisper and OCR are fallback only; a caption pre-gate discards off-topic candidates before anything gets transcribed.",
+          },
+          {
+            title: "Instagram Caption Injection",
+            content: "Instagram silently drops composer text from the publish request. The uploader therefore injects the caption via request interception directly into the submit payload — verified against the live og:description, never the DOM, backed by a daily automated live check.",
+          },
+          {
+            title: "Cross-Platform Publishing",
+            content: "YouTube Shorts are scheduled one day ahead via the YouTube Data API; Instagram Reels run on shared or channel-owned accounts in alternating daily slots — orchestrated by the same scheduler as TikTok.",
           },
         ],
       },

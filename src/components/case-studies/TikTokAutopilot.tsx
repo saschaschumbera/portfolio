@@ -6,6 +6,7 @@ import { useInView } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
+  Bot,
   Zap,
   Shield,
   Palette,
@@ -79,10 +80,10 @@ function Metric({
 const stageIcons = [Search, FileText, Clapperboard, Palette, Music, Upload];
 
 /* ── deep-dive icons ──────────────────────────────────────────── */
-const deepDiveIcons = [AlertTriangle, Shield, Palette];
+const deepDiveIcons = [AlertTriangle, Shield, Palette, Bot, TrendingUp];
 
 /* ── engineering-detail icons ─────────────────────────────────── */
-const engineeringIcons = [CheckCircle2, Cpu, Palette, Eye, Clock, Zap];
+const engineeringIcons = [CheckCircle2, Cpu, Palette, Eye, Clock, Zap, FileText, Shield, Upload];
 
 /* ── live channels ────────────────────────────────────────────── */
 const channels = [
@@ -112,7 +113,7 @@ export default function TikTokAutopilotCaseStudy() {
   const stages =
     lang === "de"
       ? [
-          { name: "Scrape", desc: "TikTok via Playwright" },
+          { name: "Source", desc: "Scrape / Research-DB" },
           { name: "Extract", desc: "Whisper + OCR + CC" },
           { name: "Build", desc: "Gemini TTS + FFmpeg" },
           { name: "Overlay", desc: "HeyGen HyperFrames" },
@@ -120,7 +121,7 @@ export default function TikTokAutopilotCaseStudy() {
           { name: "Upload", desc: "TikTok, IG & YT" },
         ]
       : [
-          { name: "Scrape", desc: "TikTok via Playwright" },
+          { name: "Source", desc: "Scrape / Research-DB" },
           { name: "Extract", desc: "Whisper + OCR + CC" },
           { name: "Build", desc: "Gemini TTS + FFmpeg" },
           { name: "Overlay", desc: "HeyGen HyperFrames" },
