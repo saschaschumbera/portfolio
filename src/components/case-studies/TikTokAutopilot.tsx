@@ -306,13 +306,24 @@ export default function TikTokAutopilotCaseStudy() {
                     {stage.desc}
                   </p>
 
-                  {/* Connector arrow (not on last) */}
+                  {/* Animated data-flow connector (not on last) */}
                   {i < stages.length - 1 && (
                     <div
-                      className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 text-lg"
-                      style={{ color: "var(--border)" }}
+                      className="hidden lg:block absolute -right-4 top-1/2 -translate-y-1/2 w-4 h-[2px]"
+                      style={{ background: "var(--border)" }}
                     >
-                      →
+                      <motion.span
+                        className="absolute -top-[2px] w-1.5 h-1.5 rounded-full"
+                        style={{ background: ACCENT, boxShadow: `0 0 6px ${ACCENT}` }}
+                        animate={archInView ? { left: ["-15%", "85%"], opacity: [0, 1, 1, 0] } : {}}
+                        transition={{
+                          duration: 0.5,
+                          repeat: Infinity,
+                          repeatDelay: 2,
+                          delay: i * 0.5,
+                          ease: "linear",
+                        }}
+                      />
                     </div>
                   )}
                 </motion.div>
