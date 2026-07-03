@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye, Clapperboard } from "lucide-react";
+import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye, Clapperboard, ExternalLink } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
@@ -16,7 +16,7 @@ const GithubIcon = () => (
 );
 
 const projectMeta = [
-  { icon: Clapperboard, accent: "#ec4899", github: null, videoSrc: null, tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"] },
+  { icon: Clapperboard, accent: "#ec4899", github: null, videoSrc: null, tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }] },
   { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
   { icon: Shield, accent: "#f59e0b", github: null, videoSrc: null, tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
   { icon: PenLine, accent: "#22c55e", github: null, videoSrc: null, tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
@@ -56,7 +56,7 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {tx.items.map((item, i) => {
-            const { icon: Icon, accent, github, videoSrc, tags } = projectMeta[i];
+            const { icon: Icon, accent, github, videoSrc, tags, externalLinks } = projectMeta[i] as any;
             return (
               <motion.article
                 key={item.title}
@@ -195,6 +195,19 @@ export default function Projects() {
                       {tx.demoVideo}
                     </button>
                   )}
+                  {externalLinks?.map((link: any) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-xs hover:opacity-80 transition-opacity"
+                      style={{ color: accent }}
+                    >
+                      <ExternalLink size={13} />
+                      {link.label}
+                    </a>
+                  ))}
                 </div>
               </motion.article>
             );
