@@ -135,7 +135,7 @@ export default function TikTokAutopilotCaseStudy() {
       style={{ background: "var(--bg-base)", color: "var(--text-1)" }}
     >
       {/* ── Back link ───────────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 pt-8">
+      <div className="max-w-5xl mx-auto px-6 pt-24">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 text-sm transition-colors"
