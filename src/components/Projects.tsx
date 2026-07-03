@@ -150,7 +150,7 @@ export default function Projects() {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-1.5 mb-5">
-                  {tags.map((tag) => (
+                  {tags.map((tag: string) => (
                     <span
                       key={tag}
                       className="px-2 py-0.5 text-xs rounded-full"
@@ -195,7 +195,7 @@ export default function Projects() {
                       {tx.demoVideo}
                     </button>
                   )}
-                  {externalLinks?.map((link: any) => (
+                  {externalLinks?.map((link: { url: string; label: string }) => (
                     <a
                       key={link.url}
                       href={link.url}
