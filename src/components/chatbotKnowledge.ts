@@ -138,8 +138,8 @@ export const RULES: Rule[] = [
     answer: "Sadidauto: ein Computer-Vision-Automatisierungsbot (ursprünglich Open Source, von Sascha überarbeitet und erweitert) — erkennt Spielzustände per visueller Bilderkennung (OpenCV) und steuert Maus/Tastatur via PyAutoGUI, mit PySide6-Oberfläche. Belegt Computer Vision und Desktop-Automatisierung.",
   },
   {
-    keywords: ["tiktok", "video", "content automatisierung", "videogenerierung", "yt-dlp", "faceless"],
-    answer: "Content-Automatisierung: mehrere Pipelines, die KI-Videos und Social-Media-Content end-to-end produzieren — Scraping (yt-dlp), KI-Analyse, automatische Skript- und Voice-Generierung (TTS) bis zum Upload. Zeigt Saschas Stärke im Bauen kompletter automatisierter Medien-Pipelines.",
+    keywords: ["tiktok", "video", "content automatisierung", "videogenerierung", "yt-dlp", "faceless", "autopilot", "gedankenguide", "inner child", "truecrime", "geldnerd"],
+    answer: "TikTok Autopilot (Content-Automatisierung): Eine vollständig autonome Data- & AI-Pipeline, die für Kanäle wie 'Gedankenguide' und 'Inner Child' täglich vollautomatisiert KI-Videos produziert — von Scraping und Transkription über Gemini-Voiceovers bis hin zum Headless-Upload.",
   },
   {
     keywords: ["privacy", "pseudonymisierung", "datenschutz", "privacy by design"],
@@ -297,7 +297,7 @@ export const RULES_EN: Rule[] = [
   { keywords: ["smart-notes", "smart notes", "note tool", "gemini"], answer: "Smart-Notes: an AI-powered note tool built with Express and the Gemini API that automatically processes and structures notes (Markdown) — an example of quickly integrating LLM APIs into a custom app." },
   { keywords: ["battlesnake", "game ai", "competition"], answer: "Battlesnake: a FastAPI server for the Battlesnake Blackout 2026 competition — implements the game API and a move logic under a real-time constraint (≤ 500 ms per move). Demonstrates algorithmics and clean backend design." },
   { keywords: ["sadidauto", "computer vision", "opencv", "image recognition"], answer: "Sadidauto: a computer-vision automation bot (originally open source, reworked and extended by Sascha) — detects states via visual image recognition (OpenCV) and controls mouse/keyboard via PyAutoGUI, with a PySide6 UI. Demonstrates computer vision and desktop automation." },
-  { keywords: ["tiktok", "video", "content automation", "video generation", "yt-dlp"], answer: "Content automation: several pipelines that produce AI videos and social-media content end-to-end — scraping (yt-dlp), AI analysis, automatic script and voice generation (TTS) through to upload. Shows Sascha's strength in building complete automated media pipelines." },
+  { keywords: ["tiktok", "video", "content automation", "video generation", "yt-dlp", "autopilot", "gedankenguide", "inner child", "truecrime", "geldnerd"], answer: "TikTok Autopilot (Content Automation): A fully autonomous data & AI pipeline that produces AI videos end-to-end for channels like 'Gedankenguide' and 'Inner Child' daily — from scraping and transcription to Gemini voiceovers and headless upload." },
   { keywords: ["privacy", "gdpr", "pseudonymisation", "privacy by design"], answer: "Privacy-by-Design is a core theme for Sascha: sensitive data is pseudonymised or processed locally before any external AI service is involved — especially relevant for privacy-sensitive use cases in finance." },
   { keywords: ["skill", "knowledge", "tech stack", "technology", "tools", "can he"], answer: "Core skills: Python, SQL, TypeScript. AI tools: Claude Code, Cursor, GitHub Copilot, LangGraph, Prompt Engineering, local LLMs. Data: Power BI, SAS, DAX. Engineering: FastAPI, OCR pipelines, data modelling. Automation: Power Automate, UIPath (RPA), SCHUFA-DSS." },
   { keywords: ["python"], answer: "Python is Sascha's main programming language for AI development — used for FastAPI backends, OCR pipelines, LLM integration, automation scripts and data processing." },

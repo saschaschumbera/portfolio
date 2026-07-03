@@ -128,6 +128,18 @@ export const t = {
       comingSoon: "Weitere Projekte und Ausbaustufen sind in Entwicklung.",
       items: [
         {
+          title: "TikTok Autopilot",
+          subtitle: "Autonome AI-Content-Pipeline",
+          description: "Eine vollständig autonome, headless Data- & AI-Pipeline für soziale Medien (TikTok, Instagram, YouTube). Scrapt Inhalte, extrahiert Transkripte, nutzt LLMs für Redaktion & Gating, generiert Voiceovers (Gemini TTS) und automatisiert den finalen Videoschnitt sowie den automatischen Upload.",
+          status: "Produktiv (Live)",
+          highlights: [
+            "Multi-Kanal-Betrieb (inkl. der Live-Kanäle „Gedankenguide“ und „Inner Child“) mit vollautomatischem täglichen Posting",
+            "Einsatz von Whisper, Tesseract OCR, LLMs und Text-to-Speech in einem ETL-Prozess",
+            "Resilientes System-Design: Automatisierte Quality-Gates zur Erkennung von KI-Halluzinationen, Fehler-Recovery & API-Rate-Limit Management",
+            "Headless-Upload via Playwright inklusive Umgehung von Consent-Walls und UI-Blockern",
+          ],
+        },
+        {
           title: "DocInspect",
           subtitle: "KI-gestützte Dokumentenanalyse",
           description: "End-to-End Webanwendung zur Analyse von Verträgen und Dokumenten mit Fokus auf Datenschutz und automatisierte Risikobewertung. Privacy-by-Design: sensible Daten werden lokal pseudonymisiert, bevor externe Verarbeitung erfolgt.",
@@ -365,6 +377,18 @@ export const t = {
       demoVideo: "Demo video",
       comingSoon: "More projects and extensions are in development.",
       items: [
+        {
+          title: "TikTok Autopilot",
+          subtitle: "Autonomous AI Content Pipeline",
+          description: "A fully autonomous, headless data & AI pipeline for social media (TikTok, Instagram, YouTube). Scrapes content, extracts transcripts, uses LLMs for editing & gating, generates voiceovers (Gemini TTS), and automates the final video editing as well as the upload.",
+          status: "Live (Production)",
+          highlights: [
+            "Multi-channel operation (including the live channels 'Gedankenguide' and 'Inner Child') with fully automated daily posting",
+            "Integration of Whisper, Tesseract OCR, LLMs, and Text-to-Speech in an ETL process",
+            "Resilient system design: Automated quality gates for detecting AI hallucinations, error recovery & API rate-limit management",
+            "Headless upload via Playwright including bypassing consent walls and UI blockers",
+          ],
+        },
         {
           title: "DocInspect",
           subtitle: "AI-Powered Document Analysis",
