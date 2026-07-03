@@ -21,6 +21,7 @@ import {
   FileText,
   AlertTriangle,
   CheckCircle2,
+  ExternalLink,
 } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "../LanguageProvider";
@@ -80,6 +81,17 @@ const stageIcons = [Search, FileText, Clapperboard, Palette, Music, Upload];
 /* ── deep-dive icons ──────────────────────────────────────────── */
 const deepDiveIcons = [AlertTriangle, Shield, Palette];
 
+/* ── engineering-detail icons ─────────────────────────────────── */
+const engineeringIcons = [CheckCircle2, Cpu, Palette, Eye, Clock, Zap];
+
+/* ── live channels ────────────────────────────────────────────── */
+const channels = [
+  { label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" },
+  { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" },
+  { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" },
+  { label: "@truecrime_DE.exe", url: "https://www.tiktok.com/@truecrime_DE.exe" },
+];
+
 export default function TikTokAutopilotCaseStudy() {
   const mounted = useIsMounted();
   const { lang } = useLang();
@@ -88,11 +100,13 @@ export default function TikTokAutopilotCaseStudy() {
   const heroRef = useRef(null);
   const archRef = useRef(null);
   const deepRef = useRef(null);
+  const engRef = useRef(null);
   const resultRef = useRef(null);
 
   const heroInView = useInView(heroRef, { once: true, margin: "-50px" });
   const archInView = useInView(archRef, { once: true, margin: "-80px" });
   const deepInView = useInView(deepRef, { once: true, margin: "-80px" });
+  const engInView = useInView(engRef, { once: true, margin: "-80px" });
   const resultInView = useInView(resultRef, { once: true, margin: "-80px" });
 
   const stages =
@@ -120,13 +134,13 @@ export default function TikTokAutopilotCaseStudy() {
           { value: "4", label: "Kanäle in Produktion" },
           { value: "12+", label: "Videos / Tag" },
           { value: "3", label: "Plattformen" },
-          { value: "0 €", label: "Manuelle Arbeit" },
+          { value: "0 h", label: "Manuelle Arbeit" },
         ]
       : [
           { value: "4", label: "Channels in Production" },
           { value: "12+", label: "Videos / Day" },
           { value: "3", label: "Platforms" },
-          { value: "€0", label: "Manual Labor" },
+          { value: "0 h", label: "Manual Labor" },
         ];
 
   return (
@@ -449,6 +463,62 @@ export default function TikTokAutopilotCaseStudy() {
               );
             })}
           </div>
+
+          {/* Engineering details */}
+          <div ref={engRef} className="mt-20">
+            <motion.div
+              initial={mounted ? { opacity: 0, y: 30 } : false}
+              animate={engInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <SectionTag>{tx.sections.engineering.tag}</SectionTag>
+              <h2
+                className="text-3xl font-bold mb-10"
+                style={{ color: "var(--text-1)" }}
+              >
+                {tx.sections.engineering.title}
+              </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {tx.sections.engineering.items.map((item, i) => {
+                const Icon = engineeringIcons[i];
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={mounted ? { opacity: 0, y: 20 } : false}
+                    animate={engInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.08 * i + 0.2 }}
+                    className="p-5 rounded-xl"
+                    style={{
+                      border: "1px solid var(--border)",
+                      background:
+                        "color-mix(in srgb, var(--bg-card) 50%, transparent)",
+                    }}
+                  >
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center mb-3"
+                      style={{ background: `${ACCENT}12` }}
+                    >
+                      <Icon size={16} style={{ color: ACCENT }} />
+                    </div>
+                    <h3
+                      className="text-sm font-semibold mb-2"
+                      style={{ color: "var(--text-1)" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="text-xs leading-relaxed"
+                      style={{ color: "var(--text-3)" }}
+                    >
+                      {item.content}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -493,6 +563,33 @@ export default function TikTokAutopilotCaseStudy() {
               >
                 {tx.sections.results.content}
               </p>
+            </div>
+
+            {/* Live channels */}
+            <p
+              className="text-xs font-semibold tracking-widest uppercase mt-10 mb-4"
+              style={{ color: "var(--text-3)" }}
+            >
+              {tx.sections.results.channelsLabel}
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {channels.map((c) => (
+                <a
+                  key={c.url}
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full transition-opacity hover:opacity-80"
+                  style={{
+                    border: `1px solid ${ACCENT}30`,
+                    background: `${ACCENT}10`,
+                    color: ACCENT,
+                  }}
+                >
+                  <ExternalLink size={12} />
+                  {c.label}
+                </a>
+              ))}
             </div>
           </motion.div>
 

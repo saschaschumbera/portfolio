@@ -38,9 +38,40 @@ graph TD
           },
         ]
       },
+      engineering: {
+        tag: "Unter der Haube",
+        title: "Engineering Details",
+        items: [
+          {
+            title: "Selbstkorrigierendes TTS-Quality-Gate",
+            content: "Jedes Voiceover wird per Whisper zurücktranskribiert und über Bag-of-Words- und Similarity-Scoring gegen das Originalskript verifiziert. Fällt der Score durch, triggert die Pipeline autonom eine Neusynthese — defekte Audios erreichen nie den Schnitt.",
+          },
+          {
+            title: "API-Key-Orchestrierung",
+            content: "16 rotierende Gemini-Keys im Round-Robin mit erzwungenem Mindestabstand von 0,7 s pro Request. Rate-Limits werden nicht abgefangen, sondern by design nie erreicht.",
+          },
+          {
+            title: "Code-to-Video-Rendering",
+            content: "Datengetriebene Finanz-Charts entstehen als HTML/CSS/GSAP-Animationen (HeyGen HyperFrames) und werden von FFmpeg framegenau über KI-generierte Hintergrundvideos (Grok Imagine) komponiert.",
+          },
+          {
+            title: "DOM-basierte Blocker-Erkennung",
+            content: "Consent Walls und In-App-Dialoge werden zur Laufzeit per DOM-Inspektion erkannt und autonom weggeklickt — Upload-Quote 100 %, ohne menschlichen Eingriff.",
+          },
+          {
+            title: "Slot-basiertes Publishing",
+            content: "Fertige Videos landen in einer Upload-Queue mit kanalspezifischen Slots. Der Scheduler fährt Generate- und Upload-Zyklen pro Kanal getrennt — z. B. 07:00 Generate, 09/15/21 Upload.",
+          },
+          {
+            title: "Cost Engineering",
+            content: "Aggressives Caching von Zwischenartefakten und zentrales Rate-Limit-Management drücken die operativen Kosten auf unter 0,05 € für 3 Videos pro Tag.",
+          },
+        ],
+      },
       results: {
         title: "Business Impact",
-        content: "Das System läuft produktiv auf 4 Kanälen (darunter @geldnerd und @gedankenguide). Es spart pro Woche über 40 Stunden manuelle Arbeit und skaliert beliebig. Durch das intelligente Caching und die API-Rate-Limit-Verwaltung betragen die operativen Kosten für 3 Videos pro Tag weniger als 0,05 €.",
+        content: "Das System läuft produktiv auf 4 Kanälen. Es spart pro Woche über 40 Stunden manuelle Arbeit und skaliert beliebig. Durch das intelligente Caching und die API-Rate-Limit-Verwaltung betragen die operativen Kosten für 3 Videos pro Tag weniger als 0,05 €.",
+        channelsLabel: "Live in Produktion",
       }
     }
   },
@@ -83,9 +114,40 @@ graph TD
           },
         ]
       },
+      engineering: {
+        tag: "Under the Hood",
+        title: "Engineering Details",
+        items: [
+          {
+            title: "Self-Correcting TTS Quality Gate",
+            content: "Every voiceover is back-transcribed with Whisper and verified against the original script via bag-of-words and similarity scoring. If the score fails, the pipeline autonomously triggers a resynthesis — defective audio never reaches the edit.",
+          },
+          {
+            title: "API Key Orchestration",
+            content: "16 rotating Gemini keys in round-robin with an enforced minimum interval of 0.7s per request. Rate limits aren't handled — by design, they are never hit.",
+          },
+          {
+            title: "Code-to-Video Rendering",
+            content: "Data-driven finance charts are built as HTML/CSS/GSAP animations (HeyGen HyperFrames) and composited frame-accurately by FFmpeg onto AI-generated background videos (Grok Imagine).",
+          },
+          {
+            title: "DOM-Based Blocker Detection",
+            content: "Consent walls and in-app dialogs are detected at runtime via DOM inspection and dismissed autonomously — 100% upload success rate, zero human intervention.",
+          },
+          {
+            title: "Slot-Based Publishing",
+            content: "Finished videos enter an upload queue with channel-specific slots. The scheduler runs generate and upload cycles separately per channel — e.g. 07:00 generate, 09/15/21 upload.",
+          },
+          {
+            title: "Cost Engineering",
+            content: "Aggressive caching of intermediate artifacts and central rate-limit management push operational costs below €0.05 for 3 videos per day.",
+          },
+        ],
+      },
       results: {
         title: "Business Impact",
-        content: "The system runs in production across 4 channels (including @geldnerd and @gedankenguide). It saves over 40 hours of manual work per week and scales infinitely. Thanks to smart caching and API rate limit management, operational costs for 3 videos a day are under €0.05.",
+        content: "The system runs in production across 4 channels. It saves over 40 hours of manual work per week and scales infinitely. Thanks to smart caching and API rate limit management, operational costs for 3 videos a day are under €0.05.",
+        channelsLabel: "Live in Production",
       }
     }
   }
