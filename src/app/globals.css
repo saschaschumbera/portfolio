@@ -54,6 +54,9 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   transition: background 0.3s ease, color 0.3s ease;
+  /* Entrance animations slide cards in from the sides (x offsets); clip the
+     transient overhang so mobile never gets a horizontal wiggle. */
+  overflow-x: clip;
 }
 
 /* Theme toggle icons: render both, switch via root class to avoid hydration mismatch. */
