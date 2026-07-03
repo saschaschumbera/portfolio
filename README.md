@@ -13,9 +13,10 @@ Personal portfolio website built with Next.js, showcasing projects, skills, and 
 
 ## Features
 
-- Project showcase with interactive demo videos
-- Keyword-based chatbot for visitor questions
-- Dark/light mode
+- Project showcase with interactive demo videos and real production outputs
+- In-depth case study: [TikTok Autopilot](https://sascha-schumbera.dev/case-studies/tiktok-autopilot) (architecture, deep dives, engineering details)
+- Chatbot for visitor questions (keyword matching + semantic search, fully client-side)
+- Bilingual (DE/EN), dark/light mode
 - Responsive design
 
 ## Local Development
