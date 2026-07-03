@@ -130,18 +130,36 @@ export default function ChatBot() {
       .catch(() => setSemanticStatus("idle"));
   }, [open]);
 
-  const dismissHint = useCallback(() => setShowHint(false), []);
+  const dismissHint = useCallback(() => {
+    setShowHint(false);
+    try { localStorage.setItem("chatbot_hint_dismissed", "1"); } catch {}
+  }, []);
 
-  // Reveal the teaser shortly after every page load, never while the chat is open.
+  // Reveal the teaser once per session shortly after page load, never while the
+  // chat is open. Auto-hides after 8s; a manual dismiss or opening the chat
+  // suppresses it permanently.
   useEffect(() => {
     if (!mounted || open) return;
-    const showTimer = window.setTimeout(() => setShowHint(true), 1200);
-    return () => window.clearTimeout(showTimer);
+    try {
+      if (localStorage.getItem("chatbot_hint_dismissed") || sessionStorage.getItem("chatbot_hint_shown")) return;
+    } catch {}
+    const showTimer = window.setTimeout(() => {
+      setShowHint(true);
+      try { sessionStorage.setItem("chatbot_hint_shown", "1"); } catch {}
+    }, 1200);
+    const hideTimer = window.setTimeout(() => setShowHint(false), 9200);
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
   }, [mounted, open]);
 
-  // Opening the chat hides the teaser.
+  // Opening the chat hides the teaser for good.
   useEffect(() => {
-    if (open) setShowHint(false);
+    if (open) {
+      setShowHint(false);
+      try { localStorage.setItem("chatbot_hint_dismissed", "1"); } catch {}
+    }
   }, [open]);
 
   useEffect(() => {

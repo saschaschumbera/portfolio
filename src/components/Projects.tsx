@@ -16,7 +16,7 @@ const GithubIcon = () => (
 );
 
 const projectMeta = [
-  { icon: Clapperboard, accent: "#ec4899", featured: true, github: null, videoSrc: null, caseStudyUrl: "/case-studies/tiktok-autopilot", tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }, { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" }, { label: "@truecrime_DE.exe", url: "https://www.tiktok.com/@truecrime_DE.exe" }] },
+  { icon: Clapperboard, accent: "#ec4899", featured: true, github: null, videoSrc: null, caseStudyUrl: "/case-studies/tiktok-autopilot", tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], videoGallery: [{ label: "Gedankenguide", src: "/projects/tiktok-gedankenguide.mp4" }, { label: "Inner Child", src: "/projects/tiktok-innerchild.mp4" }, { label: "Geldnerd", src: "/projects/tiktok-geldnerd.mp4" }, { label: "TrueCrime", src: "/projects/tiktok-truecrime.mp4" }], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }, { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" }, { label: "@truecrime_DE.exe", url: "https://www.tiktok.com/@truecrime_DE.exe" }] },
   { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, caseStudyUrl: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
   { icon: Shield, accent: "#f59e0b", github: null, videoSrc: null, tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
   { icon: PenLine, accent: "#22c55e", github: null, videoSrc: null, tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
@@ -56,12 +56,13 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {tx.items.map((item, i) => {
-            const { icon: Icon, accent, featured, github, videoSrc, tags, externalLinks, caseStudyUrl } = projectMeta[i] as {
+            const { icon: Icon, accent, featured, github, videoSrc, videoGallery, tags, externalLinks, caseStudyUrl } = projectMeta[i] as {
               icon: any;
               accent: string;
               featured?: boolean;
               github: string | null;
               videoSrc: string | null;
+              videoGallery?: { label: string; src: string }[];
               caseStudyUrl?: string | null;
               tags: string[];
               externalLinks?: { label: string; url: string }[];
@@ -156,6 +157,45 @@ export default function Projects() {
                     </li>
                   ))}
                 </ul>
+
+                {/* Video gallery (one production output per channel) */}
+                {videoGallery && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+                    {videoGallery.map((v) => (
+                      <button
+                        key={v.src}
+                        type="button"
+                        onClick={() => setActiveVideo(v.src)}
+                        className="group/video relative aspect-[9/16] rounded-xl overflow-hidden"
+                        style={{ border: "1px solid var(--border)", background: "#000" }}
+                        aria-label={`${v.label} — ${tx.demoVideo}`}
+                      >
+                        <video
+                          src={`${v.src}#t=0.1`}
+                          preload="metadata"
+                          muted
+                          playsInline
+                          tabIndex={-1}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-[1.04]"
+                        />
+                        <span className="absolute inset-0 flex items-center justify-center bg-black/25 group-hover/video:bg-black/5 transition-colors duration-300">
+                          <span
+                            className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover/video:scale-110"
+                            style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.25)" }}
+                          >
+                            <Play size={13} fill="#fff" style={{ color: "#fff", marginLeft: 1 }} />
+                          </span>
+                        </span>
+                        <span
+                          className="absolute bottom-1.5 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-semibold rounded-full whitespace-nowrap"
+                          style={{ background: "rgba(0,0,0,0.6)", color: "#fff", backdropFilter: "blur(4px)" }}
+                        >
+                          {v.label}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-1.5 mb-5">
@@ -260,7 +300,7 @@ export default function Projects() {
             onClick={() => setActiveVideo(null)}
           >
             <div
-              className="w-full max-w-4xl rounded-2xl overflow-hidden relative"
+              className="relative rounded-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -276,8 +316,8 @@ export default function Projects() {
                 src={activeVideo}
                 controls
                 autoPlay
-                className="w-full rounded-2xl"
-                style={{ maxHeight: "80vh", background: "#000" }}
+                className="rounded-2xl max-w-[90vw]"
+                style={{ maxHeight: "82vh", background: "#000" }}
               />
             </div>
           </div>
