@@ -116,7 +116,7 @@ export default function Projects() {
                 )}
 
                 {/* Header */}
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2 mb-4">
                   <div className="flex items-center gap-3">
                     <div
                       className="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -132,7 +132,7 @@ export default function Projects() {
                     </div>
                   </div>
                   <span
-                    className="text-xs px-2 py-0.5 rounded-full border"
+                    className="text-xs px-2 py-0.5 rounded-full border whitespace-nowrap flex-shrink-0"
                     style={{
                       color: accent,
                       borderColor: `${accent}40`,
@@ -151,8 +151,8 @@ export default function Projects() {
                 {/* Highlights */}
                 <ul className="space-y-1 mb-5">
                   {item.highlights.map((h) => (
-                    <li key={h} className="flex items-center gap-2 text-xs" style={{ color: "var(--text-2)" }}>
-                      <span style={{ color: accent }} className="text-[10px]">▸</span>
+                    <li key={h} className="flex items-start gap-2 text-xs" style={{ color: "var(--text-2)" }}>
+                      <span style={{ color: accent }} className="text-[10px] mt-0.5 flex-shrink-0">▸</span>
                       {h}
                     </li>
                   ))}
