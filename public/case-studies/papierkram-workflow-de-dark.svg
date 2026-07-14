@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="700" fill="#0B1220" rx="0"/>
+
+  <!-- Titel -->
+  <text x="60" y="56" font-size="11" letter-spacing="2.5" fill="#64748B" font-weight="600">PAPIERKRAM-ORAKEL · LOKALE RAG-PIPELINE</text>
+  <text x="60" y="90" font-size="26" font-weight="700" fill="#F1F5F9">Vom Dokumentenstapel zur belegten Antwort</text>
+
+  <!-- ===================== Phase 1: Indexierung ===================== -->
+  <rect x="44" y="116" width="1112" height="196" rx="16" fill="#0F192C"/>
+  <circle cx="76" cy="148" r="12" fill="#818CF8"/>
+  <text x="76" y="152.5" font-size="11" font-weight="700" fill="#0B1220" text-anchor="middle">1</text>
+  <text x="96" y="153" font-size="13"><tspan font-weight="700" fill="#F1F5F9">Indexierung</tspan><tspan fill="#94A3B8"> · einmalig pro Wissensgebiet</tspan></text>
+  <rect x="1032" y="134" width="104" height="26" rx="13" fill="none" stroke="#818CF8" stroke-width="1"/>
+  <text x="1084" y="151" font-size="12" fill="#818CF8" text-anchor="middle">100 % lokal</text>
+
+  <!-- Box 1: Dokumente -->
+  <rect x="68" y="176" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="84" y="210" font-size="20">📄</text>
+  <text x="84" y="238" font-size="15" font-weight="600" fill="#F1F5F9">Dokumente</text>
+  <text x="84" y="258" font-size="11.5" fill="#94A3B8">PDF · DOCX · MD · TXT</text>
+  <text x="84" y="274" font-size="11.5" fill="#94A3B8">Scans · Handyfotos</text>
+
+  <!-- Box 2: Parsing -->
+  <rect x="288" y="176" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="304" y="210" font-size="20">🔍</text>
+  <text x="304" y="238" font-size="15" font-weight="600" fill="#F1F5F9">Parsing &amp; OCR</text>
+  <text x="304" y="258" font-size="11.5" fill="#94A3B8">Text + Fundstelle extrahieren,</text>
+  <text x="304" y="274" font-size="11.5" fill="#94A3B8">Tesseract-OCR für Scans</text>
+
+  <!-- Box 3: Chunking -->
+  <rect x="508" y="176" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="524" y="210" font-size="20">✂️</text>
+  <text x="524" y="238" font-size="15" font-weight="600" fill="#F1F5F9">Chunking</text>
+  <text x="524" y="258" font-size="11.5" fill="#94A3B8">Absätze zu ~700-Zeichen-</text>
+  <text x="524" y="274" font-size="11.5" fill="#94A3B8">Chunks, 10 % Überlappung</text>
+
+  <!-- Box 4: Embedding -->
+  <rect x="728" y="176" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="744" y="210" font-size="20">🧮</text>
+  <text x="744" y="238" font-size="15" font-weight="600" fill="#F1F5F9">Embedding</text>
+  <text x="744" y="258" font-size="11.5" fill="#94A3B8">Bedeutung → 384-dim. Vektor,</text>
+  <text x="744" y="274" font-size="11.5" fill="#94A3B8">lokales MiniLM-Modell</text>
+
+  <!-- Box 5: SQLite -->
+  <rect x="948" y="176" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="964" y="210" font-size="20">🗄️</text>
+  <text x="964" y="238" font-size="15" font-weight="600" fill="#F1F5F9">SQLite-Index</text>
+  <text x="964" y="258" font-size="11.5" fill="#94A3B8">Vektor- + Volltextindex,</text>
+  <text x="964" y="274" font-size="11.5" fill="#94A3B8">eine Datei pro Wissensgebiet</text>
+
+  <!-- Pfeile Reihe 1 -->
+  <line x1="262" y1="232" x2="282" y2="232" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="482" y1="232" x2="502" y2="232" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="702" y1="232" x2="722" y2="232" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="922" y1="232" x2="942" y2="232" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Verbindung Index -> Hybrid-Suche -->
+  <path d="M1044 290 V324 H604 V388" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="824" y="318" font-size="11" fill="#64748B" text-anchor="middle">durchsucht den Index</text>
+
+  <!-- ===================== Phase 2: Abfrage ===================== -->
+  <rect x="44" y="336" width="1112" height="196" rx="16" fill="#0F192C"/>
+  <circle cx="76" cy="368" r="12" fill="#38BDF8"/>
+  <text x="76" y="372.5" font-size="11" font-weight="700" fill="#0B1220" text-anchor="middle">2</text>
+  <text x="96" y="373" font-size="13"><tspan font-weight="700" fill="#F1F5F9">Abfrage</tspan><tspan fill="#94A3B8"> · bei jeder Frage</tspan></text>
+
+  <!-- Box 1: Frage -->
+  <rect x="68" y="396" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="84" y="430" font-size="20">💬</text>
+  <text x="84" y="458" font-size="15" font-weight="600" fill="#F1F5F9">Frage</text>
+  <text x="84" y="478" font-size="11.5" fill="#94A3B8">»Welches Waschprogramm</text>
+  <text x="84" y="494" font-size="11.5" fill="#94A3B8">für Wolle?«</text>
+
+  <!-- Box 2: Embedding -->
+  <rect x="288" y="396" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="304" y="430" font-size="20">🧮</text>
+  <text x="304" y="458" font-size="15" font-weight="600" fill="#F1F5F9">Embedding</text>
+  <text x="304" y="478" font-size="11.5" fill="#94A3B8">Frage → Vektor,</text>
+  <text x="304" y="494" font-size="11.5" fill="#94A3B8">gleiches Modell wie im Index</text>
+
+  <!-- Box 3: Hybrid-Suche -->
+  <rect x="508" y="396" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="524" y="430" font-size="20">🔀</text>
+  <text x="524" y="458" font-size="15" font-weight="600" fill="#F1F5F9">Hybrid-Suche</text>
+  <text x="524" y="478" font-size="11.5" fill="#94A3B8">Vektor-KNN + BM25 parallel,</text>
+  <text x="524" y="494" font-size="11.5" fill="#94A3B8">Fusion per RRF</text>
+
+  <!-- Box 4: Reranking -->
+  <rect x="728" y="396" width="192" height="112" rx="12" fill="#16223A" stroke="#263654"/>
+  <text x="744" y="430" font-size="20">🎯</text>
+  <text x="744" y="458" font-size="15" font-weight="600" fill="#F1F5F9">Reranking</text>
+  <text x="744" y="478" font-size="11.5" fill="#94A3B8">Cross-Encoder liest Frage +</text>
+  <text x="744" y="494" font-size="11.5" fill="#94A3B8">Chunk gemeinsam, sortiert neu</text>
+
+  <!-- Box 5: Claude (Cloud) -->
+  <rect x="948" y="396" width="192" height="112" rx="12" fill="#16223A" stroke="#F59E0B"/>
+  <rect x="1056" y="408" width="72" height="20" rx="10" fill="none" stroke="#F59E0B" stroke-width="1"/>
+  <text x="1092" y="422" font-size="10.5" fill="#FBBF24" text-anchor="middle">Cloud</text>
+  <text x="964" y="430" font-size="20">🤖</text>
+  <text x="964" y="458" font-size="15" font-weight="600" fill="#F1F5F9">Claude (LLM)</text>
+  <text x="964" y="478" font-size="11.5" fill="#94A3B8">formuliert die Antwort nur</text>
+  <text x="964" y="494" font-size="11.5" fill="#94A3B8">aus den Fundstellen</text>
+
+  <!-- Pfeile Reihe 2 -->
+  <line x1="262" y1="452" x2="282" y2="452" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="482" y1="452" x2="502" y2="452" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="702" y1="452" x2="722" y2="452" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="922" y1="452" x2="942" y2="452" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Pfeil zur Antwort -->
+  <line x1="1044" y1="512" x2="1044" y2="544" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Antwort-Karte -->
+  <rect x="728" y="552" width="412" height="108" rx="14" fill="#16223A" stroke="#263654"/>
+  <rect x="728" y="566" width="3" height="80" fill="#34D399"/>
+  <text x="752" y="580" font-size="10.5" letter-spacing="1.5" fill="#34D399" font-weight="600">ANTWORT MIT QUELLENANGABE</text>
+  <text x="752" y="604" font-size="13" fill="#F1F5F9">Programm 4 (Wolle/Handwäsche),</text>
+  <text x="752" y="622" font-size="13" fill="#F1F5F9">30 °C, max. 600 U/min</text>
+  <text x="752" y="646" font-size="11" fill="#34D399" font-family="ui-monospace, 'Cascadia Code', Consolas, monospace">[Quelle: bosch_wat28.md | Waschprogramme]</text>
+
+  <!-- Fußnote + Legende -->
+  <text x="60" y="584" font-size="12.5" fill="#94A3B8">Suche &amp; Ranking laufen komplett lokal und ohne LLM —</text>
+  <text x="60" y="604" font-size="12.5" fill="#94A3B8">das Sprachmodell formuliert nur die finale Antwort aus den gefundenen Textstellen.</text>
+  <circle cx="66" cy="638" r="5" fill="#818CF8"/>
+  <text x="78" y="642" font-size="12" fill="#94A3B8">lokal &amp; kostenlos</text>
+  <circle cx="196" cy="638" r="5" fill="#F59E0B"/>
+  <text x="208" y="642" font-size="12" fill="#94A3B8">einziger Cloud-Schritt (Claude)</text>
+</svg>

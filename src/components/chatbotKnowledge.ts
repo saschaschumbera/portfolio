@@ -142,6 +142,10 @@ export const RULES: Rule[] = [
     answer: "TikTok Autopilot (Content-Automatisierung): Eine vollständig autonome Data- & AI-Pipeline, die für Kanäle wie 'Gedankenguide' und 'Inner Child' täglich vollautomatisiert KI-Videos produziert — von Scraping und Transkription über Gemini-Voiceovers bis hin zum Headless-Upload.",
   },
   {
+    keywords: ["papierkram", "orakel", "rag system", "hybrid search", "sqlite-vec", "bm25", "wissensbasis", "dokumente fragen", "reciprocal rank fusion"],
+    answer: "Papierkram-Orakel: Ein lokales RAG-System, das private Dokumente (Anleitungen, Verträge, Garantien) in eine befragbare Wissensbasis verwandelt — Hybrid Search aus Vektor-Suche (sqlite-vec) und BM25, Cross-Encoder-Reranking und Antworten mit exakter Quellenangabe. Das LLM-Backend ist frei austauschbar, auf Wunsch komplett lokal via Ollama. Mit eigener Case Study auf dieser Seite.",
+  },
+  {
     keywords: ["privacy", "pseudonymisierung", "datenschutz", "privacy by design"],
     answer: "Privacy-by-Design ist ein zentrales Thema für Sascha: Sensible Daten werden lokal pseudonymisiert oder verarbeitet, bevor externe KI-Dienste ins Spiel kommen — besonders relevant für datenschutzsensible Anwendungsfälle im Finanzumfeld.",
   },
@@ -298,6 +302,7 @@ export const RULES_EN: Rule[] = [
   { keywords: ["battlesnake", "game ai", "competition"], answer: "Battlesnake: a FastAPI server for the Battlesnake Blackout 2026 competition — implements the game API and a move logic under a real-time constraint (≤ 500 ms per move). Demonstrates algorithmics and clean backend design." },
   { keywords: ["sadidauto", "computer vision", "opencv", "image recognition"], answer: "Sadidauto: a computer-vision automation bot (originally open source, reworked and extended by Sascha) — detects states via visual image recognition (OpenCV) and controls mouse/keyboard via PyAutoGUI, with a PySide6 UI. Demonstrates computer vision and desktop automation." },
   { keywords: ["tiktok", "video", "content automation", "video generation", "yt-dlp", "autopilot", "gedankenguide", "inner child", "truecrime", "geldnerd"], answer: "TikTok Autopilot (Content Automation): A fully autonomous data & AI pipeline that produces AI videos end-to-end for channels like 'Gedankenguide' and 'Inner Child' daily — from scraping and transcription to Gemini voiceovers and headless upload." },
+  { keywords: ["papierkram", "orakel", "rag system", "hybrid search", "sqlite-vec", "bm25", "knowledge base", "query documents", "reciprocal rank fusion"], answer: "Papierkram-Orakel: A local RAG system that turns private documents (manuals, contracts, warranties) into a queryable knowledge base — hybrid search combining vector search (sqlite-vec) and BM25, cross-encoder reranking, and answers with exact source references. The LLM backend is fully swappable, fully local via Ollama if desired. Has its own case study on this site." },
   { keywords: ["privacy", "gdpr", "pseudonymisation", "privacy by design"], answer: "Privacy-by-Design is a core theme for Sascha: sensitive data is pseudonymised or processed locally before any external AI service is involved — especially relevant for privacy-sensitive use cases in finance." },
   { keywords: ["skill", "knowledge", "tech stack", "technology", "tools", "can he"], answer: "Core skills: Python, SQL, TypeScript. AI tools: Claude Code, Cursor, GitHub Copilot, LangGraph, Prompt Engineering, local LLMs. Data: Power BI, SAS, DAX. Engineering: FastAPI, OCR pipelines, data modelling. Automation: Power Automate, UIPath (RPA), SCHUFA-DSS." },
   { keywords: ["python"], answer: "Python is Sascha's main programming language for AI development — used for FastAPI backends, OCR pipelines, LLM integration, automation scripts and data processing." },

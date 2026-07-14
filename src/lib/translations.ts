@@ -141,6 +141,18 @@ export const t = {
           ],
         },
         {
+          title: "Papierkram-Orakel",
+          subtitle: "Lokales RAG-Wissenssystem",
+          description: "Ein lokales RAG-System, das den Ordner voller ungelesener Dokumente — Anleitungen, Verträge, Garantien — in eine befragbare Wissensbasis verwandelt. Fragen in Alltagssprache, Antworten mit exakter Quellenangabe (Datei + Seite). Suche und Ranking laufen komplett lokal und ohne LLM; das Sprachmodell formuliert nur die Antwort.",
+          status: "Abgeschlossen",
+          highlights: [
+            "Hybrid Search: Vektor-Suche (sqlite-vec) + BM25-Volltext (FTS5), fusioniert per Reciprocal Rank Fusion — exakte Artikelnummern schlagen semantische Beinahe-Treffer",
+            "Zitatpflicht statt Halluzination: jede Aussage mit Quellenangabe, bei fehlender Evidenz ein ehrliches »steht nicht in den Unterlagen«",
+            "OCR-Fallback (Tesseract) macht Scans und Handyfotos von Belegen durchsuchbar",
+            "Das LLM ist nur der letzte Baustein und frei austauschbar — Claude heute, ein lokales Modell via Ollama morgen",
+          ],
+        },
+        {
           title: "DocInspect",
           subtitle: "KI-gestützte Dokumentenanalyse",
           description: "End-to-End Webanwendung zur Analyse von Verträgen und Dokumenten mit Fokus auf Datenschutz und automatisierte Risikobewertung. Privacy-by-Design: sensible Daten werden lokal pseudonymisiert, bevor externe Verarbeitung erfolgt.",
@@ -389,6 +401,18 @@ export const t = {
             "Integration of Whisper, Tesseract OCR, LLMs, and Text-to-Speech in an ETL process",
             "Resilient system design: Automated quality gates for detecting AI hallucinations, error recovery & API rate-limit management",
             "Headless upload via Playwright including bypassing consent walls and UI blockers",
+          ],
+        },
+        {
+          title: "Papierkram-Orakel",
+          subtitle: "Local RAG Knowledge System",
+          description: "A local RAG system that turns the folder of never-read documents — manuals, contracts, warranties — into a queryable knowledge base. Ask in plain language, get answers with exact source references (file + page). Search and ranking run fully local without any LLM; the language model only phrases the answer.",
+          status: "Completed",
+          highlights: [
+            "Hybrid search: vector search (sqlite-vec) + BM25 full-text (FTS5), fused via Reciprocal Rank Fusion — exact part numbers beat semantic near-misses",
+            "Citations over hallucination: every statement carries a source reference, and missing evidence yields an honest \"not in the documents\"",
+            "OCR fallback (Tesseract) makes scans and phone photos of receipts searchable",
+            "The LLM is only the last building block and fully swappable — Claude today, a local model via Ollama tomorrow",
           ],
         },
         {

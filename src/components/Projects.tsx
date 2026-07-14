@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye, Clapperboard, ExternalLink, FileText } from "lucide-react";
+import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye, Clapperboard, ExternalLink, FileText, Library } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
@@ -17,6 +17,7 @@ const GithubIcon = () => (
 
 const projectMeta = [
   { icon: Clapperboard, accent: "#ec4899", featured: true, github: null, videoSrc: null, caseStudyUrl: "/case-studies/tiktok-autopilot", tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], videoGallery: [{ label: "Gedankenguide", src: "/projects/tiktok-gedankenguide.mp4" }, { label: "Inner Child", src: "/projects/tiktok-innerchild.mp4" }, { label: "Geldnerd", src: "/projects/tiktok-geldnerd.mp4" }, { label: "TrueCrime", src: "/projects/tiktok-truecrime.mp4" }], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }, { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" }, { label: "@truecrime_DE.exe", url: "https://www.tiktok.com/@truecrime_DE.exe" }] },
+  { icon: Library, accent: "#f97316", github: null, videoSrc: null, caseStudyUrl: "/case-studies/papierkram-orakel", tags: ["Python", "RAG", "Hybrid Search", "SQLite", "Sentence-Transformers", "OCR", "Local-First"] },
   { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, caseStudyUrl: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
   { icon: Shield, accent: "#f59e0b", github: null, videoSrc: null, tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
   { icon: PenLine, accent: "#22c55e", github: null, videoSrc: null, tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
