@@ -41,6 +41,8 @@ export const INTENT_QUESTIONS: Record<string, string[]> = {
   battlesnake: ["Was ist sein Battlesnake-Projekt?", "Hat er eine Spiel-KI programmiert?"],
   sadidauto: ["Was ist Sadidauto?", "Hat er etwas mit Computer Vision oder Bilderkennung gebaut?", "Hat er einen Automatisierungsbot mit OpenCV gemacht?"],
   tiktok: ["Hat er etwas mit KI-Videos oder TikTok-Automatisierung gebaut?", "Was sind seine Content-Automatisierungs-Projekte?", "Hat er Medien-Pipelines entwickelt?"],
+  papierkram: ["Was ist das Papierkram-Orakel?", "Hat er ein RAG-System für private Dokumente gebaut?", "Kann man mit seinem System eigene Dokumente per KI befragen?", "Hat er etwas mit Hybrid Search oder BM25 gemacht?"],
+  docinspect: ["Was ist DocInspect?", "Hat er ein Tool zur KI-Dokumentenanalyse gebaut?", "Was macht seine App zur Risikobewertung von Verträgen?"],
 };
 
 export const INTENT_QUESTIONS_EN: Record<string, string[]> = {
@@ -66,4 +68,7 @@ export const INTENT_QUESTIONS_EN: Record<string, string[]> = {
   battlesnake: ["What is his Battlesnake project?", "Did he program a game AI?"],
   sadidauto: ["What is Sadidauto?", "Did he build something with computer vision or image recognition?"],
   tiktok: ["Did he build anything with AI videos or TikTok automation?", "What are his content-automation projects?", "Did he develop media pipelines?"],
+  project: ["What projects has Sascha built?", "Which AI projects did he develop?", "What are his own projects?", "Does he have a project portfolio?"],
+  papierkram: ["What is the Papierkram-Orakel?", "Did he build a RAG system for private documents?", "Can I query my own documents with his AI system?", "Did he do anything with hybrid search or BM25?"],
+  docinspect: ["What is DocInspect?", "Did he build an AI document analysis tool?", "What does his contract risk assessment app do?"],
 };

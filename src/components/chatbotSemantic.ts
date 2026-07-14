@@ -39,6 +39,27 @@ export function isSemanticReady(): boolean {
   return ready;
 }
 
+// Load progress (0–100) so the UI can show a real percentage instead of an
+// indefinite spinner while the ~130 MB of model files download.
+type ProgressListener = (pct: number) => void;
+const progressListeners = new Set<ProgressListener>();
+let lastPct = 0;
+
+function reportProgress(pct: number) {
+  if (pct <= lastPct) return; // monotonic: files report interleaved
+  lastPct = pct;
+  for (const listener of progressListeners) listener(pct);
+}
+
+// Fires immediately with the current value; returns an unsubscribe function.
+export function onSemanticProgress(listener: ProgressListener): () => void {
+  progressListeners.add(listener);
+  listener(lastPct);
+  return () => {
+    progressListeners.delete(listener);
+  };
+}
+
 // e5 models are trained with explicit "query:" / "passage:" prefixes.
 const asQuery = (text: string) => `query: ${text}`;
 const asPassage = (text: string) => `passage: ${text}`;
@@ -60,11 +81,46 @@ async function embed(texts: string[]): Promise<number[][]> {
   return output.tolist();
 }
 
+// Passage vectors precomputed at build time (scripts/build-chatbot-index.ts),
+// keyed by phrasing text. null → compute everything in the browser.
+async function loadPrecomputed(): Promise<Map<string, number[]> | null> {
+  try {
+    const res = await fetch("/models/chatbot-index.json");
+    if (!res.ok) return null;
+    const data = (await res.json()) as { model?: string; vectors?: Record<string, number[]> };
+    if (data.model !== MODEL_ID || !data.vectors) return null;
+    return new Map(Object.entries(data.vectors));
+  } catch {
+    return null;
+  }
+}
+
+// Uses precomputed vectors where available; embeds only what's missing (e.g.
+// phrasings edited after the index was last generated).
+async function buildVecs(entries: Entry[], pre: Map<string, number[]> | null): Promise<number[][]> {
+  const vecs: number[][] = new Array(entries.length);
+  const missing: number[] = [];
+  entries.forEach((e, i) => {
+    const v = pre?.get(e.text);
+    if (v) vecs[i] = v;
+    else missing.push(i);
+  });
+  if (missing.length > 0) {
+    const embedded = await embed(missing.map((i) => asPassage(entries[i].text)));
+    missing.forEach((idx, j) => {
+      vecs[idx] = embedded[j];
+    });
+  }
+  return vecs;
+}
+
 // Loads the model + precomputes the question index once. Safe to call repeatedly.
 export function initSemantic(): Promise<void> {
   if (initPromise) return initPromise;
 
   initPromise = (async () => {
+    // Fetch the precomputed index in parallel with the model download.
+    const precomputedPromise = loadPrecomputed();
     const { pipeline, env } = await import("@huggingface/transformers");
 
     // Serve model + runtime from our own domain only.
@@ -81,18 +137,33 @@ export function initSemantic(): Promise<void> {
 
     // dtype "q8" → loads the int8 model_quantized.onnx we ship; device "wasm"
     // runs on CPU everywhere (no WebGPU requirement).
+    // Progress tracks only the ONNX weights (113 MB ≈ 87 % of all bytes; the
+    // small config/tokenizer files finish first and would otherwise show 95 %
+    // before the real download starts). Capped at 95 % — the remainder is the
+    // index build below.
     extractor = (await pipeline("feature-extraction", MODEL_ID, {
       dtype: "q8",
       device: "wasm",
+      progress_callback: (info: { status: string; file?: string; loaded?: number; total?: number }) => {
+        if (info.status !== "progress" || !info.total || !info.file?.endsWith(".onnx")) return;
+        reportProgress(Math.round(((info.loaded ?? 0) / info.total) * 95));
+      },
     })) as unknown as FeatureExtractor;
 
     const entriesDE = buildEntries(RULES, INTENT_QUESTIONS);
     const entriesEN = buildEntries(RULES_EN, INTENT_QUESTIONS_EN);
-    indexDE = { entries: entriesDE, vecs: await embed(entriesDE.map((e) => asPassage(e.text))) };
-    indexEN = { entries: entriesEN, vecs: await embed(entriesEN.map((e) => asPassage(e.text))) };
+    const precomputed = await precomputedPromise;
+    indexDE = { entries: entriesDE, vecs: await buildVecs(entriesDE, precomputed) };
+    indexEN = { entries: entriesEN, vecs: await buildVecs(entriesEN, precomputed) };
 
     ready = true;
-  })();
+    reportProgress(100);
+  })().catch((err) => {
+    // Allow a later attempt to retry (e.g. transient network failure during
+    // the background preload) instead of caching the rejection forever.
+    initPromise = null;
+    throw err;
+  });
 
   return initPromise;
 }

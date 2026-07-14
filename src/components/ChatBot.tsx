@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { X, Send, Bot, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { findAnswer, SUGGESTIONS, SUGGESTIONS_EN, findAnswerEn } from "./chatbotKnowledge";
-import { initSemantic, isSemanticReady, semanticAnswer } from "./chatbotSemantic";
+import { initSemantic, isSemanticReady, onSemanticProgress, semanticAnswer } from "./chatbotSemantic";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 
@@ -90,6 +90,8 @@ export default function ChatBot() {
   // "idle" until the chat is first opened, then "loading" the embedding model,
   // then "ready" once semantic matching is live.
   const [semanticStatus, setSemanticStatus] = useState<"idle" | "loading" | "ready">("idle");
+  // Model download progress (0–100), shown while semanticStatus === "loading".
+  const [loadProgress, setLoadProgress] = useState(0);
   // Animated teaser bubble above the closed bot button (shown once per session).
   const [showHint, setShowHint] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -129,6 +131,30 @@ export default function ChatBot() {
       .then(() => setSemanticStatus("ready"))
       .catch(() => setSemanticStatus("idle"));
   }, [open]);
+
+  // Live download progress for the loading indicator in the header.
+  useEffect(() => onSemanticProgress(setLoadProgress), []);
+
+  // Warm-up on intent signals (hover/touch on the button) so the model has a
+  // head start before the chat opens. Errors are surfaced by the open-effect.
+  const warmupSemantic = useCallback(() => {
+    initSemantic().catch(() => {});
+  }, []);
+
+  // Preload the model shortly after page load so it's usually ready on first
+  // open — but only on desktop-class devices without data saver: the model
+  // files are ~130 MB, too heavy to push unasked onto mobile connections.
+  // There the touch warm-up plus the visible progress bar carry the UX.
+  useEffect(() => {
+    if (!mounted) return;
+    type NetInfo = { saveData?: boolean; effectiveType?: string };
+    const conn = (navigator as Navigator & { connection?: NetInfo }).connection;
+    if (conn?.saveData) return;
+    if (conn?.effectiveType && /(^|\b)(2g|3g)\b/.test(conn.effectiveType)) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    const timer = window.setTimeout(() => initSemantic().catch(() => {}), 3500);
+    return () => window.clearTimeout(timer);
+  }, [mounted]);
 
   const dismissHint = useCallback(() => {
     setShowHint(false);
@@ -289,6 +315,8 @@ export default function ChatBot() {
       {/* Floating button */}
       <div
         className={`fixed${open ? " hidden sm:block" : ""}`}
+        onPointerEnter={warmupSemantic}
+        onTouchStart={warmupSemantic}
         style={{
           width: "3.5rem",
           height: "3.5rem",
@@ -437,7 +465,9 @@ export default function ChatBot() {
                     <span className="flex items-center gap-1 text-xs sm:text-sm" style={{ color: "var(--text-3)" }}>
                       <span>·</span>
                       <Sparkles size={12} className="animate-pulse" />
-                      {isEN ? "loading AI…" : "KI lädt…"}
+                      {loadProgress > 0
+                        ? (isEN ? `loading AI… ${loadProgress}%` : `KI lädt… ${loadProgress}%`)
+                        : (isEN ? "loading AI…" : "KI lädt…")}
                     </span>
                   )}
                 </div>
@@ -452,6 +482,20 @@ export default function ChatBot() {
                 <X size={14} />
               </button>
             </div>
+
+            {/* Download progress bar — visible movement so the load never feels stuck */}
+            {semanticStatus === "loading" && (
+              <div style={{ height: "2px", background: "var(--border)", flexShrink: 0 }}>
+                <div
+                  style={{
+                    height: "100%",
+                    width: `${Math.max(loadProgress, 3)}%`,
+                    background: "#6366f1",
+                    transition: "width 300ms ease",
+                  }}
+                />
+              </div>
+            )}
 
             {/* Messages */}
             <div ref={scrollContainerRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3">

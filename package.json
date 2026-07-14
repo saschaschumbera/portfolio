@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "fetch:chatbot-assets": "node scripts/fetch-chatbot-assets.mjs",
-    "predev": "node scripts/fetch-chatbot-assets.mjs",
+    "build:chatbot-index": "tsx scripts/build-chatbot-index.mts",
+    "predev": "node scripts/fetch-chatbot-assets.mjs && tsx scripts/build-chatbot-index.mts",
     "dev": "next dev --webpack",
-    "prebuild": "node scripts/fetch-chatbot-assets.mjs",
+    "prebuild": "node scripts/fetch-chatbot-assets.mjs && tsx scripts/build-chatbot-index.mts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
