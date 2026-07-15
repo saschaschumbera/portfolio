@@ -22,7 +22,7 @@ export const RULES: Rule[] = [
     answer: "Hi! Schön, dass du vorbeischaust. Ich beantworte gerne Fragen über Sascha — Werdegang, Projekte, Skills oder Kontakt. Einfach fragen!",
   },
   {
-    keywords: ["kontakt", "contact", "email", "mail", "erreichen", "schreiben"],
+    keywords: ["kontakt", "kontaktieren", "kontaktiere", "kontaktaufnahme", "contact", "email", "mail", "erreichen", "schreiben"],
     answer: "Sascha ist per E-Mail erreichbar: sascha.schumbera@mail.de — oder über den Kontakt-Bereich auf dieser Seite. Er freut sich über jede Nachricht.",
   },
   {
@@ -287,7 +287,7 @@ export const RULES_EN: Rule[] = [
   { keywords: ["hello", "hi", "hey", "good morning", "good evening"], answer: "Hi! Great to have you here. I'm happy to answer questions about Sascha — his background, projects, skills or how to contact him." },
   { keywords: ["contact", "email", "mail", "reach", "write"], answer: "Sascha is reachable by email: sascha.schumbera@mail.de — or via the contact section on this page." },
   { keywords: ["phone", "mobile", "number", "call"], answer: "Sascha's phone number is not public, but he's very responsive by email: sascha.schumbera@mail.de" },
-  { keywords: ["freelance", "hire", "project", "cooperation", "collaboration", "work together"], answer: "For collaboration and project enquiries, reach Sascha directly by email: sascha.schumbera@mail.de" },
+  { keywords: ["freelance", "hire", "cooperation", "collaboration", "work together"], answer: "For collaboration and project enquiries, reach Sascha directly by email: sascha.schumbera@mail.de" },
   { keywords: ["who is", "about sascha", "about him", "introduction", "profile"], answer: "Sascha Schumbera is an AI-oriented software developer from NRW, Germany. He combines over 10 years of finance and banking experience with modern AI development, building end-to-end AI products — from document analysis to multi-agent systems." },
   { keywords: ["location", "where", "lives", "based", "germany", "nrw"], answer: "Sascha lives and works in NRW, Germany." },
   { keywords: ["stand out", "unique", "different", "special", "why sascha", "strength", "makes him"], answer: "Sascha combines over 10 years of finance and banking experience with AI-oriented software development — including credit decisions up to €250,000, risk model application, and banking automation. That domain expertise is his biggest differentiator as an AI developer." },

@@ -19,7 +19,7 @@ const MODEL_ID = "Xenova/multilingual-e5-small";
 // Below this cosine similarity we don't trust the best match and let the
 // keyword matcher try instead. Calibrated against e5 scores (real matches land
 // ~0.89–0.95, off-topic questions ~0.81).
-const SIMILARITY_THRESHOLD = 0.84;
+const SIMILARITY_THRESHOLD = 0.85;
 
 type FeatureExtractor = (
   text: string | string[],

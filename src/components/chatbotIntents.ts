@@ -9,14 +9,19 @@
 // duplicated here. Rules without an entry remain reachable via keyword matching.
 
 export const INTENT_QUESTIONS: Record<string, string[]> = {
-  skill: ["Welche Skills hat Sascha?", "Welche Programmiersprachen und Technologien kann er?", "Womit arbeitet und entwickelt er?"],
+  skill: ["Welche Skills hat Sascha?", "Welche Skills hat er?", "Welche Programmiersprachen und Technologien kann er?", "Womit arbeitet und entwickelt er?", "Was ist sein Tech-Stack?", "Welchen Tech-Stack nutzt er?"],
   erfahrung: ["Was ist Saschas beruflicher Werdegang?", "Wo hat er früher gearbeitet?", "Welche Berufserfahrung hat er?", "Wie sieht seine berufliche Laufbahn und Karriere aus?"],
-  kontakt: ["Wie kann ich Sascha kontaktieren?", "Wie erreiche ich ihn?", "Wie kann ich ihm schreiben?"],
+  kontakt: ["Wie kann ich Sascha kontaktieren?", "Wie erreiche ich ihn?", "Wie kann ich ihm schreiben?", "Was ist seine E-Mail-Adresse?", "Wie lautet seine E-Mail?", "Wie nehme ich Kontakt auf?"],
   studium: ["Was studiert Sascha?", "Wo macht er sein Studium?", "Welchen Studiengang belegt er?"],
   finanz: ["Welchen Finanz-Hintergrund hat Sascha?", "Hat er Erfahrung im Bankwesen?", "Was hat er im Banking gemacht?"],
   ki: ["Was macht Sascha im Bereich KI?", "Kennt er sich mit neuronalen Netzen und Machine Learning aus?", "Was sind seine KI-Schwerpunkte?", "Arbeitet er mit Sprachmodellen und LLMs?"],
   standort: ["Wo wohnt Sascha?", "In welcher Stadt lebt er?", "Wo ist er ansässig?"],
   besonders: ["Was macht Sascha besonders?", "Was ist seine Stärke?", "Warum sollte man ihn einstellen?", "Was hebt ihn von anderen Bewerbern ab?"],
+  "wer bist": ["Wer ist Sascha?", "Wer ist Sascha Schumbera?", "Stell dich vor", "Was ist er von Beruf?"],
+  hallo: ["Hallo", "Hi", "Hey", "Guten Tag", "Moin"],
+  danke: ["Danke", "Vielen Dank", "Danke dir"],
+  tschüss: ["Tschüss", "Bis dann", "Auf Wiedersehen"],
+  "was kannst du": ["Was kannst du?", "Wobei kannst du mir helfen?", "Welche Fragen kann ich stellen?"],
   "soft skill": ["Wie ist seine Arbeitsweise?", "Welche persönlichen Stärken hat er?", "Wie würdest du seinen Charakter beschreiben?"],
   sprache: ["Welche Sprachen spricht Sascha?", "Kann er Englisch?", "Welche Fremdsprachen beherrscht er?"],
   aktuell: ["Was macht Sascha aktuell?", "Woran arbeitet er gerade?", "Was ist sein aktueller Job?"],
@@ -46,9 +51,13 @@ export const INTENT_QUESTIONS: Record<string, string[]> = {
 };
 
 export const INTENT_QUESTIONS_EN: Record<string, string[]> = {
-  skill: ["What are Sascha's skills?", "Which programming languages and technologies does he know?", "What does he work with?"],
-  experience: ["What is Sascha's career background?", "Where has he worked before?", "How much experience does he have?"],
-  contact: ["How can I contact Sascha?", "How do I reach him?", "How can I get in touch?"],
+  skill: ["What are Sascha's skills?", "Which programming languages and technologies does he know?", "What does he work with?", "What's his tech stack?", "What is his tech stack?"],
+  experience: ["What is Sascha's career background?", "What's his career background?", "Where has he worked before?", "How much experience does he have?"],
+  "who is": ["Who is Sascha?", "Who is Sascha Schumbera?", "Introduce yourself", "What is he by profession?"],
+  hello: ["Hello", "Hi", "Hey", "Good morning"],
+  thank: ["Thanks", "Thank you", "Thanks a lot"],
+  bye: ["Bye", "Goodbye", "See you"],
+  contact: ["How can I contact Sascha?", "How can I contact him?", "How do I reach him?", "How can I get in touch?", "What is his email address?", "What's his email?"],
   degree: ["What does Sascha study?", "Where is he studying?", "What is his degree?"],
   "stand out": ["What makes Sascha special?", "What is his strength?", "Why should someone hire him?"],
   current: ["What is Sascha doing right now?", "What is his current job?", "What is he working on?"],
