@@ -35,6 +35,6 @@
   "overrides": {
     "postcss": "^8.5.10",
     "@babel/core": "^7.29.7",
-    "js-yaml": "^4.2.0"
+    "js-yaml": "^4.3.2"
   }
 }
