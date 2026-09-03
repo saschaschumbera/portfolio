@@ -147,9 +147,9 @@ export const t = {
           status: "Abgeschlossen",
           highlights: [
             "Hybrid Search: Vektor-Suche (sqlite-vec) + BM25-Volltext (FTS5), fusioniert per Reciprocal Rank Fusion — exakte Artikelnummern schlagen semantische Beinahe-Treffer",
-            "Zitatpflicht statt Halluzination: jede Aussage mit Quellenangabe, bei fehlender Evidenz ein ehrliches »steht nicht in den Unterlagen«",
-            "OCR-Fallback (Tesseract) macht Scans und Handyfotos von Belegen durchsuchbar",
-            "Das LLM ist nur der letzte Baustein und frei austauschbar — Claude heute, ein lokales Modell via Ollama morgen",
+            "Zitatpflicht statt Halluzination: das LLM sieht nur die belegten Textstellen, jede Aussage mit Datei- und Seitenzitat",
+            "Passt ein Wissensgebiet ins Kontextfenster, geht es komplett ans LLM statt durch eine Retrieval-Auswahl — robust auch bei »wie viele …«-Fragen über einen ganzen Abschnitt",
+            "OCR-Fallback (Tesseract) für Scans und Handyfotos; das LLM als letzter Baustein frei austauschbar (Claude heute, Ollama morgen)",
           ],
         },
         {
@@ -410,9 +410,9 @@ export const t = {
           status: "Completed",
           highlights: [
             "Hybrid search: vector search (sqlite-vec) + BM25 full-text (FTS5), fused via Reciprocal Rank Fusion — exact part numbers beat semantic near-misses",
-            "Citations over hallucination: every statement carries a source reference, and missing evidence yields an honest \"not in the documents\"",
-            "OCR fallback (Tesseract) makes scans and phone photos of receipts searchable",
-            "The LLM is only the last building block and fully swappable — Claude today, a local model via Ollama tomorrow",
+            "Citations over hallucination: the LLM only ever sees the retrieved passages, every statement carries a file + page reference",
+            "If a knowledge domain fits into the context window, it all goes to the LLM instead of a retrieval selection — robust even for \"how many …\" questions spanning a whole section",
+            "OCR fallback (Tesseract) for scans and phone photos; the LLM as the last building block, fully swappable (Claude today, Ollama tomorrow)",
           ],
         },
         {
