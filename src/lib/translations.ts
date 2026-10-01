@@ -30,7 +30,7 @@ export const t = {
           status: "Prototyp · Eval-getrieben",
           description: "Prüft eine Gehaltsabrechnung in Sekunden auf Manipulation: Rechnet sie? Stimmen Sozialabgaben, Steuer-ID und SV-Nummer? Wurde das PDF nachträglich bearbeitet? Gibt es den Arbeitgeber? Die KI liest nur aus — jeder Wert wird gegen das Dokument belegt, entschieden wird durch nachrechenbare Regeln.",
           metrics: [
-            { value: "30/30", label: "Manipulationen erkannt (synthetisches Eval)" },
+            { value: "45/45", label: "Manipulationen erkannt (synthetisches Eval)" },
             { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
             { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
           ],
@@ -148,7 +148,7 @@ export const t = {
           status: "Prototype · eval-driven",
           description: "Checks a German payslip for manipulation in seconds: Does it add up? Are social security contributions, tax ID and social security number valid? Was the PDF edited afterwards? Does the employer exist? The AI only reads — every value is verified against the document, decisions come from rules you can recalculate.",
           metrics: [
-            { value: "30/30", label: "manipulations detected (synthetic eval)" },
+            { value: "45/45", label: "manipulations detected (synthetic eval)" },
             { value: "0", label: "false RED on samples from real payroll software" },
             { value: "10/10", label: "invented employers flagged via web search" },
           ],

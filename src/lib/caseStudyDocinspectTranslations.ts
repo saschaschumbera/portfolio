@@ -10,10 +10,10 @@ export const caseStudyDocinspect = {
       tags: ["Python", "PyMuPDF", "Codex CLI", "Pydantic", "Tesseract OCR", "FastAPI"],
     },
     metrics: [
-      { value: "30/30", label: "manipulierte Abrechnungen erkannt (synthetisches Eval)" },
+      { value: "45/45", label: "manipulierte Abrechnungen erkannt (synthetisches Eval)" },
       { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
       { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
-      { value: "119", label: "automatisierte Tests" },
+      { value: "135", label: "automatisierte Tests" },
     ],
     screenshots: [
       {
@@ -41,7 +41,7 @@ export const caseStudyDocinspect = {
       items: [
         { title: "KI nur fürs Lesen", content: "Das Modell überträgt Werte wörtlich in ein festes Schema. Es rechnet nicht, es bewertet nicht." },
         { title: "Jeder Wert belegt", content: "Der Code prüft, ob jeder ausgelesene Betrag, jedes Datum, jede Kennung tatsächlich im Dokument steht." },
-        { title: "Regeln entscheiden", content: "Arithmetik, Sozialversicherung, Prüfziffern, Datums- und Jahreswerte, PDF-Forensik — jedes Urteil mit Soll und Ist." },
+        { title: "Regeln entscheiden", content: "Arithmetik, Sozialversicherung, amtliche Lohnsteuer, Prüfziffern, Datums- und Jahreswerte, PDF-Forensik — jedes Urteil mit Soll und Ist." },
         { title: "Nie ROT auf Unsicherem", content: "Beruht ein harter Befund auf einem nicht belegten Wert oder einem Scan, wird er GELB: Ein Lesefehler darf keinen Betrugsverdacht auslösen." },
       ],
     },
@@ -57,7 +57,7 @@ export const caseStudyDocinspect = {
     },
     forensics: {
       title: "Wie die Forensik Fälschungen erkennt",
-      intro: "Gefälschte Gehaltsnachweise entstehen fast nie neu, sondern durch Bearbeiten einer echten Abrechnung — im PDF-Editor oder im Bildprogramm. Jede Bearbeitung hinterlässt Spuren, oft unsichtbar für das Auge, aber messbar in der Datei: Computerschrift ist exakt, ein Lohnprogramm schreibt seine Dokumente immer gleich, ein Scan hat nie reines Weiß. DocInspect prüft diese Spuren ohne KI — direkt aus der Struktur des PDFs bzw. aus den Pixeln des Scans.",
+      intro: "Gefälschte Gehaltsnachweise entstehen meist durch Bearbeiten einer echten Abrechnung — im PDF-Editor oder im Bildprogramm —, seltener komplett neu. Jede Bearbeitung hinterlässt Spuren, oft unsichtbar für das Auge, aber messbar in der Datei: Computerschrift ist exakt, ein Lohnprogramm schreibt seine Dokumente immer gleich, ein Scan hat nie reines Weiß. DocInspect prüft diese Spuren ohne KI — direkt aus der Struktur des PDFs bzw. aus den Pixeln des Scans.",
       labels: { forger: "Was der Fälscher tut", trace: "Welche Spur bleibt", how: "Wie DocInspect sie misst" },
       signals: [
         {
@@ -106,6 +106,14 @@ export const caseStudyDocinspect = {
           ],
           caption: "Links der Scan, wie ihn ein Mensch sieht. Rechts dieselbe Stelle kontrastverstärkt: Die übermalten Flächen leuchten, weil sie heller sind als das Papier.",
         },
+        {
+          title: "Komplett neu erstellte Dokumente",
+          forger: "Bearbeitet nichts, sondern baut die Abrechnung neu — in Word oder einem Grafikprogramm, oder mit eigener Vorlage und von Hand gerechneten Abzügen.",
+          trace: "Ohne Bearbeitung keine Bearbeitungsspur. Aber zwei Dinge verraten das Dokument: Die Datei nennt ihr Erzeugerprogramm — Lohnprogramme sind nicht Word oder Canva. Und die Lohnsteuer folgt einem amtlichen Rechenweg, den kaum ein Fälscher von Hand trifft.",
+          how: "DocInspect liest das Erzeugerprogramm aus den PDF-Metadaten; Druckertreiber und Programmbibliotheken, über die Lohnprogramme drucken, bleiben unauffällig. Die Lohnsteuer rechnet es nach dem Programmablaufplan des Bundesfinanzministeriums centgenau nach — Zusatzbeitrag und Kinderzahl liest es dafür aus den Sozialabgaben ab.",
+          images: [],
+          caption: "",
+        },
       ],
       tableTitle: "Was erkannt wird",
       tableHead: ["Fälschung", "erkannt", "Fehlalarme"],
@@ -113,11 +121,13 @@ export const caseStudyDocinspect = {
         ["Im PDF überklebt, neuer Wert in anderer Schrift", "5/5", "0"],
         ["Im PDF sorgfältig bearbeitet — gleiche Schrift, Größe und Position", "5/5 (vorher 0/5)", "0"],
         ["Scan im Bildprogramm mit Weiß übermalt", "10/10", "0/10"],
-        ["Echte Abrechnungen echter Lohnprogramme", "—", "0/9"],
+        ["Neu erstellt, Lohnsteuer von Hand gerechnet", "5/5", "0"],
+        ["In Word nachgebaut, alle Werte korrekt", "5/5", "0"],
+        ["PDFs echter Lohnprogramme", "—", "0/8"],
       ],
       limitsTitle: "Was die Forensik nicht erkennt",
       limits: [
-        "Ein komplett neu erstelltes Dokument mit stimmigen Werten hat keine Bearbeitungsspur — dagegen hilft nur der Abgleich mit dem Gehaltseingang auf dem Kontoauszug.",
+        "Wer alle Werte amtlich korrekt rechnet und das Dokument mit derselben Software wie das Original erzeugt, hinterlässt keine Spur im Dokument (0/5) — dagegen hilft nur der Abgleich mit dem Gehaltseingang auf dem Kontoauszug. Auch Metadaten lassen sich fälschen: Die Herkunftsprüfung fängt den typischen, nicht den versierten Fälscher.",
         "Scans, die mit der Papierfarbe übermalt wurden, und kopierte (geklonte) Ziffern: gemessen, aber nach der JPEG-Kompression nicht zuverlässig von echten Scans zu trennen — deshalb bewusst nicht eingebaut.",
         "Zeichenabstände: bei sorgfältigen Fälschungen identisch mit dem Original — ebenfalls gemessen und verworfen.",
       ],
@@ -149,12 +159,16 @@ export const caseStudyDocinspect = {
           title: "6. Die eigene Datenschutz-Zusage auf den Prüfstand gestellt",
           content: "„Vor jeder KI-Verarbeitung pseudonymisiert“ klang gut — eine gezielte Gegenprobe zeigte, dass es nicht stimmte. Der Codex-Agent erbte meine persönliche Konfiguration und las trotz Read-only-Sandbox eine Testdatei außerhalb seines Arbeitsordners; über eine präparierte Abrechnung (Prompt-Injection) wäre das ausnutzbar gewesen. Dazu: Namensteile unter drei Zeichen blieben im Klartext, „Stellplatz 40,00“ wurde als Straße ersetzt und der Betrag zerstört, und die Arbeitgeber-Recherche hätte bei Einzelunternehmen den Namen der Person an die Websuche geschickt. Jetzt läuft der Agent isoliert ohne Datei- und Werkzeugzugriff (ein Skript weist es mit einer Kennwort-Datei nach), jede Lücke hat einen Regressionstest — und die Zusage ist so formuliert, wie sie belegbar ist. Danach der Angriff von außen: Drei präparierte Abrechnungen mit sichtbaren und versteckten Anweisungen an die KI — keine wurde GRÜN, kein Dateiinhalt kam zurück. Ein abschließendes, unabhängiges Code-Review fand zehn weitere Punkte; jeder wurde erst per Test reproduziert, neun bestätigten sich und sind behoben.",
         },
+        {
+          title: "7. Lohnsteuer centgenau — gegen echte DATEV-Abrechnungen",
+          content: "Die Lohnsteuer selbst nachzubauen wäre fehleranfällig. Stattdessen ist der Rechenkern aus der amtlichen XML-Fassung des Programmablaufplans generiert, die das Bundesfinanzministerium für Lohnprogramme veröffentlicht. Die Probe an zwei echten DATEV-Abrechnungen: einmal 1.058,58 € auf den Cent. Beim zweiten Mal 679,66 € statt gedruckter 679,40 € — die Differenz von 0,26 € steht als Lohnsteuer-Jahresausgleich auf der Abrechnung. Beide sind jetzt feste Testfälle. Was sich nicht ablesen lässt (Freibeträge, Faktorverfahren), wird als 0 angenommen; deshalb ist eine Abweichung nur GELB. Dazu eine Regel aus der Kreditpraxis: Ein Einkommensnachweis, der älter als drei Monate ist oder aus der Zukunft stammt, wird markiert.",
+        },
       ],
     },
     evals: {
       title: "Die Zahlen",
       rows: [
-        { label: "Synthetisches Set", detail: "65 Abrechnungen, 7 Manipulationsarten, 3 Layouts", result: "30/30 erkannt · 1/30 Fehlalarm (GELB) · 1820/1820 Felder korrekt" },
+        { label: "Synthetisches Set", detail: "80 Abrechnungen, 10 Fälschungsarten, 3 Layouts", result: "45/45 erkannt · 1/30 Fehlalarm (GELB) · KI-Extraktion 1820/1820 Felder korrekt (frühere Fassung mit 65 Abrechnungen)" },
         { label: "Echte Lohnprogramme", detail: "9 öffentliche Muster, 2005–2025, inkl. Scan", result: "0 fälschlich ROT durch Regeln oder Lesefehler" },
         { label: "Arbeitgeber-Recherche", detail: "8 reale, 10 erfundene Arbeitgeber", result: "8/8 belegt · 10/10 markiert" },
         { label: "Prompt-Injection", detail: "sichtbare und versteckte Anweisungen, Versuch, eine lokale Datei auszulesen", result: "3/3 abgewehrt: nie GRÜN, kein Dateiinhalt ausgeleitet" },
@@ -163,8 +177,8 @@ export const caseStudyDocinspect = {
     limits: {
       title: "Grenzen — bewusst benannt",
       items: [
-        "Eine gute Fälschung, die alle Werte konsistent neu berechnet, erkennt keine Plausibilitätsprüfung (0/5 im Eval). Dafür braucht es den Abgleich mit dem Gehaltseingang auf dem Kontoauszug.",
-        "Die Lohnsteuer wird noch nicht nachgerechnet; geplant ist der offizielle BMF-Programmablaufplan.",
+        "Eine gute Fälschung, die alle Werte amtlich korrekt berechnet und mit der Software des Originals erzeugt wird, erkennt keine Prüfung des Dokuments allein (0/5 im Eval). Dafür braucht es den Abgleich mit dem Gehaltseingang auf dem Kontoauszug.",
+        "Die Lohnsteuer wird für 2025 und 2026 nachgerechnet — nicht bei Einmalzahlungen, Mini-/Midijobs und freiwillig oder privat Versicherten.",
         "Scans werden per OCR gelesen, aber nie ROT — OCR-Fehler stehen auch im Belegtext und lassen sich dort nicht erkennen.",
         "Prototyp mit Codex CLI über ein ChatGPT-Abo (~10 s pro Extraktion); im Betrieb ein direkter API-Aufruf oder ein lokales Modell.",
       ],
@@ -181,10 +195,10 @@ export const caseStudyDocinspect = {
       tags: ["Python", "PyMuPDF", "Codex CLI", "Pydantic", "Tesseract OCR", "FastAPI"],
     },
     metrics: [
-      { value: "30/30", label: "manipulated payslips detected (synthetic eval)" },
+      { value: "45/45", label: "manipulated payslips detected (synthetic eval)" },
       { value: "0", label: "false RED on samples from real payroll software" },
       { value: "10/10", label: "invented employers flagged via web search" },
-      { value: "119", label: "automated tests" },
+      { value: "135", label: "automated tests" },
     ],
     screenshots: [
       {
@@ -212,7 +226,7 @@ export const caseStudyDocinspect = {
       items: [
         { title: "AI only reads", content: "The model copies values verbatim into a fixed schema. It doesn't calculate, it doesn't judge." },
         { title: "Every value verified", content: "Code checks that every extracted amount, date and identifier actually appears in the document." },
-        { title: "Rules decide", content: "Arithmetic, social security, check digits, dates and year-to-date values, PDF forensics — every verdict with expected and actual." },
+        { title: "Rules decide", content: "Arithmetic, social security, official income tax, check digits, dates and year-to-date values, PDF forensics — every verdict with expected and actual." },
         { title: "Never RED on uncertainty", content: "If a hard finding rests on an unverified value or a scan, it becomes YELLOW: a misreading must never trigger a fraud suspicion." },
       ],
     },
@@ -228,7 +242,7 @@ export const caseStudyDocinspect = {
     },
     forensics: {
       title: "How the forensics detect forgeries",
-      intro: "Forged proof of income is almost never created from scratch — it is an edited genuine payslip, changed in a PDF editor or an image program. Every edit leaves traces, often invisible to the eye but measurable in the file: computer type is exact, payroll software always writes its documents the same way, a scan never contains pure white. DocInspect checks these traces without AI — directly from the PDF's structure or the scan's pixels.",
+      intro: "Forged proof of income is usually an edited genuine payslip, changed in a PDF editor or an image program — less often created from scratch. Every edit leaves traces, often invisible to the eye but measurable in the file: computer type is exact, payroll software always writes its documents the same way, a scan never contains pure white. DocInspect checks these traces without AI — directly from the PDF's structure or the scan's pixels.",
       labels: { forger: "What the forger does", trace: "What trace remains", how: "How DocInspect measures it" },
       signals: [
         {
@@ -277,6 +291,14 @@ export const caseStudyDocinspect = {
           ],
           caption: "Left the scan as a human sees it. Right the same spot contrast-enhanced: the painted-over areas glow because they are brighter than the paper.",
         },
+        {
+          title: "Documents created from scratch",
+          forger: "Edits nothing but rebuilds the payslip — in Word or a design tool, or with a home-made template and deductions calculated by hand.",
+          trace: "No editing, no editing trace. But two things give the document away: the file names the program that created it — payroll software isn't Word or Canva. And income tax follows an official calculation that hardly any forger hits by hand.",
+          how: "DocInspect reads the creating program from the PDF metadata; printer drivers and libraries that payroll software prints through stay unflagged. It recalculates income tax to the cent using the German Finance Ministry's official program flowchart — reading the health insurance surcharge and number of children from the social security deductions.",
+          images: [],
+          caption: "",
+        },
       ],
       tableTitle: "What is detected",
       tableHead: ["Forgery", "detected", "false alarms"],
@@ -284,11 +306,13 @@ export const caseStudyDocinspect = {
         ["Pasted over in the PDF, new value in a different font", "5/5", "0"],
         ["Carefully edited in the PDF — same font, size and position", "5/5 (before: 0/5)", "0"],
         ["Scan painted over with white in an image program", "10/10", "0/10"],
-        ["Genuine payslips from real payroll software", "—", "0/9"],
+        ["Created from scratch, income tax calculated by hand", "5/5", "0"],
+        ["Rebuilt in Word, all values correct", "5/5", "0"],
+        ["PDFs from real payroll software", "—", "0/8"],
       ],
       limitsTitle: "What the forensics don't detect",
       limits: [
-        "A document created from scratch with consistent values has no editing trace — only a match against the salary credit on the bank statement helps there.",
+        "A forger who calculates every value officially correctly and creates the document with the same software as the original leaves no trace in the document (0/5) — only a match against the salary credit on the bank statement helps there. Metadata can be forged too: the provenance check catches the typical forger, not the skilled one.",
         "Scans painted over with the paper colour and copied (cloned) digits: measured, but after JPEG compression not reliably separable from genuine scans — deliberately not built.",
         "Character spacing: identical to the original in careful forgeries — also measured and discarded.",
       ],
@@ -320,12 +344,16 @@ export const caseStudyDocinspect = {
           title: "6. Putting my own privacy promise to the test",
           content: "\"Pseudonymised before any AI processing\" sounded good — a targeted counter-check showed it wasn't true. The Codex agent inherited my personal configuration and, despite a read-only sandbox, read a test file outside its working directory; a crafted payslip (prompt injection) could have exploited that. On top: name parts shorter than three characters stayed in plain text, \"Stellplatz 40,00\" (a parking deduction) was replaced as a street and the amount destroyed, and for sole proprietorships the employer research would have sent the person's name to web search. Now the agent runs isolated without file or tool access (a script proves it with a canary file), every gap has a regression test — and the promise is worded exactly as far as it can be proven. Then the attack from outside: three crafted payslips with visible and hidden instructions to the AI — none turned GREEN, no file content came back. A final independent code review found ten more issues; each was first reproduced with a test, nine were confirmed and fixed.",
         },
+        {
+          title: "7. Income tax to the cent — against real DATEV payslips",
+          content: "Re-implementing German income tax by hand would be error-prone. Instead, the calculation core is generated from the official XML version of the program flowchart that the Finance Ministry publishes for payroll software. The test against two real DATEV payslips: once 1,058.58 € to the cent. The second time 679.66 € instead of the printed 679.40 € — the 0.26 € difference is shown on the payslip as an annual tax adjustment. Both are now fixed test cases. What can't be read from the payslip (allowances, factor method) is assumed to be 0; that's why a deviation is only YELLOW. Plus a rule from lending practice: proof of income older than three months, or dated in the future, is flagged.",
+        },
       ],
     },
     evals: {
       title: "The numbers",
       rows: [
-        { label: "Synthetic set", detail: "65 payslips, 7 manipulation types, 3 layouts", result: "30/30 detected · 1/30 false alarm (YELLOW) · 1820/1820 fields correct" },
+        { label: "Synthetic set", detail: "80 payslips, 10 forgery types, 3 layouts", result: "45/45 detected · 1/30 false alarm (YELLOW) · AI extraction 1820/1820 fields correct (earlier version with 65 payslips)" },
         { label: "Real payroll software", detail: "9 public samples, 2005–2025, incl. a scan", result: "0 false RED from rules or misreadings" },
         { label: "Employer research", detail: "8 real, 10 invented employers", result: "8/8 verified · 10/10 flagged" },
         { label: "Prompt injection", detail: "visible and hidden instructions, attempt to read a local file", result: "3/3 repelled: never GREEN, no file content leaked" },
@@ -334,8 +362,8 @@ export const caseStudyDocinspect = {
     limits: {
       title: "Limits — named deliberately",
       items: [
-        "A good forgery that recalculates all values consistently cannot be caught by any plausibility check (0/5 in the eval). That needs a match against the salary credit on the bank statement.",
-        "Income tax is not yet recalculated; the official BMF program flowchart is planned.",
+        "A good forgery that calculates all values officially correctly and is created with the original's software can't be caught by checking the document alone (0/5 in the eval). That needs a match against the salary credit on the bank statement.",
+        "Income tax is recalculated for 2025 and 2026 — not for one-off payments, mini/midi jobs or voluntarily or privately insured employees.",
         "Scans are read via OCR but never RED — OCR errors also appear in the evidence text and can't be detected there.",
         "Prototype using the Codex CLI via a ChatGPT subscription (~10 s per extraction); in production a direct API call or a local model.",
       ],
