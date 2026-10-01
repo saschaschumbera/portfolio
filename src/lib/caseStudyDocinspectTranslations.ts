@@ -13,7 +13,7 @@ export const caseStudyDocinspect = {
       { value: "45/45", label: "manipulierte Abrechnungen erkannt (synthetisches Eval)" },
       { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
       { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
-      { value: "135", label: "automatisierte Tests" },
+      { value: "155", label: "automatisierte Tests" },
     ],
     screenshots: [
       {
@@ -198,7 +198,7 @@ export const caseStudyDocinspect = {
       { value: "45/45", label: "manipulated payslips detected (synthetic eval)" },
       { value: "0", label: "false RED on samples from real payroll software" },
       { value: "10/10", label: "invented employers flagged via web search" },
-      { value: "135", label: "automated tests" },
+      { value: "155", label: "automated tests" },
     ],
     screenshots: [
       {
