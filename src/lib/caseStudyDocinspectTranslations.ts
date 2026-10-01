@@ -13,7 +13,7 @@ export const caseStudyDocinspect = {
       { value: "30/30", label: "manipulierte Abrechnungen erkannt (synthetisches Eval)" },
       { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
       { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
-      { value: "67", label: "automatisierte Tests" },
+      { value: "77", label: "automatisierte Tests" },
     ],
     screenshots: [
       {
@@ -80,16 +80,17 @@ export const caseStudyDocinspect = {
         },
         {
           title: "6. Die eigene Datenschutz-Zusage auf den Prüfstand gestellt",
-          content: "„Vor jeder KI-Verarbeitung pseudonymisiert“ klang gut — eine gezielte Gegenprobe zeigte, dass es nicht stimmte. Der Codex-Agent erbte meine persönliche Konfiguration und las trotz Read-only-Sandbox eine Testdatei außerhalb seines Arbeitsordners; über eine präparierte Abrechnung (Prompt-Injection) wäre das ausnutzbar gewesen. Dazu: Namensteile unter drei Zeichen blieben im Klartext, „Stellplatz 40,00“ wurde als Straße ersetzt und der Betrag zerstört, und die Arbeitgeber-Recherche hätte bei Einzelunternehmen den Namen der Person an die Websuche geschickt. Jetzt läuft der Agent isoliert ohne Datei- und Werkzeugzugriff (ein Skript weist es mit einer Kennwort-Datei nach), jede Lücke hat einen Regressionstest — und die Zusage ist so formuliert, wie sie belegbar ist.",
+          content: "„Vor jeder KI-Verarbeitung pseudonymisiert“ klang gut — eine gezielte Gegenprobe zeigte, dass es nicht stimmte. Der Codex-Agent erbte meine persönliche Konfiguration und las trotz Read-only-Sandbox eine Testdatei außerhalb seines Arbeitsordners; über eine präparierte Abrechnung (Prompt-Injection) wäre das ausnutzbar gewesen. Dazu: Namensteile unter drei Zeichen blieben im Klartext, „Stellplatz 40,00“ wurde als Straße ersetzt und der Betrag zerstört, und die Arbeitgeber-Recherche hätte bei Einzelunternehmen den Namen der Person an die Websuche geschickt. Jetzt läuft der Agent isoliert ohne Datei- und Werkzeugzugriff (ein Skript weist es mit einer Kennwort-Datei nach), jede Lücke hat einen Regressionstest — und die Zusage ist so formuliert, wie sie belegbar ist. Danach der Angriff von außen: Drei präparierte Abrechnungen mit sichtbaren und versteckten Anweisungen an die KI — keine wurde GRÜN, kein Dateiinhalt kam zurück.",
         },
       ],
     },
     evals: {
       title: "Die Zahlen",
       rows: [
-        { label: "Synthetisches Set", detail: "65 Abrechnungen, 7 Manipulationsarten, 3 Layouts", result: "30/30 erkannt · 1/30 Fehlalarm (GELB) · 1815/1820 Felder korrekt" },
+        { label: "Synthetisches Set", detail: "65 Abrechnungen, 7 Manipulationsarten, 3 Layouts", result: "30/30 erkannt · 1/30 Fehlalarm (GELB) · 1820/1820 Felder korrekt" },
         { label: "Echte Lohnprogramme", detail: "9 öffentliche Muster, 2005–2025, inkl. Scan", result: "0 fälschlich ROT durch Regeln oder Lesefehler" },
         { label: "Arbeitgeber-Recherche", detail: "8 reale, 10 erfundene Arbeitgeber", result: "8/8 belegt · 10/10 markiert" },
+        { label: "Prompt-Injection", detail: "sichtbare und versteckte Anweisungen, Versuch, eine lokale Datei auszulesen", result: "3/3 abgewehrt: nie GRÜN, kein Dateiinhalt ausgeleitet" },
       ],
     },
     limits: {
@@ -116,7 +117,7 @@ export const caseStudyDocinspect = {
       { value: "30/30", label: "manipulated payslips detected (synthetic eval)" },
       { value: "0", label: "false RED on samples from real payroll software" },
       { value: "10/10", label: "invented employers flagged via web search" },
-      { value: "67", label: "automated tests" },
+      { value: "77", label: "automated tests" },
     ],
     screenshots: [
       {
@@ -183,16 +184,17 @@ export const caseStudyDocinspect = {
         },
         {
           title: "6. Putting my own privacy promise to the test",
-          content: "\"Pseudonymised before any AI processing\" sounded good — a targeted counter-check showed it wasn't true. The Codex agent inherited my personal configuration and, despite a read-only sandbox, read a test file outside its working directory; a crafted payslip (prompt injection) could have exploited that. On top: name parts shorter than three characters stayed in plain text, \"Stellplatz 40,00\" (a parking deduction) was replaced as a street and the amount destroyed, and for sole proprietorships the employer research would have sent the person's name to web search. Now the agent runs isolated without file or tool access (a script proves it with a canary file), every gap has a regression test — and the promise is worded exactly as far as it can be proven.",
+          content: "\"Pseudonymised before any AI processing\" sounded good — a targeted counter-check showed it wasn't true. The Codex agent inherited my personal configuration and, despite a read-only sandbox, read a test file outside its working directory; a crafted payslip (prompt injection) could have exploited that. On top: name parts shorter than three characters stayed in plain text, \"Stellplatz 40,00\" (a parking deduction) was replaced as a street and the amount destroyed, and for sole proprietorships the employer research would have sent the person's name to web search. Now the agent runs isolated without file or tool access (a script proves it with a canary file), every gap has a regression test — and the promise is worded exactly as far as it can be proven. Then the attack from outside: three crafted payslips with visible and hidden instructions to the AI — none turned GREEN, no file content came back.",
         },
       ],
     },
     evals: {
       title: "The numbers",
       rows: [
-        { label: "Synthetic set", detail: "65 payslips, 7 manipulation types, 3 layouts", result: "30/30 detected · 1/30 false alarm (YELLOW) · 1815/1820 fields correct" },
+        { label: "Synthetic set", detail: "65 payslips, 7 manipulation types, 3 layouts", result: "30/30 detected · 1/30 false alarm (YELLOW) · 1820/1820 fields correct" },
         { label: "Real payroll software", detail: "9 public samples, 2005–2025, incl. a scan", result: "0 false RED from rules or misreadings" },
         { label: "Employer research", detail: "8 real, 10 invented employers", result: "8/8 verified · 10/10 flagged" },
+        { label: "Prompt injection", detail: "visible and hidden instructions, attempt to read a local file", result: "3/3 repelled: never GREEN, no file content leaked" },
       ],
     },
     limits: {
