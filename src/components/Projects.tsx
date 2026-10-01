@@ -17,8 +17,14 @@ type FeaturedMeta = {
   externalLinks?: { label: string; url: string }[];
 };
 
-// Index-gekoppelt an t.<lang>.projects.featured bzw. .more — Reihenfolge muss übereinstimmen.
+// Index-gekoppelt an t.<lang>.projects.featured — Reihenfolge muss übereinstimmen.
 const featuredMeta: FeaturedMeta[] = [
+  {
+    caseStudyUrl: "/case-studies/docinspect",
+    github: null,
+    tags: ["Python", "PyMuPDF", "Codex CLI", "Pydantic", "Tesseract OCR", "FastAPI"],
+    image: { src: "/case-studies/docinspect-report.png", width: 1744, height: 1630, alt: "DocInspect — Prüfbericht einer manipulierten Gehaltsabrechnung" },
+  },
   {
     caseStudyUrl: "/case-studies/papierkram-orakel",
     github: "https://github.com/saschaschumbera/papierkram-orakel",
@@ -38,10 +44,6 @@ const featuredMeta: FeaturedMeta[] = [
       { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" },
     ],
   },
-];
-
-const moreTags = [
-  ["Python", "FastAPI", "OCR", "Multi-Agent", "Privacy-by-Design"],
 ];
 
 function FadeIn({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -231,40 +233,6 @@ export default function Projects() {
             );
           })}
         </div>
-
-        {/* Weitere Projekte */}
-        <FadeIn className="mt-28 md:mt-36">
-          <h3 className="text-xs font-mono uppercase tracking-widest mb-6" style={{ color: "var(--text-3)" }}>
-            {tx.moreHeading}
-          </h3>
-          <ul style={{ borderBottom: "1px solid var(--border)" }}>
-            {tx.more.map((item, i) => (
-              <li
-                key={item.title}
-                className="grid md:grid-cols-12 gap-x-8 gap-y-2 py-6"
-                style={{ borderTop: "1px solid var(--border)" }}
-              >
-                <div className="md:col-span-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 md:block">
-                  <div>
-                    <p className="text-base font-semibold" style={{ color: "var(--text-1)" }}>{item.title}</p>
-                    <p className="text-xs" style={{ color: "var(--text-3)" }}>{item.subtitle}</p>
-                  </div>
-                  <p className="text-xs font-mono whitespace-nowrap md:hidden" style={{ color: "var(--text-3)" }}>{item.status}</p>
-                </div>
-                <div className="md:col-span-6">
-                  <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--text-2)" }}>{item.description}</p>
-                  <p className="text-xs font-mono" style={{ color: "var(--text-3)" }}>{moreTags[i].join(" · ")}</p>
-                </div>
-                <p className="hidden md:block md:col-span-2 text-xs font-mono text-right whitespace-nowrap" style={{ color: "var(--text-3)" }}>
-                  {item.status}
-                </p>
-              </li>
-            ))}
-          </ul>
-          <p className="text-xs mt-6" style={{ color: "var(--text-3)" }}>
-            {tx.repoOnRequest}
-          </p>
-        </FadeIn>
 
         {/* Video Modal */}
         {activeVideo && (

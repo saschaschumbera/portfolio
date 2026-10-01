@@ -9,7 +9,7 @@ export const t = {
     },
     hero: {
       headline: "Ich automatisiere Unternehmens\u00ADprozesse mit KI.",
-      intro: "10 Jahre Kreditrisiko und Banking, heute KI-Entwicklung: Ich weiß, wo Prozesse in Finanzunternehmen hängen — und baue die Systeme, die sie lösen. Nachvollziehbar, mit belegbaren Ergebnissen und Datenschutz von Anfang an.",
+      intro: "10 Jahre Kreditrisiko und Banking, heute KI-Entwicklung: Ich weiß, wo Prozesse in Finanzunternehmen hängen — und baue die Systeme, die sie lösen, von der Prüfung gefälschter Gehaltsabrechnungen bis zur belegbaren Dokumentensuche. Nachvollziehbar, mit belegbaren Ergebnissen und Datenschutz von Anfang an.",
       meta: "Referent Kreditrisikosteuerung bei Bank11 · B.Sc. Angewandte KI (laufend) · Korschenbroich, NRW",
       cvRequest: "Lebenslauf anfordern",
       cvSubject: "Anfrage Lebenslauf",
@@ -18,13 +18,28 @@ export const t = {
     projects: {
       tag: "Projekte",
       heading: "Ausgewählte Arbeiten",
-      subheading: "Zwei Systeme im Detail — gebaut, getestet und im Einsatz.",
+      subheading: "Drei Systeme im Detail — gebaut, getestet und mit Zahlen belegt.",
       repoOnRequest: "Repository auf Anfrage",
       readCaseStudy: "Case Study lesen",
       viewCode: "Code auf GitHub",
       demoVideo: "Demo-Video",
-      moreHeading: "Weitere Projekte",
       featured: [
+        {
+          title: "DocInspect",
+          subtitle: "Prüfung von Gehaltsabrechnungen für Kreditanträge",
+          status: "Prototyp · Eval-getrieben",
+          description: "Prüft eine Gehaltsabrechnung in Sekunden auf Manipulation: Rechnet sie? Stimmen Sozialabgaben, Steuer-ID und SV-Nummer? Wurde das PDF nachträglich bearbeitet? Gibt es den Arbeitgeber? Die KI liest nur aus — jeder Wert wird gegen das Dokument belegt, entschieden wird durch nachrechenbare Regeln.",
+          metrics: [
+            { value: "30/30", label: "Manipulationen erkannt (synthetisches Eval)" },
+            { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
+            { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
+          ],
+          highlights: [
+            "PDF-Forensik erkennt überklebte Werte: verdeckte Originale und abweichende Schrift",
+            "Personenbezogene Daten werden vor jeder KI-Verarbeitung lokal pseudonymisiert — fail-closed",
+            "Realitätscheck auf Mustern von DATEV, Lexware & Co. kippte sieben Annahmen, bevor sie Fehlalarme erzeugten",
+          ],
+        },
         {
           title: "Papierkram-Orakel",
           subtitle: "Lokales RAG-Wissenssystem mit Quellenpflicht",
@@ -56,14 +71,6 @@ export const t = {
             "Resilienz: Fehler-Recovery, zentrales Rate-Limit-Management und Caching von Zwischenartefakten",
             "Wöchentlicher automatischer Performance-Check gegen die Baseline, Verdikt per Telegram",
           ],
-        },
-      ],
-      more: [
-        {
-          title: "DocInspect",
-          subtitle: "KI-gestützte Vertrags- und Dokumentenanalyse",
-          status: "In Entwicklung",
-          description: "Analysiert Verträge und Dokumente mit Risiko-Scoring in Ampellogik und Handlungsempfehlungen. Privacy-by-Design: sensible Daten werden lokal pseudonymisiert, bevor ein Multi-Agent-Workflow mit Provider-Routing sie verarbeitet.",
         },
       ],
     },
@@ -120,7 +127,7 @@ export const t = {
     },
     hero: {
       headline: "I automate business processes with AI.",
-      intro: "10 years in credit risk and banking, now AI development: I know where processes in financial companies get stuck — and I build the systems that fix them. Traceable, with verifiable results and privacy built in from the start.",
+      intro: "10 years in credit risk and banking, now AI development: I know where processes in financial companies get stuck — and I build the systems that fix them, from detecting forged payslips to document search with verifiable sources. Traceable, with verifiable results and privacy built in from the start.",
       meta: "Credit Risk Specialist at Bank11 · B.Sc. Applied AI (ongoing) · Korschenbroich, Germany",
       cvRequest: "Request my CV",
       cvSubject: "CV request",
@@ -129,13 +136,28 @@ export const t = {
     projects: {
       tag: "Projects",
       heading: "Selected Work",
-      subheading: "Two systems in depth — built, tested and in use.",
+      subheading: "Three systems in depth — built, tested and backed by numbers.",
       repoOnRequest: "Repository on request",
       readCaseStudy: "Read case study",
       viewCode: "Code on GitHub",
       demoVideo: "Demo video",
-      moreHeading: "More Projects",
       featured: [
+        {
+          title: "DocInspect",
+          subtitle: "Checking payslips for credit applications",
+          status: "Prototype · eval-driven",
+          description: "Checks a German payslip for manipulation in seconds: Does it add up? Are social security contributions, tax ID and social security number valid? Was the PDF edited afterwards? Does the employer exist? The AI only reads — every value is verified against the document, decisions come from rules you can recalculate.",
+          metrics: [
+            { value: "30/30", label: "manipulations detected (synthetic eval)" },
+            { value: "0", label: "false RED on samples from real payroll software" },
+            { value: "10/10", label: "invented employers flagged via web search" },
+          ],
+          highlights: [
+            "PDF forensics catches pasted-over values: hidden originals and deviating fonts",
+            "Personal data is pseudonymised locally before any AI processing — fail-closed",
+            "A reality check on samples from DATEV, Lexware & co. overturned seven assumptions before they caused false alarms",
+          ],
+        },
         {
           title: "Papierkram-Orakel",
           subtitle: "Local RAG Knowledge System with Mandatory Citations",
@@ -167,14 +189,6 @@ export const t = {
             "Resilience: error recovery, central rate-limit management and caching of intermediate artefacts",
             "Weekly automated performance check against the baseline, verdict via Telegram",
           ],
-        },
-      ],
-      more: [
-        {
-          title: "DocInspect",
-          subtitle: "AI-Powered Contract & Document Analysis",
-          status: "In Development",
-          description: "Analyses contracts and documents with traffic-light risk scoring and recommendations. Privacy-by-Design: sensitive data is pseudonymised locally before a multi-agent workflow with provider routing processes it.",
         },
       ],
     },
