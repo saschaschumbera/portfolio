@@ -1,6 +1,11 @@
 export const caseStudyTiktok = {
   de: {
     back: "Zurück zur Übersicht",
+    demo: {
+      src: "/projects/tiktok-demo-de.mp4",
+      poster: "/projects/tiktok-demo-de.jpg",
+      caption: "60-Sekunden-Demo aus echtem Produktionsmaterial: die fertigen Videos zweier Kanäle und ein wörtlicher Auszug eines Laufs vom 05.09.2026 (API-Keys geschwärzt). Die Zahlen sind aus den Logs gezählt. Die Pipeline läuft headless, deshalb gibt es keine Bildschirmaufnahme.",
+    },
     hero: {
       title: "Case Study: TikTok Autopilot",
       subtitle: "Vollautonome Headless Data- & AI-Pipeline",
@@ -97,6 +102,11 @@ graph TD
   },
   en: {
     back: "Back to Portfolio",
+    demo: {
+      src: "/projects/tiktok-demo-en.mp4",
+      poster: "/projects/tiktok-demo-en.jpg",
+      caption: "60-second demo built from real production material: the finished videos of two channels and a verbatim excerpt of a run on Sep 5, 2026 (API keys redacted). The numbers are counted from the logs. The pipeline runs headless, so there is no screen recording.",
+    },
     hero: {
       title: "Case Study: TikTok Autopilot",
       subtitle: "Fully Autonomous Headless Data & AI Pipeline",

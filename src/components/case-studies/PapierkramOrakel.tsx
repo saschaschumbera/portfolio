@@ -246,6 +246,17 @@ export default function PapierkramOrakelCaseStudy() {
               />
             ))}
           </div>
+
+          {/* Demo-Video */}
+          <figure className="mt-12 text-left">
+            <div className="rounded-lg overflow-hidden" style={{ border: "1px solid var(--border)", background: "#0a0a0f" }}>
+              <video key={tx.demo.src} src={tx.demo.src} poster={tx.demo.poster} controls preload="metadata" playsInline
+                     className="block w-full aspect-video" />
+            </div>
+            <figcaption className="text-sm leading-relaxed mt-3" style={{ color: "var(--text-3)" }}>
+              {tx.demo.caption}
+            </figcaption>
+          </figure>
         </div>
       </section>
 

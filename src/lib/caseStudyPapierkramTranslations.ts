@@ -3,6 +3,11 @@ export const caseStudyPapierkram = {
     back: "Zurück zur Übersicht",
     repoLabel: "Code auf GitHub",
     repoUrl: "https://github.com/saschaschumbera/papierkram-orakel",
+    demo: {
+      src: "/projects/papierkram-demo-de.mp4",
+      poster: "/projects/papierkram-demo-de.jpg",
+      caption: "60-Sekunden-Demo: Live-Aufnahme der echten Web-Oberfläche mit vier Fragen an die Beispiel-Dokumente des Repos. Die Antworten sind echt und unbearbeitet; Wartezeit und Tippen sind gerafft und so gekennzeichnet.",
+    },
     hero: {
       title: "Case Study: Papierkram-Orakel",
       subtitle: "Lokales RAG-System für den privaten Papierkram",
@@ -136,6 +141,11 @@ export const caseStudyPapierkram = {
     back: "Back to Portfolio",
     repoLabel: "Code on GitHub",
     repoUrl: "https://github.com/saschaschumbera/papierkram-orakel",
+    demo: {
+      src: "/projects/papierkram-demo-en.mp4",
+      poster: "/projects/papierkram-demo-en.jpg",
+      caption: "60-second demo: live recording of the real web interface with four questions about the repo's sample documents. The answers are real and unedited; waiting and typing are sped up and labelled as such.",
+    },
     hero: {
       title: "Case Study: Papierkram-Orakel",
       subtitle: "A Local RAG System for Household Paperwork",

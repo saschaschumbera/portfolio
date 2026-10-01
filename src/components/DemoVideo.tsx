@@ -1,8 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 import { Volume2 } from "lucide-react";
+
+function autoplayAllowed() {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+  return !reduced && !saveData;
+}
 
 // Stummes Demo-Video in der Projektübersicht: lädt erst, wenn es ins Bild scrollt, läuft dann in Schleife
 // und pausiert außerhalb. Kein Autoplay bei „Bewegung reduzieren“ oder Datensparmodus — dann nur das Standbild.
@@ -19,33 +25,26 @@ export default function DemoVideo({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const inView = useInView(ref, { margin: "200px" });
-  const [autoplay, setAutoplay] = useState(false);
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-    setAutoplay(!reduced && !saveData);
-  }, []);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video || !autoplay) return;
+    if (!video || !autoplayAllowed()) return;
     if (inView) {
       if (!video.src) video.src = src;
       video.play().catch(() => {});
     } else {
       video.pause();
     }
-  }, [inView, autoplay, src]);
+  }, [inView, src]);
 
   // Sprache gewechselt: laufendes Video auf die andere Fassung umstellen
   useEffect(() => {
     const video = ref.current;
     if (video?.src && !video.src.endsWith(src)) {
       video.src = src;
-      if (inView && autoplay) video.play().catch(() => {});
+      if (inView && autoplayAllowed()) video.play().catch(() => {});
     }
-  }, [src, inView, autoplay]);
+  }, [src, inView]);
 
   return (
     <div className="relative rounded-lg overflow-hidden" style={{ border: "1px solid var(--border)", background: "#0a0a0f" }}>

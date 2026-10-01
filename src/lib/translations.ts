@@ -22,14 +22,13 @@ export const t = {
       repoOnRequest: "Repository auf Anfrage",
       readCaseStudy: "Case Study lesen",
       viewCode: "Code auf GitHub",
-      demoVideo: "Demo-Video",
       watchWithSound: "Mit Ton ansehen",
-      demoCaption: "Live-Aufnahme der echten Oberfläche · KI-Wartezeit gerafft · 60 s",
       featured: [
         {
           title: "DocInspect",
           subtitle: "Prüfung von Gehaltsabrechnungen für Kreditanträge",
           status: "Prototyp · Eval-getrieben",
+          demoCaption: "Live-Aufnahme der echten Oberfläche · KI-Wartezeit gerafft · 60 s",
           description: "Prüft eine Gehaltsabrechnung in Sekunden auf Manipulation: Rechnet sie? Stimmen Sozialabgaben, Steuer-ID und SV-Nummer? Wurde das PDF nachträglich bearbeitet? Gibt es den Arbeitgeber? Die KI liest nur aus — jeder Wert wird gegen das Dokument belegt, entschieden wird durch nachrechenbare Regeln.",
           metrics: [
             { value: "45/45", label: "Manipulationen erkannt (synthetisches Eval)" },
@@ -46,6 +45,7 @@ export const t = {
           title: "Papierkram-Orakel",
           subtitle: "Lokales RAG-Wissenssystem mit Quellenpflicht",
           status: "Abgeschlossen · Open Source",
+          demoCaption: "Live-Aufnahme mit echten Antworten · Wartezeit gerafft · 60 s",
           description: "Verwandelt einen Ordner voller Dokumente — Anleitungen, Verträge, Garantien — in eine befragbare Wissensbasis. Jede Antwort nennt Datei und Seite. Suche und Ranking laufen komplett lokal; an das Sprachmodell gehen nur die belegten Textstellen. Dasselbe Muster trägt überall, wo Antworten aus Richtlinien, Verträgen oder Handbüchern nachprüfbar sein müssen.",
           metrics: [
             { value: "20/20", label: "Eval-Fragen korrekt und mit richtiger Quelle" },
@@ -62,6 +62,7 @@ export const t = {
           title: "TikTok Autopilot",
           subtitle: "Autonome AI-Pipeline im Dauerbetrieb",
           status: "Produktiv (Live)",
+          demoCaption: "Echte Logs und Ausgaben aus dem Produktivbetrieb · 60 s",
           description: "Ein headless Daten- und KI-System, das ohne manuelle Eingriffe täglich Videos recherchiert, redigiert, vertont, schneidet und veröffentlicht. Der Kern ist nicht der Content, sondern der Betrieb: Qualitäts-Gates, Fehler-Recovery, Kostenkontrolle und Monitoring — so, wie ein Produktivsystem laufen muss.",
           metrics: [
             { value: "6", label: "vollautomatisierte Pipeline-Stufen" },
@@ -142,14 +143,13 @@ export const t = {
       repoOnRequest: "Repository on request",
       readCaseStudy: "Read case study",
       viewCode: "Code on GitHub",
-      demoVideo: "Demo video",
       watchWithSound: "Watch with sound",
-      demoCaption: "Live recording of the real interface · AI wait time sped up · 60 s",
       featured: [
         {
           title: "DocInspect",
           subtitle: "Checking payslips for credit applications",
           status: "Prototype · eval-driven",
+          demoCaption: "Live recording of the real interface · AI wait time sped up · 60 s",
           description: "Checks a German payslip for manipulation in seconds: Does it add up? Are social security contributions, tax ID and social security number valid? Was the PDF edited afterwards? Does the employer exist? The AI only reads — every value is verified against the document, decisions come from rules you can recalculate.",
           metrics: [
             { value: "45/45", label: "manipulations detected (synthetic eval)" },
@@ -166,6 +166,7 @@ export const t = {
           title: "Papierkram-Orakel",
           subtitle: "Local RAG Knowledge System with Mandatory Citations",
           status: "Completed · Open Source",
+          demoCaption: "Live recording with real answers · wait time sped up · 60 s",
           description: "Turns a folder full of documents — manuals, contracts, warranties — into a queryable knowledge base. Every answer names file and page. Search and ranking run fully local; only the cited passages are sent to the language model. The same pattern applies wherever answers from policies, contracts or handbooks must be verifiable.",
           metrics: [
             { value: "20/20", label: "eval questions correct, with the right source" },
@@ -182,6 +183,7 @@ export const t = {
           title: "TikTok Autopilot",
           subtitle: "Autonomous AI Pipeline in Continuous Operation",
           status: "Live (Production)",
+          demoCaption: "Real logs and output from production · 60 s",
           description: "A headless data and AI system that researches, edits, voices, cuts and publishes videos every day without manual intervention. The core isn't the content but the operations: quality gates, error recovery, cost control and monitoring — the way a production system has to run.",
           metrics: [
             { value: "6", label: "fully automated pipeline stages" },

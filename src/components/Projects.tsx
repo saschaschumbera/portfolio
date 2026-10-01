@@ -2,8 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import Image from "next/image";
-import { X, Play, ArrowUpRight } from "lucide-react";
+import { X, ArrowUpRight } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
@@ -13,8 +12,6 @@ type FeaturedMeta = {
   caseStudyUrl: string;
   github: string | null;
   tags: string[];
-  videos?: { label: string; src: string }[];
-  image?: { src: string; width: number; height: number; alt: string };
   demo?: { src: Record<"de" | "en", string>; poster: Record<"de" | "en", string> };
   externalLinks?: { label: string; url: string }[];
 };
@@ -34,16 +31,19 @@ const featuredMeta: FeaturedMeta[] = [
     caseStudyUrl: "/case-studies/papierkram-orakel",
     github: "https://github.com/saschaschumbera/papierkram-orakel",
     tags: ["Python", "RAG", "Hybrid Search", "SQLite", "Sentence-Transformers", "OCR"],
-    image: { src: "/case-studies/papierkram-ui-chat.png", width: 1568, height: 662, alt: "Papierkram-Orakel — Chat mit Quellenangabe" },
+    demo: {
+      src: { de: "/projects/papierkram-demo-de.mp4", en: "/projects/papierkram-demo-en.mp4" },
+      poster: { de: "/projects/papierkram-demo-de.jpg", en: "/projects/papierkram-demo-en.jpg" },
+    },
   },
   {
     caseStudyUrl: "/case-studies/tiktok-autopilot",
     github: null,
     tags: ["Python", "Gemini", "Whisper", "Playwright", "FFmpeg", "ETL"],
-    videos: [
-      { label: "Gedankenguide", src: "/projects/tiktok-gedankenguide.mp4" },
-      { label: "Geldnerd", src: "/projects/tiktok-geldnerd.mp4" },
-    ],
+    demo: {
+      src: { de: "/projects/tiktok-demo-de.mp4", en: "/projects/tiktok-demo-en.mp4" },
+      poster: { de: "/projects/tiktok-demo-de.jpg", en: "/projects/tiktok-demo-en.jpg" },
+    },
     externalLinks: [
       { label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" },
       { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" },
@@ -162,60 +162,6 @@ export default function Projects() {
 
                   {/* Media */}
                   <div className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-1" : ""} ${meta.demo ? "order-first lg:order-none" : ""}`}>
-                    {meta.videos && (
-                      <>
-                        <div className="grid grid-cols-2 gap-3 max-w-lg">
-                          {meta.videos.map((v) => (
-                            <button
-                              key={v.src}
-                              type="button"
-                              onClick={() => setActiveVideo(v.src)}
-                              className="group/video relative aspect-[9/16] rounded-lg overflow-hidden"
-                              style={{ border: "1px solid var(--border)", background: "#000" }}
-                              aria-label={`${v.label} — ${tx.demoVideo}`}
-                            >
-                              <video
-                                src={`${v.src}#t=0.1`}
-                                preload="metadata"
-                                muted
-                                playsInline
-                                tabIndex={-1}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-[1.04]"
-                              />
-                              <span className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover/video:bg-black/0 transition-colors duration-300">
-                                <span
-                                  className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover/video:scale-110"
-                                  style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.25)" }}
-                                >
-                                  <Play size={13} fill="#fff" style={{ color: "#fff", marginLeft: 1 }} />
-                                </span>
-                              </span>
-                              <span
-                                className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-medium rounded-full whitespace-nowrap"
-                                style={{ background: "rgba(0,0,0,0.6)", color: "#fff" }}
-                              >
-                                {v.label}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                        {meta.externalLinks && (
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-4">
-                            {meta.externalLinks.map((link) => (
-                              <a
-                                key={link.url}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs font-mono transition-colors text-[var(--text-3)] hover:text-[var(--text-1)]"
-                              >
-                                {link.label} ↗
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                      </>
-                    )}
                     {meta.demo && (
                       <>
                         <DemoVideo
@@ -224,24 +170,23 @@ export default function Projects() {
                           label={tx.watchWithSound}
                           onWatchWithSound={() => setActiveVideo(meta.demo!.src[lang])}
                         />
-                        <p className="text-xs font-mono mt-3" style={{ color: "var(--text-3)" }}>{tx.demoCaption}</p>
+                        <p className="text-xs font-mono mt-3" style={{ color: "var(--text-3)" }}>{item.demoCaption}</p>
                       </>
                     )}
-                    {meta.image && (
-                      <a
-                        href={meta.caseStudyUrl}
-                        className="block rounded-lg overflow-hidden transition-opacity hover:opacity-90"
-                        style={{ border: "1px solid var(--border)" }}
-                      >
-                        <Image
-                          src={meta.image.src}
-                          alt={meta.image.alt}
-                          width={meta.image.width}
-                          height={meta.image.height}
-                          sizes="(min-width: 1024px) 60vw, 100vw"
-                          className="w-full h-auto"
-                        />
-                      </a>
+                    {meta.externalLinks && (
+                      <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+                        {meta.externalLinks.map((link) => (
+                          <a
+                            key={link.url}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-mono transition-colors text-[var(--text-3)] hover:text-[var(--text-1)]"
+                          >
+                            {link.label} ↗
+                          </a>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </article>
