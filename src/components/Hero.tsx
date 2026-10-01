@@ -53,10 +53,7 @@ export default function Hero() {
             <h1 className="text-sm font-semibold" style={{ color: "var(--text-1)" }}>
               Sascha Schumbera
             </h1>
-            <p className="flex items-baseline gap-1.5 text-xs" style={{ color: "var(--text-3)" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] shrink-0 -translate-y-px" aria-hidden="true" />
-              {tx.availability}
-            </p>
+            <p className="text-xs" style={{ color: "var(--text-3)" }}>AI Developer</p>
           </div>
         </div>
 
