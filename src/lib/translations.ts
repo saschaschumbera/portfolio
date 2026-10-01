@@ -35,7 +35,7 @@ export const t = {
             { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
           ],
           highlights: [
-            "PDF-Forensik erkennt überklebte Werte: verdeckte Originale und abweichende Schrift",
+            "Forensik auf Zeichen- und Pixelebene: überklebte Werte, abweichende Schrift, Spuren in der Dateistruktur, übermalte Scans",
             "Personenbezogene Daten werden vor der KI-Extraktion lokal pseudonymisiert — fail-closed, der KI-Agent läuft ohne Dateizugriff",
             "Realitätscheck auf Mustern von DATEV, Lexware & Co. kippte sieben Annahmen, bevor sie Fehlalarme erzeugten",
           ],
@@ -153,7 +153,7 @@ export const t = {
             { value: "10/10", label: "invented employers flagged via web search" },
           ],
           highlights: [
-            "PDF forensics catches pasted-over values: hidden originals and deviating fonts",
+            "Forensics at character and pixel level: pasted-over values, deviating fonts, traces in the file structure, painted-over scans",
             "Personal data is pseudonymised locally before AI extraction — fail-closed, the AI agent runs without file access",
             "A reality check on samples from DATEV, Lexware & co. overturned seven assumptions before they caused false alarms",
           ],
