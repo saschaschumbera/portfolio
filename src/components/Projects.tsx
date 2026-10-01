@@ -1,299 +1,270 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Shield, FileSearch, X, Video, PenLine, Play, Database, Bot, Gamepad2, Eye, Clapperboard, ExternalLink, FileText, Library } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { X, Play, ArrowUpRight } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
 
-const GithubIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-  </svg>
-);
+type FeaturedMeta = {
+  caseStudyUrl: string;
+  github: string | null;
+  tags: string[];
+  videos?: { label: string; src: string }[];
+  image?: { src: string; width: number; height: number; alt: string };
+  externalLinks?: { label: string; url: string }[];
+};
 
-const projectMeta = [
-  { icon: Clapperboard, accent: "#ec4899", featured: true, github: null, videoSrc: null, caseStudyUrl: "/case-studies/tiktok-autopilot", tags: ["Python", "MLOps", "Gemini", "Whisper", "Playwright", "ETL", "Headless"], videoGallery: [{ label: "Gedankenguide", src: "/projects/tiktok-gedankenguide.mp4" }, { label: "Inner Child", src: "/projects/tiktok-innerchild.mp4" }, { label: "Geldnerd", src: "/projects/tiktok-geldnerd.mp4" }, { label: "TrueCrime", src: "/projects/tiktok-truecrime.mp4" }], externalLinks: [{ label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" }, { label: "@echo.des.inneren.kindes", url: "https://www.tiktok.com/@echo.des.inneren.kindes" }, { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" }, { label: "@truecrime_DE.exe", url: "https://www.tiktok.com/@truecrime_DE.exe" }] },
-  { icon: Library, accent: "#f97316", github: "https://github.com/saschaschumbera/papierkram-orakel", videoSrc: null, caseStudyUrl: "/case-studies/papierkram-orakel", tags: ["Python", "RAG", "Hybrid Search", "SQLite", "Sentence-Transformers", "OCR", "Local-First"] },
-  { icon: FileSearch, accent: "#6366f1", github: null, videoSrc: null, caseStudyUrl: null, tags: ["Python", "FastAPI", "OCR", "LLM", "Multi-Agent", "Privacy-by-Design"] },
-  { icon: Shield, accent: "#f59e0b", github: null, videoSrc: null, tags: ["Python", "API-Design", "OCR", "SQL", "Self-Hosted", "Fullstack"] },
-  { icon: PenLine, accent: "#22c55e", github: null, videoSrc: null, tags: ["Node.js", "Express", "Google Gemini API", "Canvas API", "Markdown", "Fullstack"] },
-  { icon: Database, accent: "#a78bfa", github: null, videoSrc: null, tags: ["Python", "LangChain", "ChromaDB", "Ollama", "RAG", "Tool-Use"] },
-  { icon: Bot, accent: "#38bdf8", github: null, videoSrc: null, tags: ["Python", "Agentic AI", "Context Engineering", "Intent-Orchestrierung", "Multi-Capability", "Telegram"] },
-  { icon: Gamepad2, accent: "#f472b6", github: null, videoSrc: null, tags: ["Python", "FastAPI", "Algorithmik", "Echtzeit"] },
-  { icon: Eye, accent: "#14b8a6", github: null, videoSrc: null, tags: ["Python", "OpenCV", "Computer Vision", "Computer-Use", "State Machine", "OCR", "Pathfinding", "PyAutoGUI"] },
+// Index-gekoppelt an t.<lang>.projects.featured bzw. .more — Reihenfolge muss übereinstimmen.
+const featuredMeta: FeaturedMeta[] = [
+  {
+    caseStudyUrl: "/case-studies/papierkram-orakel",
+    github: "https://github.com/saschaschumbera/papierkram-orakel",
+    tags: ["Python", "RAG", "Hybrid Search", "SQLite", "Sentence-Transformers", "OCR"],
+    image: { src: "/case-studies/papierkram-ui-chat.png", width: 1568, height: 662, alt: "Papierkram-Orakel — Chat mit Quellenangabe" },
+  },
+  {
+    caseStudyUrl: "/case-studies/tiktok-autopilot",
+    github: null,
+    tags: ["Python", "Gemini", "Whisper", "Playwright", "FFmpeg", "ETL"],
+    videos: [
+      { label: "Gedankenguide", src: "/projects/tiktok-gedankenguide.mp4" },
+      { label: "Geldnerd", src: "/projects/tiktok-geldnerd.mp4" },
+    ],
+    externalLinks: [
+      { label: "@gedankenguide", url: "https://www.tiktok.com/@gedankenguide" },
+      { label: "@geldnerd", url: "https://www.tiktok.com/@geldnerd" },
+    ],
+  },
 ];
 
-export default function Projects() {
+const moreTags = [
+  ["Python", "FastAPI", "OCR", "Multi-Agent", "Privacy-by-Design"],
+];
+
+function FadeIn({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const mounted = useIsMounted();
+  return (
+    <motion.div
+      ref={ref}
+      initial={mounted ? { opacity: 0, y: 24 } : false}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default function Projects() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const { lang } = useLang();
   const tx = t[lang].projects;
 
   return (
-    <section id="projects" className="py-24 px-6" ref={ref}>
+    <section id="projects" className="px-6 pb-24">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={mounted ? { opacity: 0, y: 20 } : false}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-14 text-center"
-        >
-          <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "var(--accent)" }}>
-            {tx.tag}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "var(--text-1)" }}>
-            {tx.heading}
-          </h2>
-          <p className="text-sm mt-3 max-w-xl mx-auto" style={{ color: "var(--text-3)" }}>
-            {tx.subheading}
-          </p>
-        </motion.div>
+        <FadeIn className="pt-10 mb-16">
+          <div style={{ borderTop: "1px solid var(--border)" }} className="pt-10">
+            <p className="text-xs font-mono uppercase tracking-widest mb-4" style={{ color: "var(--text-3)" }}>
+              {tx.tag}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3" style={{ color: "var(--text-1)" }}>
+              {tx.heading}
+            </h2>
+            <p className="text-base max-w-xl" style={{ color: "var(--text-3)" }}>
+              {tx.subheading}
+            </p>
+          </div>
+        </FadeIn>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {tx.items.map((item, i) => {
-            const { icon: Icon, accent, featured, github, videoSrc, videoGallery, tags, externalLinks, caseStudyUrl } = projectMeta[i] as {
-              icon: any;
-              accent: string;
-              featured?: boolean;
-              github: string | null;
-              videoSrc: string | null;
-              videoGallery?: { label: string; src: string }[];
-              caseStudyUrl?: string | null;
-              tags: string[];
-              externalLinks?: { label: string; url: string }[];
-            };
+        {/* Showcases */}
+        <div className="space-y-24 md:space-y-32">
+          {tx.featured.map((item, i) => {
+            const meta = featuredMeta[i];
             return (
-              <motion.article
-                key={item.title}
-                initial={mounted ? { opacity: 0, y: 40 } : false}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className={`group relative p-6 rounded-2xl transition-all duration-300 overflow-hidden${featured ? " md:col-span-2" : ""}`}
-                style={{
-                  border: "1px solid var(--border)",
-                  background: "color-mix(in srgb, var(--bg-card) 40%, transparent)",
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "color-mix(in srgb, var(--border) 80%, transparent)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border)"; }}
-              >
-                {/* Glow on hover */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl pointer-events-none"
-                  style={{ background: accent }}
-                />
+              <FadeIn key={item.title}>
+                <article className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                  {/* Text */}
+                  <div className={`lg:col-span-5 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                    <p className="text-xs font-mono mb-3" style={{ color: "var(--text-3)" }}>
+                      {String(i + 1).padStart(2, "0")} · {item.status}
+                    </p>
+                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight mb-1" style={{ color: "var(--text-1)" }}>
+                      {item.title}
+                    </h3>
+                    <p className="text-sm mb-5" style={{ color: "var(--accent)" }}>{item.subtitle}</p>
+                    <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--text-2)" }}>
+                      {item.description}
+                    </p>
 
-                {/* Video preview */}
-                {videoSrc && (
-                  <button
-                    type="button"
-                    onClick={() => setActiveVideo(videoSrc)}
-                    className="group/video relative block w-full aspect-video rounded-xl overflow-hidden mb-5"
-                    style={{ border: "1px solid var(--border)", background: "#000" }}
-                    aria-label={`${item.title} — ${tx.demoVideo}`}
-                  >
-                    <video
-                      src={`${videoSrc}#t=0.1`}
-                      preload="metadata"
-                      muted
-                      playsInline
-                      tabIndex={-1}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-[1.03]"
-                    />
-                    <span className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover/video:bg-black/10 transition-colors duration-300">
-                      <span
-                        className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover/video:scale-110"
-                        style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.25)" }}
-                      >
-                        <Play size={18} fill="#fff" style={{ color: "#fff", marginLeft: 2 }} />
-                      </span>
-                    </span>
-                  </button>
-                )}
-
-                {/* Header */}
-                <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2 mb-4">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center"
-                      style={{ background: `${accent}18` }}
-                    >
-                      <Icon size={18} style={{ color: accent }} />
+                    <div className="grid grid-cols-3 gap-4 mb-8">
+                      {item.metrics.map((m) => (
+                        <div key={m.label} className="pt-3" style={{ borderTop: "1px solid var(--border)" }}>
+                          <p className="text-xl md:text-2xl font-semibold tracking-tight mb-1 whitespace-nowrap" style={{ color: "var(--text-1)" }}>
+                            {m.value}
+                          </p>
+                          <p className="text-xs leading-snug" style={{ color: "var(--text-3)" }}>{m.label}</p>
+                        </div>
+                      ))}
                     </div>
-                    <div>
-                      <h3 className="text-base font-bold" style={{ color: "var(--text-1)" }}>
-                        {item.title}
-                      </h3>
-                      <p className="text-xs" style={{ color: "var(--text-3)" }}>{item.subtitle}</p>
-                    </div>
-                  </div>
-                  <span
-                    className="text-xs px-2 py-0.5 rounded-full border whitespace-nowrap flex-shrink-0"
-                    style={{
-                      color: accent,
-                      borderColor: `${accent}40`,
-                      background: `${accent}10`,
-                    }}
-                  >
-                    {item.status}
-                  </span>
-                </div>
 
-                {/* Description */}
-                <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--text-3)" }}>
-                  {item.description}
-                </p>
+                    <ul className="space-y-2 mb-6">
+                      {item.highlights.map((h) => (
+                        <li key={h} className="flex gap-3 text-sm leading-relaxed" style={{ color: "var(--text-2)" }}>
+                          <span aria-hidden="true" style={{ color: "var(--text-3)" }}>—</span>
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
 
-                {/* Highlights */}
-                <ul className="space-y-1 mb-5">
-                  {item.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-2 text-xs" style={{ color: "var(--text-2)" }}>
-                      <span style={{ color: accent }} className="text-[10px] mt-0.5 flex-shrink-0">▸</span>
-                      {h}
-                    </li>
-                  ))}
-                </ul>
+                    <p className="text-xs font-mono mb-8" style={{ color: "var(--text-3)" }}>
+                      {meta.tags.join(" · ")}
+                    </p>
 
-                {/* Video gallery (one production output per channel) */}
-                {videoGallery && (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-                    {videoGallery.map((v) => (
-                      <button
-                        key={v.src}
-                        type="button"
-                        onClick={() => setActiveVideo(v.src)}
-                        className="group/video relative aspect-[9/16] rounded-xl overflow-hidden"
-                        style={{ border: "1px solid var(--border)", background: "#000" }}
-                        aria-label={`${v.label} — ${tx.demoVideo}`}
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                      <a
+                        href={meta.caseStudyUrl}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-opacity hover:opacity-85"
+                        style={{ background: "var(--text-1)", color: "var(--bg-base)" }}
                       >
-                        <video
-                          src={`${v.src}#t=0.1`}
-                          preload="metadata"
-                          muted
-                          playsInline
-                          tabIndex={-1}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-[1.04]"
-                        />
-                        <span className="absolute inset-0 flex items-center justify-center bg-black/25 group-hover/video:bg-black/5 transition-colors duration-300">
-                          <span
-                            className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover/video:scale-110"
-                            style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.25)" }}
-                          >
-                            <Play size={13} fill="#fff" style={{ color: "#fff", marginLeft: 1 }} />
-                          </span>
-                        </span>
-                        <span
-                          className="absolute bottom-1.5 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-semibold rounded-full whitespace-nowrap"
-                          style={{ background: "rgba(0,0,0,0.6)", color: "#fff", backdropFilter: "blur(4px)" }}
+                        {tx.readCaseStudy}
+                        <ArrowUpRight size={14} />
+                      </a>
+                      {meta.github ? (
+                        <a
+                          href={meta.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm underline underline-offset-4 decoration-[var(--border)] hover:decoration-current"
+                          style={{ color: "var(--text-1)" }}
                         >
-                          {v.label}
-                        </span>
-                      </button>
-                    ))}
+                          {tx.viewCode}
+                          <ArrowUpRight size={14} />
+                        </a>
+                      ) : (
+                        <span className="text-xs" style={{ color: "var(--text-3)" }}>{tx.repoOnRequest}</span>
+                      )}
+                    </div>
                   </div>
-                )}
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {tags.map((tag: string) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 text-xs rounded-full"
-                      style={{
-                        background: "var(--bg-base)",
-                        border: "1px solid var(--border)",
-                        color: "var(--text-3)",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Links */}
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                  {caseStudyUrl && (
-                    <a
-                      href={caseStudyUrl}
-                      className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full transition-all"
-                      style={{ 
-                        color: "var(--bg-base)",
-                        backgroundColor: accent,
-                        boxShadow: `0 0 10px ${accent}40`
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.9"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
-                    >
-                      <FileText size={13} />
-                      {tx.readCaseStudy}
-                    </a>
-                  )}
-                  {github ? (
-                    <a
-                      href={github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs transition-colors"
-                      style={{ color: "var(--text-3)" }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-1)"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-3)"; }}
-                    >
-                      <GithubIcon />
-                      GitHub
-                    </a>
-                  ) : (
-                    <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-3)" }}>
-                      <GithubIcon />
-                      {tx.repoOnRequest}
-                    </span>
-                  )}
-                  {videoSrc && (
-                    <button
-                      type="button"
-                      onClick={() => setActiveVideo(videoSrc)}
-                      className="flex items-center gap-1.5 text-xs hover:opacity-80 transition-opacity"
-                      style={{ color: accent }}
-                    >
-                      <Video size={13} />
-                      {tx.demoVideo}
-                    </button>
-                  )}
-                  {externalLinks?.map((link: { url: string; label: string }) => (
-                    <a
-                      key={link.url}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs hover:opacity-80 transition-opacity"
-                      style={{ color: accent }}
-                    >
-                      <ExternalLink size={13} />
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </motion.article>
+                  {/* Media */}
+                  <div className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                    {meta.videos && (
+                      <>
+                        <div className="grid grid-cols-2 gap-3 max-w-lg">
+                          {meta.videos.map((v) => (
+                            <button
+                              key={v.src}
+                              type="button"
+                              onClick={() => setActiveVideo(v.src)}
+                              className="group/video relative aspect-[9/16] rounded-lg overflow-hidden"
+                              style={{ border: "1px solid var(--border)", background: "#000" }}
+                              aria-label={`${v.label} — ${tx.demoVideo}`}
+                            >
+                              <video
+                                src={`${v.src}#t=0.1`}
+                                preload="metadata"
+                                muted
+                                playsInline
+                                tabIndex={-1}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-[1.04]"
+                              />
+                              <span className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover/video:bg-black/0 transition-colors duration-300">
+                                <span
+                                  className="w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover/video:scale-110"
+                                  style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.25)" }}
+                                >
+                                  <Play size={13} fill="#fff" style={{ color: "#fff", marginLeft: 1 }} />
+                                </span>
+                              </span>
+                              <span
+                                className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] font-medium rounded-full whitespace-nowrap"
+                                style={{ background: "rgba(0,0,0,0.6)", color: "#fff" }}
+                              >
+                                {v.label}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                        {meta.externalLinks && (
+                          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-4">
+                            {meta.externalLinks.map((link) => (
+                              <a
+                                key={link.url}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs font-mono transition-colors text-[var(--text-3)] hover:text-[var(--text-1)]"
+                              >
+                                {link.label} ↗
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    )}
+                    {meta.image && (
+                      <a
+                        href={meta.caseStudyUrl}
+                        className="block rounded-lg overflow-hidden transition-opacity hover:opacity-90"
+                        style={{ border: "1px solid var(--border)" }}
+                      >
+                        <Image
+                          src={meta.image.src}
+                          alt={meta.image.alt}
+                          width={meta.image.width}
+                          height={meta.image.height}
+                          sizes="(min-width: 1024px) 60vw, 100vw"
+                          className="w-full h-auto"
+                        />
+                      </a>
+                    )}
+                  </div>
+                </article>
+              </FadeIn>
             );
           })}
         </div>
 
-        {/* Coming soon card */}
-        <motion.div
-          initial={mounted ? { opacity: 0, y: 20 } : false}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-6 p-5 rounded-2xl border-dashed text-center"
-          style={{ border: "1px dashed var(--border)" }}
-        >
-          <p className="text-xs" style={{ color: "var(--text-3)" }}>
-            {tx.comingSoon}
+        {/* Weitere Projekte */}
+        <FadeIn className="mt-28 md:mt-36">
+          <h3 className="text-xs font-mono uppercase tracking-widest mb-6" style={{ color: "var(--text-3)" }}>
+            {tx.moreHeading}
+          </h3>
+          <ul style={{ borderBottom: "1px solid var(--border)" }}>
+            {tx.more.map((item, i) => (
+              <li
+                key={item.title}
+                className="grid md:grid-cols-12 gap-x-8 gap-y-2 py-6"
+                style={{ borderTop: "1px solid var(--border)" }}
+              >
+                <div className="md:col-span-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 md:block">
+                  <div>
+                    <p className="text-base font-semibold" style={{ color: "var(--text-1)" }}>{item.title}</p>
+                    <p className="text-xs" style={{ color: "var(--text-3)" }}>{item.subtitle}</p>
+                  </div>
+                  <p className="text-xs font-mono whitespace-nowrap md:hidden" style={{ color: "var(--text-3)" }}>{item.status}</p>
+                </div>
+                <div className="md:col-span-6">
+                  <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--text-2)" }}>{item.description}</p>
+                  <p className="text-xs font-mono" style={{ color: "var(--text-3)" }}>{moreTags[i].join(" · ")}</p>
+                </div>
+                <p className="hidden md:block md:col-span-2 text-xs font-mono text-right whitespace-nowrap" style={{ color: "var(--text-3)" }}>
+                  {item.status}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs mt-6" style={{ color: "var(--text-3)" }}>
+            {tx.repoOnRequest}
           </p>
-        </motion.div>
+        </FadeIn>
 
         {/* Video Modal */}
         {activeVideo && (
@@ -302,10 +273,7 @@ export default function Projects() {
             style={{ background: "rgba(0,0,0,0.85)" }}
             onClick={() => setActiveVideo(null)}
           >
-            <div
-              className="relative rounded-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="relative rounded-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
               <button
                 type="button"
                 onClick={() => setActiveVideo(null)}

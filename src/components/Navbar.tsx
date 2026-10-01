@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X, Brain, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
 
-const sectionIds = ["about", "skills", "experience", "projects", "contact"];
+const sectionIds = ["projects", "about", "contact"];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -56,27 +57,13 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2 group">
-          <div
-            className="relative w-8 h-8 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-all duration-300"
-            style={{
-              background: "rgba(99,102,241,0.15)",
-              border: "1px solid rgba(99,102,241,0.30)",
-            }}
-          >
-            <Brain size={16} style={{ color: "var(--accent)" }} />
-            <span
-              className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full border"
-              style={{ background: "#22c55e", borderColor: "var(--bg-base)" }}
-            />
-          </div>
-          <span
-            className="text-xs font-semibold hidden sm:block transition-colors duration-200"
-            style={{ color: "var(--text-2)" }}
-          >
-            Sascha Schumbera
-          </span>
-        </a>
+        <Link
+          href="/"
+          className="text-sm font-semibold tracking-tight transition-opacity hover:opacity-70"
+          style={{ color: "var(--text-1)" }}
+        >
+          Sascha Schumbera
+        </Link>
 
         {/* Desktop */}
         <ul className="hidden md:flex gap-8">
@@ -88,8 +75,7 @@ export default function Navbar() {
                   href={`/${l.href}`}
                   className="text-sm transition-colors duration-200 hover:opacity-100"
                   style={{
-                    color: isActive ? "var(--accent)" : "var(--text-2)",
-                    fontWeight: isActive ? 600 : 400,
+                    color: isActive ? "var(--text-1)" : "var(--text-3)",
                   }}
                   aria-current={isActive ? "true" : undefined}
                 >
@@ -183,10 +169,10 @@ export default function Navbar() {
       {/* Scroll progress */}
       <motion.div
         aria-hidden="true"
-        className="absolute top-16 -mt-[2px] left-0 right-0 h-[2px] origin-left"
+        className="absolute top-16 -mt-px left-0 right-0 h-px origin-left"
         style={{
           scaleX: progress,
-          background: "linear-gradient(90deg, #6366f1, #a78bfa)",
+          background: "var(--text-1)",
           opacity: scrolled ? 1 : 0,
           transition: "opacity 0.3s ease",
         }}

@@ -219,6 +219,16 @@ export default function ChatBot() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  // Lets other components (e.g. the hero CTA) open the chat.
+  useEffect(() => {
+    const onOpenRequest = () => {
+      openedAtRef.current = Date.now();
+      setOpen(true);
+    };
+    window.addEventListener("chatbot:open", onOpenRequest);
+    return () => window.removeEventListener("chatbot:open", onOpenRequest);
+  }, []);
+
   function setChatOpen(next: boolean) {
     if (next) {
       openedAtRef.current = Date.now();
