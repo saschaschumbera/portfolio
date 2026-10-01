@@ -36,7 +36,7 @@ export const t = {
           ],
           highlights: [
             "PDF-Forensik erkennt überklebte Werte: verdeckte Originale und abweichende Schrift",
-            "Personenbezogene Daten werden vor jeder KI-Verarbeitung lokal pseudonymisiert — fail-closed",
+            "Personenbezogene Daten werden vor der KI-Extraktion lokal pseudonymisiert — fail-closed, der KI-Agent läuft ohne Dateizugriff",
             "Realitätscheck auf Mustern von DATEV, Lexware & Co. kippte sieben Annahmen, bevor sie Fehlalarme erzeugten",
           ],
         },
@@ -154,7 +154,7 @@ export const t = {
           ],
           highlights: [
             "PDF forensics catches pasted-over values: hidden originals and deviating fonts",
-            "Personal data is pseudonymised locally before any AI processing — fail-closed",
+            "Personal data is pseudonymised locally before AI extraction — fail-closed, the AI agent runs without file access",
             "A reality check on samples from DATEV, Lexware & co. overturned seven assumptions before they caused false alarms",
           ],
         },

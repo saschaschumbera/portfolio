@@ -13,7 +13,7 @@ export const caseStudyDocinspect = {
       { value: "30/30", label: "manipulierte Abrechnungen erkannt (synthetisches Eval)" },
       { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
       { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
-      { value: "57", label: "automatisierte Tests" },
+      { value: "67", label: "automatisierte Tests" },
     ],
     screenshots: [
       {
@@ -49,8 +49,8 @@ export const caseStudyDocinspect = {
       title: "Der Ablauf",
       steps: [
         "PDF lesen — wie ein Mensch es sieht: weiß überdeckte Originalwerte fliegen raus, Scans gehen durch Tesseract-OCR",
-        "Lokal pseudonymisieren: Name, SV-Nummer, Steuer-ID, IBAN, Daten und Straße werden zu Platzhaltern — fail-closed",
-        "KI-Extraktion auf den Platzhaltern (Codex CLI, festes JSON-Schema), danach exakte Rückübersetzung",
+        "Lokal pseudonymisieren: Name, SV-Nummer, Steuer-ID, Konto, Datumsangaben, Straße und Konfession werden zu Platzhaltern — fail-closed",
+        "KI-Extraktion auf den Platzhaltern (isolierter Codex-Agent ohne Datei- und Werkzeugzugriff, festes JSON-Schema), danach exakte Rückübersetzung",
         "Belegprüfung: Jeder Wert muss im Dokument stehen — auch in DATEV-Schreibweisen wie „67940“ für 679,40",
         "Regelwerk, PDF-Forensik und Arbeitgeber-Recherche → Ampel mit Begründung",
       ],
@@ -77,6 +77,10 @@ export const caseStudyDocinspect = {
         {
           title: "5. Gibt es den Arbeitgeber?",
           content: "Die KI recherchiert per Websuche Firmenwebsite, kununu, LinkedIn und Handelsregister — der Code ruft danach jede genannte Quelle selbst ab und prüft, ob der Firmenname dort steht. Eine erfundene URL zählt nicht. Ergebnis: 8 von 8 echten Arbeitgebern belegt, 10 von 10 erfundenen markiert, meist mit präzisem Grund („Lindenallee 19 liegt in 50968 Köln, nicht 50667“). Ein zufällig realer Firmenname fiel über die falsche Adresse auf — genau das Muster „echte Firma, falsche Anschrift“.",
+        },
+        {
+          title: "6. Die eigene Datenschutz-Zusage auf den Prüfstand gestellt",
+          content: "„Vor jeder KI-Verarbeitung pseudonymisiert“ klang gut — eine gezielte Gegenprobe zeigte, dass es nicht stimmte. Der Codex-Agent erbte meine persönliche Konfiguration und las trotz Read-only-Sandbox eine Testdatei außerhalb seines Arbeitsordners; über eine präparierte Abrechnung (Prompt-Injection) wäre das ausnutzbar gewesen. Dazu: Namensteile unter drei Zeichen blieben im Klartext, „Stellplatz 40,00“ wurde als Straße ersetzt und der Betrag zerstört, und die Arbeitgeber-Recherche hätte bei Einzelunternehmen den Namen der Person an die Websuche geschickt. Jetzt läuft der Agent isoliert ohne Datei- und Werkzeugzugriff (ein Skript weist es mit einer Kennwort-Datei nach), jede Lücke hat einen Regressionstest — und die Zusage ist so formuliert, wie sie belegbar ist.",
         },
       ],
     },
@@ -112,7 +116,7 @@ export const caseStudyDocinspect = {
       { value: "30/30", label: "manipulated payslips detected (synthetic eval)" },
       { value: "0", label: "false RED on samples from real payroll software" },
       { value: "10/10", label: "invented employers flagged via web search" },
-      { value: "57", label: "automated tests" },
+      { value: "67", label: "automated tests" },
     ],
     screenshots: [
       {
@@ -148,8 +152,8 @@ export const caseStudyDocinspect = {
       title: "The pipeline",
       steps: [
         "Read the PDF as a human sees it: white-covered originals are dropped, scans go through Tesseract OCR",
-        "Pseudonymise locally: name, social security and tax ID, IBAN, dates and street become placeholders — fail-closed",
-        "AI extraction on the placeholders (Codex CLI, fixed JSON schema), then exact back-translation",
+        "Pseudonymise locally: name, social security and tax ID, bank account, dates, street and religion become placeholders — fail-closed",
+        "AI extraction on the placeholders (isolated Codex agent without file or tool access, fixed JSON schema), then exact back-translation",
         "Evidence check: every value must appear in the document — including DATEV notations like \"67940\" for 679.40",
         "Rules, PDF forensics and employer research → traffic light with reasons",
       ],
@@ -176,6 +180,10 @@ export const caseStudyDocinspect = {
         {
           title: "5. Does the employer exist?",
           content: "The AI researches company website, kununu, LinkedIn and the commercial register via web search — then code fetches every cited source itself and checks that the company name appears there. An invented URL doesn't count. Result: 8 of 8 real employers verified, 10 of 10 invented ones flagged, usually with a precise reason (\"Lindenallee 19 is in 50968 Cologne, not 50667\"). A coincidentally real company name was caught via its wrong address — exactly the \"real company, wrong address\" pattern.",
+        },
+        {
+          title: "6. Putting my own privacy promise to the test",
+          content: "\"Pseudonymised before any AI processing\" sounded good — a targeted counter-check showed it wasn't true. The Codex agent inherited my personal configuration and, despite a read-only sandbox, read a test file outside its working directory; a crafted payslip (prompt injection) could have exploited that. On top: name parts shorter than three characters stayed in plain text, \"Stellplatz 40,00\" (a parking deduction) was replaced as a street and the amount destroyed, and for sole proprietorships the employer research would have sent the person's name to web search. Now the agent runs isolated without file or tool access (a script proves it with a canary file), every gap has a regression test — and the promise is worded exactly as far as it can be proven.",
         },
       ],
     },
