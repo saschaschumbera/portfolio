@@ -74,8 +74,8 @@ export default function Projects() {
   const tx = t[lang].projects;
 
   return (
-    <section id="projects" className="px-6 pb-24">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="pb-24">
+      <div className="max-w-6xl mx-auto px-6">
         <FadeIn className="pt-10 mb-16">
           <div style={{ borderTop: "1px solid var(--border)" }} className="pt-10">
             <p className="text-xs font-mono uppercase tracking-widest mb-4" style={{ color: "var(--text-3)" }}>
@@ -89,18 +89,31 @@ export default function Projects() {
             </p>
           </div>
         </FadeIn>
+      </div>
 
-        {/* Showcases */}
-        <div className="space-y-24 md:space-y-32">
-          {tx.featured.map((item, i) => {
-            const meta = featuredMeta[i];
-            return (
-              <FadeIn key={item.title}>
-                <article className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+      {/* Showcases: jedes Projekt ein eigenes, seitenbreites Band (Haarlinie + abwechselnder Grundton) */}
+      <div style={{ borderBottom: "1px solid var(--border)" }}>
+        {tx.featured.map((item, i) => {
+          const meta = featuredMeta[i];
+          return (
+            <div
+              key={item.title}
+              style={{ borderTop: "1px solid var(--border)", background: i % 2 === 1 ? "var(--bg-section)" : "var(--bg-base)" }}
+            >
+              <FadeIn className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+                <div className="flex items-baseline gap-4 mb-10 md:mb-14">
+                  <span className="text-5xl md:text-7xl font-semibold tracking-tight tabular-nums leading-none" style={{ color: "var(--text-1)" }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm md:text-base font-mono" style={{ color: "var(--text-3)" }}>
+                    / {String(tx.featured.length).padStart(2, "0")}
+                  </span>
+                </div>
+                <article className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
                   {/* Text */}
                   <div className={`lg:col-span-5 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
                     <p className="text-xs font-mono mb-3" style={{ color: "var(--text-3)" }}>
-                      {String(i + 1).padStart(2, "0")} · {item.status}
+                      {item.status}
                     </p>
                     <h3 className="text-2xl md:text-3xl font-semibold tracking-tight mb-1" style={{ color: "var(--text-1)" }}>
                       {item.title}
@@ -191,10 +204,12 @@ export default function Projects() {
                   </div>
                 </article>
               </FadeIn>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
+      </div>
 
+      <div>
         {/* Video Modal */}
         {activeVideo && (
           <div
