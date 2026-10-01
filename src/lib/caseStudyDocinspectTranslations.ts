@@ -13,7 +13,7 @@ export const caseStudyDocinspect = {
       { value: "30/30", label: "manipulierte Abrechnungen erkannt (synthetisches Eval)" },
       { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
       { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
-      { value: "77", label: "automatisierte Tests" },
+      { value: "102", label: "automatisierte Tests" },
     ],
     screenshots: [
       {
@@ -80,7 +80,7 @@ export const caseStudyDocinspect = {
         },
         {
           title: "6. Die eigene Datenschutz-Zusage auf den Prüfstand gestellt",
-          content: "„Vor jeder KI-Verarbeitung pseudonymisiert“ klang gut — eine gezielte Gegenprobe zeigte, dass es nicht stimmte. Der Codex-Agent erbte meine persönliche Konfiguration und las trotz Read-only-Sandbox eine Testdatei außerhalb seines Arbeitsordners; über eine präparierte Abrechnung (Prompt-Injection) wäre das ausnutzbar gewesen. Dazu: Namensteile unter drei Zeichen blieben im Klartext, „Stellplatz 40,00“ wurde als Straße ersetzt und der Betrag zerstört, und die Arbeitgeber-Recherche hätte bei Einzelunternehmen den Namen der Person an die Websuche geschickt. Jetzt läuft der Agent isoliert ohne Datei- und Werkzeugzugriff (ein Skript weist es mit einer Kennwort-Datei nach), jede Lücke hat einen Regressionstest — und die Zusage ist so formuliert, wie sie belegbar ist. Danach der Angriff von außen: Drei präparierte Abrechnungen mit sichtbaren und versteckten Anweisungen an die KI — keine wurde GRÜN, kein Dateiinhalt kam zurück.",
+          content: "„Vor jeder KI-Verarbeitung pseudonymisiert“ klang gut — eine gezielte Gegenprobe zeigte, dass es nicht stimmte. Der Codex-Agent erbte meine persönliche Konfiguration und las trotz Read-only-Sandbox eine Testdatei außerhalb seines Arbeitsordners; über eine präparierte Abrechnung (Prompt-Injection) wäre das ausnutzbar gewesen. Dazu: Namensteile unter drei Zeichen blieben im Klartext, „Stellplatz 40,00“ wurde als Straße ersetzt und der Betrag zerstört, und die Arbeitgeber-Recherche hätte bei Einzelunternehmen den Namen der Person an die Websuche geschickt. Jetzt läuft der Agent isoliert ohne Datei- und Werkzeugzugriff (ein Skript weist es mit einer Kennwort-Datei nach), jede Lücke hat einen Regressionstest — und die Zusage ist so formuliert, wie sie belegbar ist. Danach der Angriff von außen: Drei präparierte Abrechnungen mit sichtbaren und versteckten Anweisungen an die KI — keine wurde GRÜN, kein Dateiinhalt kam zurück. Ein abschließendes, unabhängiges Code-Review fand zehn weitere Punkte; jeder wurde erst per Test reproduziert, neun bestätigten sich und sind behoben.",
         },
       ],
     },
@@ -117,7 +117,7 @@ export const caseStudyDocinspect = {
       { value: "30/30", label: "manipulated payslips detected (synthetic eval)" },
       { value: "0", label: "false RED on samples from real payroll software" },
       { value: "10/10", label: "invented employers flagged via web search" },
-      { value: "77", label: "automated tests" },
+      { value: "102", label: "automated tests" },
     ],
     screenshots: [
       {
@@ -184,7 +184,7 @@ export const caseStudyDocinspect = {
         },
         {
           title: "6. Putting my own privacy promise to the test",
-          content: "\"Pseudonymised before any AI processing\" sounded good — a targeted counter-check showed it wasn't true. The Codex agent inherited my personal configuration and, despite a read-only sandbox, read a test file outside its working directory; a crafted payslip (prompt injection) could have exploited that. On top: name parts shorter than three characters stayed in plain text, \"Stellplatz 40,00\" (a parking deduction) was replaced as a street and the amount destroyed, and for sole proprietorships the employer research would have sent the person's name to web search. Now the agent runs isolated without file or tool access (a script proves it with a canary file), every gap has a regression test — and the promise is worded exactly as far as it can be proven. Then the attack from outside: three crafted payslips with visible and hidden instructions to the AI — none turned GREEN, no file content came back.",
+          content: "\"Pseudonymised before any AI processing\" sounded good — a targeted counter-check showed it wasn't true. The Codex agent inherited my personal configuration and, despite a read-only sandbox, read a test file outside its working directory; a crafted payslip (prompt injection) could have exploited that. On top: name parts shorter than three characters stayed in plain text, \"Stellplatz 40,00\" (a parking deduction) was replaced as a street and the amount destroyed, and for sole proprietorships the employer research would have sent the person's name to web search. Now the agent runs isolated without file or tool access (a script proves it with a canary file), every gap has a regression test — and the promise is worded exactly as far as it can be proven. Then the attack from outside: three crafted payslips with visible and hidden instructions to the AI — none turned GREEN, no file content came back. A final independent code review found ten more issues; each was first reproduced with a test, nine were confirmed and fixed.",
         },
       ],
     },
