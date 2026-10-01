@@ -23,6 +23,8 @@ export const t = {
       readCaseStudy: "Case Study lesen",
       viewCode: "Code auf GitHub",
       demoVideo: "Demo-Video",
+      watchWithSound: "Mit Ton ansehen",
+      demoCaption: "Live-Aufnahme der echten Oberfläche · KI-Wartezeit gerafft · 60 s",
       featured: [
         {
           title: "DocInspect",
@@ -141,6 +143,8 @@ export const t = {
       readCaseStudy: "Read case study",
       viewCode: "Code on GitHub",
       demoVideo: "Demo video",
+      watchWithSound: "Watch with sound",
+      demoCaption: "Live recording of the real interface · AI wait time sped up · 60 s",
       featured: [
         {
           title: "DocInspect",

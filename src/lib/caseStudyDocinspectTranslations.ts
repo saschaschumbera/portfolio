@@ -2,6 +2,11 @@ export const caseStudyDocinspect = {
   de: {
     back: "Zurück zur Übersicht",
     repoNote: "Repository privat — Einblick auf Anfrage",
+    demo: {
+      src: "/projects/docinspect-demo-de.mp4",
+      poster: "/projects/docinspect-demo-de.jpg",
+      caption: "60-Sekunden-Demo: Live-Aufnahme der echten Oberfläche mit einer echten und einer überklebten Testabrechnung. Die Wartezeit auf die KI ist gerafft und so gekennzeichnet; alle Dokumente sind synthetisch.",
+    },
     hero: {
       tag: "Case Study",
       title: "DocInspect",
@@ -187,6 +192,11 @@ export const caseStudyDocinspect = {
   en: {
     back: "Back to overview",
     repoNote: "Private repository — access on request",
+    demo: {
+      src: "/projects/docinspect-demo-en.mp4",
+      poster: "/projects/docinspect-demo-en.jpg",
+      caption: "60-second demo: live recording of the real interface with a genuine and a pasted-over test payslip. The AI wait time is sped up and labelled as such; all documents are synthetic.",
+    },
     hero: {
       tag: "Case Study",
       title: "DocInspect",

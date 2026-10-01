@@ -7,6 +7,7 @@ import { X, Play, ArrowUpRight } from "lucide-react";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useLang } from "./LanguageProvider";
 import { t } from "@/lib/translations";
+import DemoVideo from "./DemoVideo";
 
 type FeaturedMeta = {
   caseStudyUrl: string;
@@ -14,6 +15,7 @@ type FeaturedMeta = {
   tags: string[];
   videos?: { label: string; src: string }[];
   image?: { src: string; width: number; height: number; alt: string };
+  demo?: { src: Record<"de" | "en", string>; poster: Record<"de" | "en", string> };
   externalLinks?: { label: string; url: string }[];
 };
 
@@ -23,7 +25,10 @@ const featuredMeta: FeaturedMeta[] = [
     caseStudyUrl: "/case-studies/docinspect",
     github: null,
     tags: ["Python", "PyMuPDF", "Codex CLI", "Pydantic", "Tesseract OCR", "FastAPI"],
-    image: { src: "/case-studies/docinspect-report.png", width: 1744, height: 1630, alt: "DocInspect — Prüfbericht einer manipulierten Gehaltsabrechnung" },
+    demo: {
+      src: { de: "/projects/docinspect-demo-de.mp4", en: "/projects/docinspect-demo-en.mp4" },
+      poster: { de: "/projects/docinspect-demo-de.jpg", en: "/projects/docinspect-demo-en.jpg" },
+    },
   },
   {
     caseStudyUrl: "/case-studies/papierkram-orakel",
@@ -156,7 +161,7 @@ export default function Projects() {
                   </div>
 
                   {/* Media */}
-                  <div className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                  <div className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-1" : ""} ${meta.demo ? "order-first lg:order-none" : ""}`}>
                     {meta.videos && (
                       <>
                         <div className="grid grid-cols-2 gap-3 max-w-lg">
@@ -209,6 +214,17 @@ export default function Projects() {
                             ))}
                           </div>
                         )}
+                      </>
+                    )}
+                    {meta.demo && (
+                      <>
+                        <DemoVideo
+                          src={meta.demo.src[lang]}
+                          poster={meta.demo.poster[lang]}
+                          label={tx.watchWithSound}
+                          onWatchWithSound={() => setActiveVideo(meta.demo!.src[lang])}
+                        />
+                        <p className="text-xs font-mono mt-3" style={{ color: "var(--text-3)" }}>{tx.demoCaption}</p>
                       </>
                     )}
                     {meta.image && (
