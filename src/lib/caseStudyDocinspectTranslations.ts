@@ -13,7 +13,7 @@ export const caseStudyDocinspect = {
       { value: "45/45", label: "manipulierte Abrechnungen erkannt (synthetisches Eval)" },
       { value: "0", label: "fälschlich ROT auf Mustern echter Lohnprogramme" },
       { value: "10/10", label: "erfundene Arbeitgeber per Websuche markiert" },
-      { value: "155", label: "automatisierte Tests" },
+      { value: "156", label: "automatisierte Tests" },
     ],
     screenshots: [
       {
@@ -168,7 +168,7 @@ export const caseStudyDocinspect = {
     evals: {
       title: "Die Zahlen",
       rows: [
-        { label: "Synthetisches Set", detail: "80 Abrechnungen, 10 Fälschungsarten, 3 Layouts", result: "45/45 erkannt · 1/30 Fehlalarm (GELB) · KI-Extraktion 1820/1820 Felder korrekt (frühere Fassung mit 65 Abrechnungen)" },
+        { label: "Synthetisches Set", detail: "80 Abrechnungen, 10 Fälschungsarten, 3 Layouts", result: "45/45 erkannt · 1/30 Fehlalarm (GELB) · 2400/2400 Felder korrekt ausgelesen" },
         { label: "Echte Lohnprogramme", detail: "9 öffentliche Muster, 2005–2025, inkl. Scan", result: "0 fälschlich ROT durch Regeln oder Lesefehler" },
         { label: "Arbeitgeber-Recherche", detail: "8 reale, 10 erfundene Arbeitgeber", result: "8/8 belegt · 10/10 markiert" },
         { label: "Prompt-Injection", detail: "sichtbare und versteckte Anweisungen, Versuch, eine lokale Datei auszulesen", result: "3/3 abgewehrt: nie GRÜN, kein Dateiinhalt ausgeleitet" },
@@ -198,7 +198,7 @@ export const caseStudyDocinspect = {
       { value: "45/45", label: "manipulated payslips detected (synthetic eval)" },
       { value: "0", label: "false RED on samples from real payroll software" },
       { value: "10/10", label: "invented employers flagged via web search" },
-      { value: "155", label: "automated tests" },
+      { value: "156", label: "automated tests" },
     ],
     screenshots: [
       {
@@ -353,7 +353,7 @@ export const caseStudyDocinspect = {
     evals: {
       title: "The numbers",
       rows: [
-        { label: "Synthetic set", detail: "80 payslips, 10 forgery types, 3 layouts", result: "45/45 detected · 1/30 false alarm (YELLOW) · AI extraction 1820/1820 fields correct (earlier version with 65 payslips)" },
+        { label: "Synthetic set", detail: "80 payslips, 10 forgery types, 3 layouts", result: "45/45 detected · 1/30 false alarm (YELLOW) · 2400/2400 fields read correctly" },
         { label: "Real payroll software", detail: "9 public samples, 2005–2025, incl. a scan", result: "0 false RED from rules or misreadings" },
         { label: "Employer research", detail: "8 real, 10 invented employers", result: "8/8 verified · 10/10 flagged" },
         { label: "Prompt injection", detail: "visible and hidden instructions, attempt to read a local file", result: "3/3 repelled: never GREEN, no file content leaked" },
