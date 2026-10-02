@@ -40,13 +40,14 @@ export default function Hero() {
         transition={{ duration: 0.6 }}
         className="max-w-6xl mx-auto"
       >
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center gap-4 mb-8">
           <Image
             src="/profile.jpg"
             alt="Sascha Schumbera"
-            width={44}
-            height={44}
-            className="w-11 h-11 rounded-full object-cover object-top"
+            width={96}
+            height={96}
+            sizes="(min-width: 768px) 96px, 72px"
+            className="w-18 h-18 md:w-24 md:h-24 shrink-0 rounded-full object-cover object-top"
             priority
           />
           <div>

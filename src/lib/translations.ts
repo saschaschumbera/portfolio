@@ -9,7 +9,7 @@ export const t = {
     },
     hero: {
       headline: "Ich automatisiere Unternehmens\u00ADprozesse mit KI.",
-      intro: "10 Jahre Kreditrisiko und Banking, heute KI-Entwicklung: Ich weiß, wo Prozesse in Finanzunternehmen hängen — und baue die Systeme, die sie lösen, von der Prüfung gefälschter Gehaltsabrechnungen bis zur belegbaren Dokumentensuche. Nachvollziehbar, mit belegbaren Ergebnissen und Datenschutz von Anfang an.",
+      intro: "10 Jahre Erfahrung in Kreditrisiko und Banking. Heute baue ich KI-Systeme für Dokumentenprüfung und Wissenssuche — mit überprüfbaren Ergebnissen und Datenschutz von Anfang an.",
       meta: "Referent Kreditrisikosteuerung bei Bank11 · B.Sc. Angewandte KI (laufend) · Korschenbroich, NRW",
       cvRequest: "Lebenslauf anfordern",
       cvSubject: "Anfrage Lebenslauf",
@@ -130,7 +130,7 @@ export const t = {
     },
     hero: {
       headline: "I automate business processes with AI.",
-      intro: "10 years in credit risk and banking, now AI development: I know where processes in financial companies get stuck — and I build the systems that fix them, from detecting forged payslips to document search with verifiable sources. Traceable, with verifiable results and privacy built in from the start.",
+      intro: "10 years of experience in credit risk and banking. Today I build AI systems for document verification and knowledge search — with verifiable results and privacy built in from the start.",
       meta: "Credit Risk Specialist at Bank11 · B.Sc. Applied AI (ongoing) · Korschenbroich, Germany",
       cvRequest: "Request my CV",
       cvSubject: "CV request",
