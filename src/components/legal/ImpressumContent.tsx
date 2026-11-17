@@ -3,13 +3,7 @@
 import Link from "next/link";
 import { useLang } from "@/components/LanguageProvider";
 
-type Props = { homeHref?: string; homeLabel?: { de: string; en: string } };
-
-// Defaults = portfolio. The Glanzstück Media pages pass their own home link and legal base path.
-export default function ImpressumContent({
-  homeHref = "/",
-  homeLabel = { de: "Zur Startseite", en: "Back to Home" },
-}: Props) {
+export default function ImpressumContent() {
   const { lang } = useLang();
   const isDE = lang === "de";
 
@@ -97,14 +91,14 @@ export default function ImpressumContent({
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <Link
-            href={homeHref}
+            href="/"
             className="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-opacity hover:opacity-85"
             style={{
               background: "var(--accent)",
               color: "white",
             }}
           >
-            {isDE ? homeLabel.de : homeLabel.en}
+            {isDE ? "Zur Startseite" : "Back to Home"}
           </Link>
         </div>
       </div>
